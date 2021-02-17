@@ -10,12 +10,10 @@ const styles = StyleSheet.create({
       alignItems: 'center'
     },
     input: {
-      width: '100%',
-      height: 'auto',
-      borderColor: 'black',
-      borderWidth: 1,
-      padding: 5,
-      marginBottom: 15
+    height: 40,
+    width:'100%',
+    padding: 6,
+    marginBottom: 20
     }
   });
 
@@ -29,12 +27,16 @@ export default function Login() {
                <TextInput
                 placeholder='Enter Email'
                 style={styles.input}
+                selectionColor='#428AF8'
+                underlineColorAndroid= '#428AF8'
                 onChangeText={(e) => setEmail(e.target.value)}
                 value={email}
                />
                <TextInput
                 placeholder='Enter Password'
                 style={styles.input}
+                selectionColor='#428AF8'
+                underlineColorAndroid= '#428AF8'
                 onChangeText={(e) => setPassword(e.target.value)}
                 value={password}
                />

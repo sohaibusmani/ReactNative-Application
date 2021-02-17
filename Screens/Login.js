@@ -3,17 +3,26 @@ import { StyleSheet, Text, View, TextInput, Button } from 'react-native';
 
 const styles = StyleSheet.create({
     screen: {
-      padding: 50
+        alignItems: 'center',
+        flex: 1,
+        justifyContent: 'center' 
     },
     inputContainer: {
       justifyContent: 'space-between',
-      alignItems: 'center'
+      alignItems: 'center',
+      width: '80%'
     },
     input: {
     height: 40,
     width:'100%',
     padding: 6,
     marginBottom: 20
+    },
+    heading: {
+        fontSize: 25,
+        textAlign: 'center',
+        margin: 10,
+        fontWeight: 'bold',
     }
   });
 
@@ -23,6 +32,11 @@ export default function Login() {
 
     return(
         <View style={styles.screen}>
+            <View style={{marginBottom: 10}}>
+                <Text style={styles.heading}>
+                    Login
+                </Text>
+            </View>
             <View style={styles.inputContainer}>
                <TextInput
                 placeholder='Enter Email'

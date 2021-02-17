@@ -1,6 +1,8 @@
 import React, {useState} from 'react';
-import { StyleSheet, Text, View, TextInput, Button } from 'react-native';
+import { StyleSheet, Text, View, TextInput, Button, ImageBackground } from 'react-native';
 
+
+import image from '../assets/pic.jpg';
 
 const styles = StyleSheet.create({
     screen: {
@@ -19,6 +21,11 @@ const styles = StyleSheet.create({
     padding: 6,
     marginBottom: 20
     },
+    image: {
+        flex: 1,
+        resizeMode: "cover",
+        justifyContent: "center"
+      },
     heading: {
         fontSize: 25,
         textAlign: 'center',
@@ -32,6 +39,7 @@ export default function Login() {
     const [password, setPassword] = useState('');
 
     return(
+        <ImageBackground source={image} style={styles.image}>
         <View style={styles.screen}>
             <View style={{marginBottom: 10}}>
                 <Text style={styles.heading}>
@@ -62,6 +70,8 @@ export default function Login() {
                 color="#428AF8"
                 />
             </View>
+           
         </View>
+        </ImageBackground>
     )
 }

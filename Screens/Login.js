@@ -6,7 +6,6 @@ const styles = StyleSheet.create({
       padding: 50
     },
     inputContainer: {
-      flexDirection: 'row',
       justifyContent: 'space-between',
       alignItems: 'center'
     },
@@ -14,7 +13,8 @@ const styles = StyleSheet.create({
       width: '80%',
       borderColor: 'black',
       borderWidth: 1,
-      padding: 10
+      paddingTop: 0,
+      paddingBottom: 0,
     }
   });
 

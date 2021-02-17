@@ -10,11 +10,12 @@ const styles = StyleSheet.create({
       alignItems: 'center'
     },
     input: {
-      width: '80%',
+      width: '100%',
+      height: 'auto',
       borderColor: 'black',
       borderWidth: 1,
-      paddingTop: 0,
-      paddingBottom: 0,
+      padding: 5,
+      marginBottom: 15
     }
   });
 

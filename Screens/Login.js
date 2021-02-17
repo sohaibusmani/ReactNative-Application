@@ -1,6 +1,7 @@
 import React, {useState} from 'react';
 import { StyleSheet, Text, View, TextInput, Button } from 'react-native';
 
+
 const styles = StyleSheet.create({
     screen: {
         alignItems: 'center',
@@ -54,6 +55,12 @@ export default function Login() {
                 onChangeText={(e) => setPassword(e.target.value)}
                 value={password}
                />
+            </View>
+            <View style={{width:'30%'}}>
+                <Button
+                title="Login"
+                color="#428AF8"
+                />
             </View>
         </View>
     )

@@ -39,7 +39,11 @@ export default function signup(){
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
     const [fullName, setFullname] = useState('');
-    const [contactNumber, setContactnumber] = useState('')
+    const [contactNumber, setContactnumber] = useState('');
+
+    const consoleFunc = () => {
+        console.log(fullName, email, password, contactNumber)
+    }
 
     return(
        <ImageBackground source={image} style={styles.image}>
@@ -87,7 +91,7 @@ export default function signup(){
                 <Button
                 title="Signup"
                 color="#428AF8"
-                // onPress={consoleFunc}
+                onPress={consoleFunc}
                 />
             </View>
            </View>

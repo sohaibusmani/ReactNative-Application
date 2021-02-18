@@ -53,7 +53,7 @@ export default function Login() {
                 style={styles.input}
                 selectionColor='#428AF8'
                 underlineColorAndroid= '#428AF8'
-                onChangeText={(e) => setEmail(e.target.value)}
+                onChangeText={(email) => setEmail(email)}
                 value={email}
                />
                <TextInput
@@ -61,7 +61,7 @@ export default function Login() {
                 style={styles.input}
                 selectionColor='#428AF8'
                 underlineColorAndroid= '#428AF8'
-                onChangeText={(e) => setPassword(e.target.value)}
+                onChangeText={(password) => setPassword(password)}
                 value={password}
                />
             </View>
@@ -70,8 +70,7 @@ export default function Login() {
                 title="Login"
                 color="#428AF8"
                 />
-            </View>
-           
+            </View>         
         </View>
         </ImageBackground>
         

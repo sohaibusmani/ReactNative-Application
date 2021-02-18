@@ -1,5 +1,5 @@
 import React, {useState} from 'react';
-import { StyleSheet, Text, View, TextInput, Button, ImageBackground } from 'react-native';
+import { StyleSheet, Text, View, Button,TextInput, ImageBackground } from 'react-native';
 
 import image from '../assets/pic2.jpg';
 
@@ -20,7 +20,7 @@ const styles = StyleSheet.create({
     height: 40,
     width:'100%',
     padding: 6,
-    marginBottom: 20
+    marginBottom: 40
     },
     image: {
         flex: 1,
@@ -45,7 +45,50 @@ export default function signup(){
        <ImageBackground source={image} style={styles.image}>
            <View style={styles.screen}>
            <View style={{marginBottom: 10}}>
-               
+                <Text style={styles.heading}>
+                    Signup
+                </Text>
+            </View>
+            <View style={styles.inputContainer}>
+            <TextInput
+                placeholder='Enter Name'
+                style={styles.input}
+                selectionColor='#428AF8'
+                underlineColorAndroid= '#428AF8'
+                onChangeText={(fullName) => setFullname(fullName)}
+                value={fullName}
+               />
+               <TextInput
+                placeholder='Enter Email'
+                style={styles.input}
+                selectionColor='#428AF8'
+                underlineColorAndroid= '#428AF8'
+                onChangeText={(email) => setEmail(email)}
+                value={email}
+               />
+               <TextInput
+                placeholder='Enter Password'
+                style={styles.input}
+                selectionColor='#428AF8'
+                underlineColorAndroid= '#428AF8'
+                onChangeText={(password) => setPassword(password)}
+                value={password}
+               />
+               <TextInput
+                placeholder='Enter Number'
+                style={styles.input}
+                selectionColor='#428AF8'
+                underlineColorAndroid= '#428AF8'
+                onChangeText={(contactNumber) => setContactnumber(contactNumber)}
+                value={contactNumber}
+               />
+            </View>
+            <View style={{width:'30%', marginTop: 30}}>
+                <Button
+                title="Signup"
+                color="#428AF8"
+                // onPress={consoleFunc}
+                />
             </View>
            </View>
        </ImageBackground> 

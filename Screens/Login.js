@@ -14,7 +14,8 @@ const styles = StyleSheet.create({
     inputContainer: {
       justifyContent: 'space-between',
       alignItems: 'center',
-      width: '80%'
+      width: '80%',
+
     },
     input: {
     height: 40,
@@ -38,6 +39,10 @@ const styles = StyleSheet.create({
 export default function Login() {
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
+
+   const consoleFunc = () => {
+        console.log(email, password)
+    }
 
     return(
         <ImageBackground source={image} style={styles.image}>
@@ -65,11 +70,20 @@ export default function Login() {
                 value={password}
                />
             </View>
-            <View style={{width:'30%'}}>
+            <View style={{width:'30%', marginTop: 30}}>
                 <Button
                 title="Login"
                 color="#428AF8"
+                onPress={consoleFunc}
                 />
+            </View>
+            <View style={{flexDirection:'row', bottom: 50, position:'absolute'}}>
+            <Text style={{fontWeight:'bold', fontSize: 17}}>
+                Don't have an account ?  
+            </Text>
+            <Text style={{fontWeight:'bold', fontSize: 17, marginLeft: 5}}>
+                Create
+            </Text>
             </View>         
         </View>
         </ImageBackground>

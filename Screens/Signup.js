@@ -35,7 +35,7 @@ const styles = StyleSheet.create({
     }
   });
 
-export default function signup(){
+export default function signup({history}){
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
     const [fullName, setFullname] = useState('');
@@ -91,7 +91,7 @@ export default function signup(){
                 <Button
                 title="Signup"
                 color="#428AF8"
-                onPress={consoleFunc}
+                onPress={() => {history.push('/')}}
                 />
             </View>
            </View>

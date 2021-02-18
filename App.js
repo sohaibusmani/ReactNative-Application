@@ -1,5 +1,22 @@
 import React, { useState } from 'react';
-import { StyleSheet, Text, View, TextInput, Button } from 'react-native';
+import {NativeRouter, Switch, Route} from 'react-router-native';
+import {View, StyleSheet} from 'react-native';
+
+const styles = StyleSheet.create({
+  screen: {
+      alignItems: 'center',
+      flex: 1,
+      justifyContent: 'center',
+      backgroundColor:'rgba(0,0,0,0.3)', 
+  },
+  inputContainer: {
+    justifyContent: 'space-between',
+    alignItems: 'center',
+    width: '80%',
+
+  },
+});
+
 
 // Components 
 import Login from './Screens/Login';
@@ -29,7 +46,12 @@ export default function App() {
     //   </View>
     //   <View />
     // </View>
-    <Signup/>
+    <NativeRouter>
+        <Switch>
+          <Route exact path='/' component={Login}/>
+          <Route exact path='/signup' component={Signup}/>
+        </Switch>
+    </NativeRouter>
 
   );
 }

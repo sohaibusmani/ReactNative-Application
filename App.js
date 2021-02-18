@@ -3,6 +3,7 @@ import { StyleSheet, Text, View, TextInput, Button } from 'react-native';
 
 // Components 
 import Login from './Screens/Login';
+import Signup from './Screens/Signup';
 
 export default function App() {
   // const [enteredGoal, setEnteredGoal] = useState('');
@@ -28,7 +29,7 @@ export default function App() {
     //   </View>
     //   <View />
     // </View>
-    <Login/>
+    <Signup/>
 
   );
 }

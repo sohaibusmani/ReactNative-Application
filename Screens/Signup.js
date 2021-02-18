@@ -8,7 +8,7 @@ const styles = StyleSheet.create({
         alignItems: 'center',
         flex: 1,
         justifyContent: 'center',
-        backgroundColor:'rgba(0,0,0,0.2)', 
+        backgroundColor:'rgba(0,0,0,0.5)', 
     },
     inputContainer: {
       justifyContent: 'space-between',
@@ -43,6 +43,11 @@ export default function signup(){
 
     return(
        <ImageBackground source={image} style={styles.image}>
+           <View style={styles.screen}>
+           <View style={{marginBottom: 10}}>
+               
+            </View>
+           </View>
        </ImageBackground> 
     )
 }

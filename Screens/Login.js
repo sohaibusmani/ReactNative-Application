@@ -8,7 +8,8 @@ const styles = StyleSheet.create({
     screen: {
         alignItems: 'center',
         flex: 1,
-        justifyContent: 'center' 
+        justifyContent: 'center',
+        backgroundColor:'rgba(0,0,0,0.2)', 
     },
     inputContainer: {
       justifyContent: 'space-between',
@@ -24,7 +25,7 @@ const styles = StyleSheet.create({
     image: {
         flex: 1,
         resizeMode: "cover",
-        justifyContent: "center"
+        justifyContent: "center",
       },
     heading: {
         fontSize: 25,
@@ -73,5 +74,6 @@ export default function Login() {
            
         </View>
         </ImageBackground>
+        
     )
 }

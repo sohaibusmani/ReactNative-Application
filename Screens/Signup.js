@@ -8,7 +8,7 @@ const styles = StyleSheet.create({
         alignItems: 'center',
         flex: 1,
         justifyContent: 'center',
-        backgroundColor:'rgba(0,0,0,0.5)', 
+        backgroundColor:'rgba(0,0,0,0.3)', 
     },
     inputContainer: {
       justifyContent: 'space-between',

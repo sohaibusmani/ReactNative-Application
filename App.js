@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import {NativeRouter, Switch, Route} from 'react-router-native';
 import {View, StyleSheet} from 'react-native';
+import MyDrawer from './Components/Drawer'
 
 const styles = StyleSheet.create({
   screen: {
@@ -47,10 +48,11 @@ export default function App() {
     //   <View />
     // </View>
     <NativeRouter>
-        <Switch>
+        {/* <Switch>
           <Route exact path='/' component={Login}/>
           <Route exact path='/signup' component={Signup}/>
-        </Switch>
+        </Switch> */}
+        <MyDrawer/>
     </NativeRouter>
 
   );

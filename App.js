@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import {NativeRouter, Switch, Route} from 'react-router-native';
 import {View, StyleSheet} from 'react-native';
+import { NavigationContainer } from '@react-navigation/native';
 
 
 const styles = StyleSheet.create({
@@ -24,6 +25,7 @@ import Login from './Screens/Login';
 import Signup from './Screens/Signup';
 import MyDrawer from './Components/Drawer';
 import Header from './Components/Header';
+import Navigator from './Routes/HomeStack';
 
 export default function App() {
   // const [enteredGoal, setEnteredGoal] = useState('');
@@ -49,14 +51,17 @@ export default function App() {
     //   </View>
     //   <View />
     // </View>
-    <NativeRouter>
-        {/* <Switch>
-          <Route exact path='/' component={Login}/>
-          <Route exact path='/signup' component={Signup}/>
-        </Switch> */}
-        <MyDrawer/>
-        {/* <Header/> */}
-    </NativeRouter>
+    // <NativeRouter>
+    //     {/* <Switch>
+    //       <Route exact path='/' component={Login}/>
+    //       <Route exact path='/signup' component={Signup}/>
+    //     </Switch> */}
+    //     <MyDrawer/>
+    //     {/* <Header/> */}
+    // </NativeRouter>
+    <NavigationContainer>
+    <Navigator/>
+    </NavigationContainer>
 
   );
 }

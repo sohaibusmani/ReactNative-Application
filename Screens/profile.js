@@ -1,14 +1,14 @@
 import React from 'react';
 import {View, Text} from 'react-native';
 
-function CheckIn({navigation}){
+function profile({navigation}){
     return(
     <View style={{marginTop: 100}}>
         <Text>
-            Checkin Screen
+            profile Screen
         </Text>
     </View>
     )
 }
-
-export default CheckIn;
+ 
+export default profile;

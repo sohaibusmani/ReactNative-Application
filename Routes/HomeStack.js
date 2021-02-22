@@ -1,19 +1,3 @@
-// import {createStackNavigator} from '@react-navigation/stack';
-
-// // Screens
-
-// import Home from '../Screens/Home';
-
-// const screens = {
-//     Home: {
-//         screen: Home
-//     }
-// }
-
-// const HomeStack = createStackNavigator(screens);
-
-// export default HomeStack;
-
 import { createStackNavigator } from '@react-navigation/stack';
 import React from 'react';
 import Home from "../Screens/Home"

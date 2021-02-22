@@ -51,17 +51,16 @@ export default function App() {
     //   </View>
     //   <View />
     // </View>
-    // <NativeRouter>
-    //     {/* <Switch>
-    //       <Route exact path='/' component={Login}/>
-    //       <Route exact path='/signup' component={Signup}/>
-    //     </Switch> */}
-    //     <MyDrawer/>
-    //     {/* <Header/> */}
-    // </NativeRouter>
-    <NavigationContainer>
-    <Navigator/>
-    </NavigationContainer>
+    <NativeRouter>
+        {/* <Switch>
+          <Route exact path='/' component={Login}/>
+          <Route exact path='/signup' component={Signup}/>
+        </Switch> */}
+        <MyDrawer/>
+    </NativeRouter>
+    // <NavigationContainer>
+    // <Navigator/>
+    // </NavigationContainer>
 
   );
 }

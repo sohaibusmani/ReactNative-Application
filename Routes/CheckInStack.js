@@ -1,5 +1,6 @@
 import React from 'react';
 import { createStackNavigator } from '@react-navigation/stack';
+import Header from '../Components/Header';
 
 // Screens
 import CheckIn from '../Screens/Check-in';
@@ -17,7 +18,9 @@ function CheckInStack() {
       <Stack.Screen
         name="CheckIn"
         component={CheckIn}
-        options={{ title: 'Check-in Page' }}
+        options={({ navigation }) => ({
+          headerTitle: () => <Header navigation={navigation} title='Check-in'/>,
+        })}
       /> 
     </Stack.Navigator>
   );

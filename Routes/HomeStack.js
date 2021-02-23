@@ -18,12 +18,8 @@ function RootStack() {
         name="Home"
         component={Home}  
         options={({ navigation }) => ({
-          headerTitle: () => <Header navigation={navigation} />,
-         
+          headerTitle: () => <Header navigation={navigation} title='Time Tracking App'/>,
         })}
-        // options={{title: 'Check-in App', headerStyle: {
-        //   backgroundColor: '#428AF8'
-        // }}}
       />
       <Stack.Screen
         name="Profile"

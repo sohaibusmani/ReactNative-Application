@@ -33,7 +33,7 @@ import React from 'react';
 import {StyleSheet, View, Text} from 'react-native';
 import {MaterialIcons} from '@expo/vector-icons';
 
-export default function Header({navigation}){
+export default function Header({navigation, title}){
 
 const openMenu = () => {
   navigation.openDrawer()
@@ -44,7 +44,7 @@ const openMenu = () => {
    <MaterialIcons name='menu' size={28} onPress={openMenu} style={styles.icon}/>
    <View>
      <Text style={styles.headerText}>
-       Check-in App
+       {title}
      </Text>
    </View>
   </View>

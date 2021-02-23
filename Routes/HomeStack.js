@@ -17,13 +17,13 @@ function RootStack() {
       <Stack.Screen
         name="Home"
         component={Home}  
-        // options={({ navigation }) => ({
-        //   headerTitle: () => <Header navigation={navigation} />,
+        options={({ navigation }) => ({
+          headerTitle: () => <Header navigation={navigation} />,
          
-        // })}
-        options={{title: 'Check-in App', headerStyle: {
-          backgroundColor: '#428AF8'
-        }}}
+        })}
+        // options={{title: 'Check-in App', headerStyle: {
+        //   backgroundColor: '#428AF8'
+        // }}}
       />
       <Stack.Screen
         name="Profile"

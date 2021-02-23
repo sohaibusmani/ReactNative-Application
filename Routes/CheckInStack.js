@@ -18,7 +18,7 @@ function CheckInStack() {
         name="CheckIn"
         component={CheckIn}
         options={{ title: 'Check-in Page' }}
-      />
+      /> 
     </Stack.Navigator>
   );
 }

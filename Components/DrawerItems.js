@@ -5,12 +5,14 @@ import { NavigationContainer } from '@react-navigation/native';
 import HomeStack from '../Routes/HomeStack';
 import CheckInStack from '../Routes/CheckInStack';
 
+import MyDrawer from './Drawer';
+
 const Drawer = createDrawerNavigator();
 
 export default function DrawerItems(){
 return(
     <NavigationContainer>
-    <Drawer.Navigator>
+    <Drawer.Navigator myDrawer={props => <MyDrawer {...props} />}>
       <Drawer.Screen name="Home" component={HomeStack} />
       <Drawer.Screen name="CheckIn" component={CheckInStack} />
     </Drawer.Navigator>

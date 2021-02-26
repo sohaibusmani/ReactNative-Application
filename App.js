@@ -2,6 +2,12 @@ import React, { useState } from 'react';
 import {NativeRouter, Switch, Route} from 'react-router-native';
 import {View, StyleSheet} from 'react-native';
 import { NavigationContainer } from '@react-navigation/native';
+import {createDrawerNavigator} from '@react-navigation/drawer';
+
+import HomeStack from './Routes/HomeStack';
+import CheckInStack from './Routes/CheckInStack';
+
+const Drawer = createDrawerNavigator();
 
 
 const styles = StyleSheet.create({
@@ -51,16 +57,19 @@ export default function App() {
     //   </View>
     //   <View />
     // </View>
-    <NativeRouter>
-        {/* <Switch>
-          <Route exact path='/' component={Login}/>
-          <Route exact path='/signup' component={Signup}/>
-        </Switch> */}
-        <MyDrawer/>
-    </NativeRouter>
-    // <NavigationContainer>
-    // <Navigator/>
-    // </NavigationContainer>
+    // <NativeRouter>
+    //     {/* <Switch>
+    //       <Route exact path='/' component={Login}/>
+    //       <Route exact path='/signup' component={Signup}/>
+    //     </Switch> */}
+    //     <MyDrawer/>
+    // </NativeRouter>
+    <NavigationContainer>
+    <Drawer.Navigator drawerContent={props => <MyDrawer {...props} />}>
+      <Drawer.Screen name="Home" component={HomeStack} />
+      <Drawer.Screen name="CheckIn" component={CheckInStack} />
+    </Drawer.Navigator>
+    </NavigationContainer>
 
   );
 }

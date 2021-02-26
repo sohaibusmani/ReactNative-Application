@@ -4,6 +4,7 @@ import { NavigationContainer } from '@react-navigation/native';
 import Home from "../Screens/Home"
 import Profile from "../Screens/profile";
 import Header from '../Components/Header';
+import CheckIn from '../Screens/Check-in';
 
 
 const Stack = createStackNavigator();
@@ -25,6 +26,11 @@ function RootStack() {
         name="Profile"
         component={Profile}
         options={{ title: 'My app' }}
+      />
+      <Stack.Screen
+        name='Check-in'
+        component={CheckIn}
+        options={{ title: 'Check-in'}}
       />
     </Stack.Navigator>
   );

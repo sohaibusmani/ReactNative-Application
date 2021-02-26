@@ -1,34 +1,25 @@
 import React from 'react';
 import {View, SafeAreaView, StyleSheet, Image} from 'react-native';
+import {Avatar, Title, Caption, Paragraph, Drawer, Text, TouchableRipple, Switch} from 'react-native-paper';
+import {DrawerContentScrollView, DrawerItem} from '@react-navigation/drawer'
 
 // Component
-import DrawerItems from './DrawerItems';
 import logo from '../assets/favicon.png'
 
 export default function MyDrawer(props){
   return(
-    <SafeAreaView style={{ flex: 1 }}>
-      <DrawerItems/>
-    </SafeAreaView>
+    <View style={{ flex: 1 }}>
+      <Text>Check</Text>
+     
+    </View>
   )
 }
 
 const styles = StyleSheet.create({
-  sideMenuProfileIcon: {
-    resizeMode: 'center',
-    width: 100,
-    height: 100,
-    borderRadius: 100 / 2,
-    alignSelf: 'center',
+  bottomDrawerSection: {
+    marginBottom: 15,
+    borderTopColor: '#f4f4f4',
+    borderTopWidth: 1
   },
-  iconStyle: {
-    width: 15,
-    height: 15,
-    marginHorizontal: 5,
-  },
-  customItem: {
-    padding: 16,
-    flexDirection: 'row',
-    alignItems: 'center',
-  },
+
 });

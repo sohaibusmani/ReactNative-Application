@@ -8,6 +8,12 @@ import {MaterialIcons} from '@expo/vector-icons';
 import logo from '../assets/me.jpg'
 
 export default function MyDrawer(props){
+const [isDarkTheme, setIsDarkTheme] =React.useState(false);
+
+const toggleTheme = () => {
+  setIsDarkTheme(!isDarkTheme);
+}
+
   return(
     <View style={{ flex: 1 }}>
       <DrawerContentScrollView {...props}>
@@ -27,11 +33,23 @@ export default function MyDrawer(props){
              <DrawerItem
               icon={({color, size}) => (<MaterialIcons name='home' size={size} color={color}/>)}
               label='Home'
+              onPress={() => {props.navigation.navigate('Home')}}
              />
               <DrawerItem
               icon={({color, size}) => (<MaterialIcons name='access-time' size={size} color={color}/>)}
               label='Check-In'
+              onPress={() => {props.navigation.navigate('CheckIn')}}
              />
+           </Drawer.Section>
+           <Drawer.Section title='Preferences'>
+             <TouchableRipple onPress={() => {toggleTheme()}}>
+               <View style={styles.preference}>
+                 <Text>Dark Theme</Text>
+                 <View pointerEvents='none'>
+                  <Switch value={isDarkTheme}/>
+                 </View>
+               </View>
+             </TouchableRipple>
            </Drawer.Section>
          </View>
       </DrawerContentScrollView>
@@ -60,5 +78,10 @@ const styles = StyleSheet.create({
     borderTopColor: '#f4f4f4',
     borderTopWidth: 1
   },
-
+  preference: {
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    paddingVertical: 12,
+    paddingHorizontal: 16
+  }
 });

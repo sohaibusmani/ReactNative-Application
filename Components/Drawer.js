@@ -5,7 +5,7 @@ import {DrawerContentScrollView, DrawerItem} from '@react-navigation/drawer';
 import {MaterialIcons} from '@expo/vector-icons';
 
 // Component 
-import logo from '../assets/favicon.png'
+import logo from '../assets/me.jpg'
 
 export default function MyDrawer(props){
   return(
@@ -13,13 +13,22 @@ export default function MyDrawer(props){
       <DrawerContentScrollView {...props}>
          <View style={styles.drawerContent}>
            <View style={styles.userInfoSection}>
-            <View>
+            <View style={{flexDirection:'row'}}>
               <Avatar.Image
                source={logo}
                size={50}
               />
+              <View style={{marginLeft: 20, marginTop: 5}}>
+                <Title>Sohaib Usmani</Title>
+              </View>
             </View>
            </View>
+           <Drawer.Section style={styles.drawerSection}>
+             <DrawerItem
+              icon={({color, size}) => (<MaterialIcons name='home' size={size} color={color}/>)}
+              label='Home'
+             />
+           </Drawer.Section>
          </View>
       </DrawerContentScrollView>
       <Drawer.Section style={styles.bottomDrawerSection}>
@@ -38,6 +47,9 @@ const styles = StyleSheet.create({
   },
   userInfoSection:{
     padding: 10,
+  },
+  drawerSection:{
+   marginTop: 10
   },
   bottomDrawerSection: {
     marginBottom: 15,

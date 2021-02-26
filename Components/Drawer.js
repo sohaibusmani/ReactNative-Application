@@ -28,6 +28,10 @@ export default function MyDrawer(props){
               icon={({color, size}) => (<MaterialIcons name='home' size={size} color={color}/>)}
               label='Home'
              />
+              <DrawerItem
+              icon={({color, size}) => (<MaterialIcons name='access-time' size={size} color={color}/>)}
+              label='Check-In'
+             />
            </Drawer.Section>
          </View>
       </DrawerContentScrollView>

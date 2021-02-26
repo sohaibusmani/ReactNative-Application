@@ -11,10 +11,15 @@ export default function MyDrawer(props){
   return(
     <View style={{ flex: 1 }}>
       <DrawerContentScrollView {...props}>
-         <View>
-           <Text>
-             Main Content
-           </Text>
+         <View style={styles.drawerContent}>
+           <View style={styles.userInfoSection}>
+            <View>
+              <Avatar.Image
+               source={logo}
+               size={50}
+              />
+            </View>
+           </View>
          </View>
       </DrawerContentScrollView>
       <Drawer.Section style={styles.bottomDrawerSection}>
@@ -28,6 +33,12 @@ export default function MyDrawer(props){
 }
 
 const styles = StyleSheet.create({
+  drawerContent: {
+    flex: 1
+  },
+  userInfoSection:{
+    padding: 10,
+  },
   bottomDrawerSection: {
     marginBottom: 15,
     borderTopColor: '#f4f4f4',

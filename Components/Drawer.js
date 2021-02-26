@@ -1,7 +1,8 @@
 import React from 'react';
 import {View, SafeAreaView, StyleSheet, Image} from 'react-native';
 import {Avatar, Title, Caption, Paragraph, Drawer, Text, TouchableRipple, Switch} from 'react-native-paper';
-import {DrawerContentScrollView, DrawerItem} from '@react-navigation/drawer'
+import {DrawerContentScrollView, DrawerItem} from '@react-navigation/drawer';
+import {MaterialIcons} from '@expo/vector-icons';
 
 // Component 
 import logo from '../assets/favicon.png'
@@ -16,6 +17,12 @@ export default function MyDrawer(props){
            </Text>
          </View>
       </DrawerContentScrollView>
+      <Drawer.Section style={styles.bottomDrawerSection}>
+         <DrawerItem
+          icon={({color, size}) => (<MaterialIcons name='exit-to-app' size={size} color={color}/>)}
+          label='Sign Out'
+         />
+      </Drawer.Section>
     </View>
   )
 }

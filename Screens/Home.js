@@ -1,7 +1,9 @@
 import React from 'react';
-import {View, Text, Button} from 'react-native';
+import {View, Text, TouchableOpacity} from 'react-native';
 import Profile from "../Screens/profile";
 import {Agenda} from 'react-native-calendars';
+import {Card, Avatar} from 'react-native-paper';
+
 
 const timeToString = (time) => {
     const date = new Date(time);
@@ -36,6 +38,23 @@ function Home({navigation}){
         }, 1000);
       }
 
+      const renderItem = (item) => {
+           return(
+               <TouchableOpacity style={{marginRight: 10, marginTop: 17}}>
+                 <Card>
+                     <Card.Content>
+                         <View style={{flexDirection:'row', justifyContent:'space-between', alignItems:'center'}}>
+                             <Text>
+                                 {item.name}
+                             </Text>
+                             <Avatar.Text label='S' />
+                         </View>
+                     </Card.Content>
+                 </Card>
+               </TouchableOpacity>
+           )
+      }
+
     return(
     <View style={{flex: 1}}>
         {/* <Text>
@@ -49,6 +68,7 @@ function Home({navigation}){
         items={items}
         loadItemsForMonth={loadItems}
         selected={'2017-05-16'}
+        renderItem={renderItem}
         />
     </View>
     )

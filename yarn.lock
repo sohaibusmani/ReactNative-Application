@@ -972,13 +972,6 @@
   dependencies:
     regenerator-runtime "^0.13.4"
 
-"@babel/runtime@^7.4.5":
-  version "7.13.9"
-  resolved "https://registry.yarnpkg.com/@babel/runtime/-/runtime-7.13.9.tgz#97dbe2116e2630c489f22e0656decd60aaa1fcee"
-  integrity sha512-aY2kU+xgJ3dJ1eU6FMB9EH8dIe8dmusF1xEku52joLvw6eAFN0AI+WxCLDnpev2LEejWBAy2sBvBOBAjI3zmvA==
-  dependencies:
-    regenerator-runtime "^0.13.4"
-
 "@babel/template@^7.0.0", "@babel/template@^7.10.4", "@babel/template@^7.8.6":
   version "7.10.4"
   resolved "https://registry.yarnpkg.com/@babel/template/-/template-7.10.4.tgz#3251996c4200ebc71d1a8fc405fba940f36ba278"
@@ -1942,11 +1935,6 @@ chardet@^0.4.0:
   resolved "https://registry.yarnpkg.com/chardet/-/chardet-0.4.2.tgz#b5473b33dc97c424e5d98dc87d55d4d8a29c8bf2"
   integrity sha1-tUc7M9yXxCTl2Y3IfVXU2KKci/I=
 
-chinese-lunar@^0.1.4:
-  version "0.1.4"
-  resolved "https://registry.yarnpkg.com/chinese-lunar/-/chinese-lunar-0.1.4.tgz#c0fa7b927ef1625993e60b28c429dc44eb9c0276"
-  integrity sha1-wPp7kn7xYlmT5gsoxCncROucAnY=
-
 ci-info@^2.0.0:
   version "2.0.0"
   resolved "https://registry.yarnpkg.com/ci-info/-/ci-info-2.0.0.tgz#67a9e964be31a51e15e5010d58e6f12834002f46"
@@ -2230,11 +2218,6 @@ css-in-js-utils@^2.0.0:
   dependencies:
     hyphenate-style-name "^1.0.2"
     isobject "^3.0.1"
-
-date-fns@^1.29.0:
-  version "1.30.1"
-  resolved "https://registry.yarnpkg.com/date-fns/-/date-fns-1.30.1.tgz#2e71bf0b119153dbb4cc4e88d9ea5acfb50dc05c"
-  integrity sha512-hBSVCvSmWC+QypYObzwGOd9wqdDpOt+0wl0KbU+R+uuZBS1jN8VsD1ss3irQDknRj5NvxiTF6oj/nDRnN/UQNw==
 
 dayjs@^1.8.15:
   version "1.9.5"
@@ -4874,14 +4857,6 @@ react-is@^16.12.0, react-is@^16.13.0, react-is@^16.6.0, react-is@^16.7.0, react-
   resolved "https://registry.yarnpkg.com/react-is/-/react-is-16.13.1.tgz#789729a4dc36de2999dc156dd6c1d9c18cea56a4"
   integrity sha512-24e6ynE2H+OKt4kqsOvNd8kBpV65zoxbA4BVsEOB3ARVWQki/DHzaUoC5KuON/BiccDaCCTZBuOcfZs70kR8bQ==
 
-react-native-calendar-slider-carousel@^1.1.0:
-  version "1.1.0"
-  resolved "https://registry.yarnpkg.com/react-native-calendar-slider-carousel/-/react-native-calendar-slider-carousel-1.1.0.tgz#47d988ae5d566a4fed052d011eb7fc6aa0cb24a2"
-  integrity sha512-3MNtD9yf1tmRjqeI/1/F38FqVtHJQaPKI6MsQcGufKq+RAO2W6RNAw5lmW+ts/gTwEBKqTsD1ZuqsKgnEJN13A==
-  dependencies:
-    "@babel/runtime" "^7.4.5"
-    moment "^2.24.0"
-
 react-native-calendars@^1.1254.0:
   version "1.1254.0"
   resolved "https://registry.yarnpkg.com/react-native-calendars/-/react-native-calendars-1.1254.0.tgz#49dfb880c6588188a49ba15ecfb56cace2d3b3fe"
@@ -4946,37 +4921,15 @@ react-native-safe-area-context@3.1.4:
   resolved "https://registry.yarnpkg.com/react-native-safe-area-context/-/react-native-safe-area-context-3.1.4.tgz#9b7f883a5ae8da6218d17467a350434005893602"
   integrity sha512-bXx3hqz4LovFoMnJIRGIWL2oJ/PHadXviBKvgZV9yNErtURQLJSn0yfQytVtiqslhaBMZOJwH4R6HiClyofvBg==
 
-react-native-safe-area-view@^1.1.1:
-  version "1.1.1"
-  resolved "https://registry.yarnpkg.com/react-native-safe-area-view/-/react-native-safe-area-view-1.1.1.tgz#9833e34c384d0513f4831afcd1e54946f13897b2"
-  integrity sha512-bbLCtF+tqECyPWlgkWbIwx4vDPb0GEufx/ZGcSS4UljMcrpwluachDXoW9DBxhbMCc6k1V0ccqHWN7ntbRdERQ==
-  dependencies:
-    hoist-non-react-statics "^2.3.1"
-
 react-native-screens@~2.10.1:
   version "2.10.1"
   resolved "https://registry.yarnpkg.com/react-native-screens/-/react-native-screens-2.10.1.tgz#06d22fae87ef0ce51c616c34a199726db1403b95"
   integrity sha512-Z2kKSk4AwWRQNCBmTjViuBQK0/Lx0jc25TZptn/2gKYUCOuVRvCekoA26u0Tsb3BIQ8tWDsZW14OwDlFUXW1aw==
 
-react-native-slideable-calendar-strip@^0.4.0:
-  version "0.4.0"
-  resolved "https://registry.yarnpkg.com/react-native-slideable-calendar-strip/-/react-native-slideable-calendar-strip-0.4.0.tgz#9d4a086c2153c3ee6b4ad3b1f75e6179bd7df72d"
-  integrity sha512-juuU8HzECXQS0NQCQdaXyXaajUTM99k58/mzyJAdSiuoINXM+9WHNmpZKcRy4AVetpmHmTfz1i/UG81QsSUWXw==
-  dependencies:
-    chinese-lunar "^0.1.4"
-    date-fns "^1.29.0"
-
 react-native-swipe-gestures@^1.0.5:
   version "1.0.5"
   resolved "https://registry.yarnpkg.com/react-native-swipe-gestures/-/react-native-swipe-gestures-1.0.5.tgz#a172cb0f3e7478ccd681fd36b8bfbcdd098bde7c"
   integrity sha512-Ns7Bn9H/Tyw278+5SQx9oAblDZ7JixyzeOczcBK8dipQk2pD7Djkcfnf1nB/8RErAmMLL9iXgW0QHqiII8AhKw==
-
-react-native-swiper@^1.5.14:
-  version "1.6.0"
-  resolved "https://registry.yarnpkg.com/react-native-swiper/-/react-native-swiper-1.6.0.tgz#59fdbdf95addee49630312f27077622c27776819"
-  integrity sha512-OnkTTZi+9uZUgy0uz1I9oYDhCU3z36lZn+LFsk9FXPRelxb/KeABzvPs3r3SrHWy1aA67KGtSFj0xNK2QD0NJQ==
-  dependencies:
-    prop-types "^15.5.10"
 
 react-native-vector-icons@^7.0.0:
   version "7.1.0"
@@ -5711,15 +5664,6 @@ supports-color@^7.1.0:
   integrity sha512-qpCAvRl9stuOHveKsn7HncJRvv501qIacKzQlO/+Lwxc9+0q2wLyv4Dfvt80/DPn2pqOBsJdDiogXGR9+OvwRw==
   dependencies:
     has-flag "^4.0.0"
-
-swipeable-calendar-strip-react-native@^1.0.6:
-  version "1.0.6"
-  resolved "https://registry.yarnpkg.com/swipeable-calendar-strip-react-native/-/swipeable-calendar-strip-react-native-1.0.6.tgz#53ed6659fb5f3d8675b3e067fa4db7e4bc186e0e"
-  integrity sha512-LZNSOX6BOyaer733D+ZZA0jirezwPgdfGAvngf09jTv75DxjVn0YOnUklCTcC4SdVKJ3N+8Ahs+q+lJjQGSPrQ==
-  dependencies:
-    moment "^2.24.0"
-    prop-types "^15.7.2"
-    react-native-swiper "^1.5.14"
 
 symbol-observable@1.0.1:
   version "1.0.1"

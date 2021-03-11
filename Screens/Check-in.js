@@ -9,9 +9,10 @@ import { MaterialCommunityIcons } from '@expo/vector-icons';
 
 function CheckIn({navigation}){
     const [criteria, setCriteria] = React.useState('')
+    console.log(criteria);
 
     return(
-    <View style={{flex:1}}>
+    <View style={{flex: 1, justifyContent: 'center'}}>
         <DropDownPicker
     items={[
         {label: 'Check-In', value: 'checkIn', icon: () => <Feather name="check" size={18} style={{marginEnd:10}} color='black' />},

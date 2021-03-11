@@ -31,7 +31,7 @@ const styles = StyleSheet.create({
 function CheckIn({ navigation }) {
     const [criteria, setCriteria] = React.useState('');
     const [currentDate, setCurrentDate] = React.useState('');
-
+    const [showCard, setShowCard] = React.useState(false);
     
 
       const getDate = () => {
@@ -45,6 +45,7 @@ function CheckIn({ navigation }) {
           date + '/' + month + '/' + year 
           + ' ' + hours + ':' + min + ':' + sec
         );
+        setShowCard(true);
       }
     
 
@@ -73,20 +74,23 @@ function CheckIn({ navigation }) {
                 Start
             </Button>
             </View>
-            <TouchableOpacity style={{marginRight: 10, marginTop: 17}}>
-                 <Card style={styles.card}>
-                     <Card.Content>
-                         <View style={{flexDirection:'row', justifyContent:'space-between', alignItems:'center', padding: 20}}>
-                             <Text style={{color: 'white'}}>
-                                 {criteria}
-                             </Text>
-                             <Text style={{color: 'white'}}>
-                                 {currentDate}
-                             </Text>
-                         </View>
-                     </Card.Content>
-                 </Card>
-               </TouchableOpacity>
+            {
+                showCard && 
+                <TouchableOpacity style={{marginRight: 10, marginTop: 17}}>
+                <Card style={styles.card}>
+                    <Card.Content>
+                        <View style={{flexDirection:'row', justifyContent:'space-between', alignItems:'center', padding: 20}}>
+                            <Text style={{color: 'white'}}>
+                                {criteria}
+                            </Text>
+                            <Text style={{color: 'white'}}>
+                                {currentDate}
+                            </Text>
+                        </View>
+                    </Card.Content>
+                </Card>
+              </TouchableOpacity>
+            }
         </View>
     )
 }

@@ -14,16 +14,18 @@ function CheckIn({navigation}){
     <View style={{flex:1}}>
         <DropDownPicker
     items={[
-        {label: 'Check-In', value: 'checkIn', icon: () => <Feather name="check" size={18} color='black' />},
-        {label: 'Check-Out', value: 'checkOut', icon: () => <MaterialIcons name="exit-to-app" size={18} color="black" /> },
-        {label: 'Break-Start', value: 'breakStart', icon: () => <MaterialIcons name="free-breakfast" size={18} color='black' />},
-        {label: 'Break-End', value: 'breakEnd', icon: () => <MaterialCommunityIcons name="format-page-break" size={18} color='black' />},
+        {label: 'Check-In', value: 'checkIn', icon: () => <Feather name="check" size={18} style={{marginEnd:10}} color='black' />},
+        {label: 'Check-Out', value: 'checkOut', icon: () => <MaterialIcons name="exit-to-app" style={{marginEnd:10}} size={18} color="black" /> },
+        {label: 'Break-Start', value: 'breakStart', icon: () => <MaterialIcons name="free-breakfast" style={{marginEnd:10}} size={18} color='black' />},
+        {label: 'Break-End', value: 'breakEnd', icon: () => <MaterialCommunityIcons name="format-page-break" style={{marginEnd:10}} size={18} color='black' />},
     ]}
     defaultValue={criteria}
     containerStyle={{height: 70}}
     style={{backgroundColor: '#fafafa'}}
     itemStyle={{
-        justifyContent: 'flex-start'
+        justifyContent: 'space-between',
+        padding: 10
+
     }}
     dropDownStyle={{backgroundColor: '#fafafa'}}
     onChangeItem={item => setCriteria(item.value)}

@@ -15,8 +15,8 @@ const styles = StyleSheet.create({
     },
     btn: {
         margin: 20,
-        width: '60%',
-        backgroundColor: '#66bbb9'
+        backgroundColor: '#66bbb9',
+        height: 38
     },
     card: {
         margin: 10,
@@ -50,6 +50,7 @@ function CheckIn({ navigation }) {
 
     return (
         <View style={styles.screen}>
+            <View style={{flexDirection: 'row', justifyContent:'space-evenly', padding: 10}}>
             <DropDownPicker
                 items={[
                     { label: 'Check-In',  value: 'checkIn', icon: () => <Feather name="check" size={18} style={{ marginEnd: 10 }} color='black' /> },
@@ -58,8 +59,8 @@ function CheckIn({ navigation }) {
                     { label: 'Break-End', value: 'breakEnd', icon: () => <MaterialCommunityIcons name="format-page-break" style={{ marginEnd: 10 }} size={18} color='black' /> },
                 ]}
                 defaultValue={criteria}
-                containerStyle={{ height: 70 }}
-                style={{ backgroundColor: '#fafafa' }}
+                containerStyle={{ height: 45, flex: 1 , flexWrap: 'wrap', marginTop: 15 }}
+                style={{ backgroundColor: '#fafafa'}}
                 itemStyle={{
                     justifyContent: 'space-between',
                     padding: 10, 
@@ -71,14 +72,15 @@ function CheckIn({ navigation }) {
             <Button mode='contained' style={styles.btn} onPress={getDate}>
                 Start
             </Button>
+            </View>
             <TouchableOpacity style={{marginRight: 10, marginTop: 17}}>
                  <Card style={styles.card}>
                      <Card.Content>
                          <View style={{flexDirection:'row', justifyContent:'space-between', alignItems:'center', padding: 20}}>
-                             <Text>
+                             <Text style={{color: 'white'}}>
                                  {criteria}
                              </Text>
-                             <Text>
+                             <Text style={{color: 'white'}}>
                                  {currentDate}
                              </Text>
                          </View>

@@ -29,7 +29,11 @@ const styles = StyleSheet.create({
 
 
 function CheckIn({ navigation }) {
-    const [criteria, setCriteria] = React.useState('');
+    const [criteria, setCriteria] = React.useState([]);
+    const [checkIn, setCheckIn] = React.useState('');
+    const [breakStart, setBreakStart] = React.useState('');
+    const [breakEnd, setBreakEnd] = React.useState('');
+    const [checkOut, setCheckOut] = React.useState('');
     const [currentDate, setCurrentDate] = React.useState('');
     const [showCard, setShowCard] = React.useState(false);
     

@@ -1,7 +1,8 @@
 import React from 'react';
-import { View, StyleSheet} from 'react-native';
-import { Avatar, Button, Card, Title, Paragraph } from 'react-native-paper';
-import { Text } from 'native-base';
+import { View, StyleSheet, ImageBackground} from 'react-native';
+import { Card, Title, Paragraph } from 'react-native-paper';
+
+import image from '../assets/pic2.jpg';
 
 const styles = StyleSheet.create({
     screen:{
@@ -18,7 +19,12 @@ const styles = StyleSheet.create({
         backgroundColor: '#66bbb9',
         borderRadius: 10,
         height: 100
-    }
+    },
+    image: {
+        width: '100%',
+        height: '100%',
+        flex: 1
+      },
 
 })
 
@@ -42,23 +48,15 @@ function CheckIn({ navigation }) {
         );
         setShowCard(true);
       }
-    
-      const LeftContent = props => <Avatar.Icon {...props} icon="folder" />
 
     return (
-        <View>
-            <Card>
-    <Card.Title title="Card Title" subtitle="Card Subtitle" left={LeftContent} />
-    <Card.Content>
-      <Title>Card title</Title>
-      <Paragraph>Card content</Paragraph>
-    </Card.Content>
-    <Card.Cover source={{ uri: 'https://picsum.photos/700' }} />
-    <Card.Actions>
-      <Button>Cancel</Button>
-      <Button>Ok</Button>
-    </Card.Actions>
-  </Card>
+        <View style={{flex: 1}}>
+          <ImageBackground resizeMode='cover' style={styles.image} style={{height: 200}} source={image}>
+              <View style={{flex:1, backgroundColor:'rgba(0,0,0,0.3)',alignItems:'center'}}>
+                <Title style={{ color:'white'}}>20 March 2021</Title>   
+              </View>
+          </ImageBackground>
+         
         </View>
     )
 }

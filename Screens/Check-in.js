@@ -29,11 +29,7 @@ const styles = StyleSheet.create({
 
 
 function CheckIn({ navigation }) {
-    const [criteria, setCriteria] = React.useState([]);
-    const [checkIn, setCheckIn] = React.useState('');
-    const [breakStart, setBreakStart] = React.useState('');
-    const [breakEnd, setBreakEnd] = React.useState('');
-    const [checkOut, setCheckOut] = React.useState('');
+    const [criteria, setCriteria] = React.useState([])
     const [currentDate, setCurrentDate] = React.useState('');
     const [showCard, setShowCard] = React.useState(false);
     
@@ -55,46 +51,7 @@ function CheckIn({ navigation }) {
 
     return (
         <View style={styles.screen}>
-            <View style={{flexDirection: 'row', justifyContent:'space-evenly', padding: 10}}>
-            <DropDownPicker
-                items={[
-                    { label: 'Check-In',  value: 'checkIn', icon: () => <Feather name="check" size={18} style={{ marginEnd: 10 }} color='black' /> },
-                    { label: 'Check-Out', value: 'checkOut', icon: () => <MaterialIcons name="exit-to-app" style={{ marginEnd: 10 }} size={18} color="black" /> },
-                    { label: 'Break-Start', value: 'breakStart', icon: () => <MaterialIcons name="free-breakfast" style={{ marginEnd: 10 }} size={18} color='black' /> },
-                    { label: 'Break-End', value: 'breakEnd', icon: () => <MaterialCommunityIcons name="format-page-break" style={{ marginEnd: 10 }} size={18} color='black' /> },
-                ]}
-                defaultValue={criteria}
-                containerStyle={{ height: 45, flex: 1 , flexWrap: 'wrap', marginTop: 15 }}
-                style={{ backgroundColor: '#fafafa'}}
-                itemStyle={{
-                    justifyContent: 'space-between',
-                    padding: 10, 
-
-                }}
-                dropDownStyle={{ backgroundColor: '#fafafa' }}
-                onChangeItem={item => setCriteria(item.value)}
-            />
-            <Button mode='contained' style={styles.btn} onPress={getDate}>
-                Start
-            </Button>
-            </View>
-            {
-                showCard && 
-                <TouchableOpacity style={{marginRight: 10, marginTop: 17}}>
-                <Card style={styles.card}>
-                    <Card.Content>
-                        <View style={{flexDirection:'row', justifyContent:'space-between', alignItems:'center', padding: 20}}>
-                            <Text style={{color: 'white'}}>
-                                {criteria}
-                            </Text>
-                            <Text style={{color: 'white'}}>
-                                {currentDate}
-                            </Text>
-                        </View>
-                    </Card.Content>
-                </Card>
-              </TouchableOpacity>
-            }
+            <Text>CheckIn</Text>
         </View>
     )
 }

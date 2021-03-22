@@ -1,8 +1,12 @@
 import React from 'react';
-import { View, StyleSheet, ImageBackground} from 'react-native';
+import { View, StyleSheet, ImageBackground, Text} from 'react-native';
 import { Card, Title, Paragraph } from 'react-native-paper';
+import { Feather } from '@expo/vector-icons';
+import { MaterialIcons } from '@expo/vector-icons';
+import { MaterialCommunityIcons } from '@expo/vector-icons';
 
 import image from '../assets/pic2.jpg';
+
 
 const styles = StyleSheet.create({
     screen:{
@@ -51,9 +55,27 @@ function CheckIn({ navigation }) {
 
     return (
         <View style={{flex: 1}}>
-          <ImageBackground resizeMode='cover' style={styles.image} style={{height: 200}} source={image}>
-              <View style={{flex:1, backgroundColor:'rgba(0,0,0,0.3)',alignItems:'center'}}>
-                <Title style={{ color:'white'}}>20 March 2021</Title>   
+          <ImageBackground resizeMode='cover' style={styles.image} style={{height: 250}} source={image}>
+              <View style={{flex:1, backgroundColor:'rgba(0,0,0,0.3)',}}>
+                  <View style={{color:'white', alignItems:'center'}}>
+                <Title style={{ color:'white',}}>20 March 2021</Title>
+                </View>
+                <View style={{flexDirection:'row', margin: 15}}>
+                <Feather style={{marginTop: 2}} name="check-square" size={20} color="white" />
+                <Text style={{marginLeft: 8, fontSize: 18, color:'white'}}>Check In : 9:05 AM</Text>
+                </View>
+                <View style={{flexDirection:'row', margin: 15}}>
+                <MaterialIcons name="free-breakfast" size={24} color="white" />
+                <Text style={{marginLeft: 8, fontSize: 18, color:'white'}}>Break Start : 2:05 PM</Text>
+                </View>
+                <View style={{flexDirection:'row', margin: 15}}>
+                <MaterialCommunityIcons name="format-page-break" size={24} color="white" />
+                <Text style={{marginLeft: 8, fontSize: 18, color:'white'}}>Break End : 3:05 PM</Text>
+                </View>
+                <View style={{flexDirection:'row', margin: 15}}>
+                <MaterialIcons name="exit-to-app" size={23} color="white" />
+                <Text style={{marginLeft: 8, fontSize: 18, color:'white'}}>Check Out : 8:05 PM</Text>
+                </View>    
               </View>
           </ImageBackground>
          

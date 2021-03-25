@@ -1,9 +1,10 @@
 import React from 'react';
-import { View, StyleSheet, ImageBackground, Text, TouchableOpacity} from 'react-native';
-import { Card, Title, Paragraph } from 'react-native-paper';
+import { View, StyleSheet, ImageBackground, Text, TouchableOpacity, ScrollView} from 'react-native';
+import { Avatar, Button, Card, Title, Paragraph } from 'react-native-paper';
 import { Feather } from '@expo/vector-icons';
 import { MaterialIcons } from '@expo/vector-icons';
 import { MaterialCommunityIcons } from '@expo/vector-icons';
+import { Entypo } from '@expo/vector-icons';
 
 import image from '../assets/pic2.jpg';
 
@@ -67,6 +68,8 @@ function CheckIn({ navigation }) {
         setShowCard(true);
       }
 
+      const LeftContent = props => <Avatar.Icon {...props} icon="folder" />
+
     return (
         <View style={{flex: 1}}>
           <ImageBackground resizeMode='cover' style={styles.image} style={{height: 250}} source={image}>
@@ -92,13 +95,29 @@ function CheckIn({ navigation }) {
                 </View>    
               </View>
           </ImageBackground>
-          <View style={{marginTop: 20, alignItems:'center'}}>
+          <ScrollView>
+          <View style={{marginTop: 20}}>
+            <View>
+          <Card>
+    <Card.Title title="Sohaib Usmani" subtitle="Employee" />
+    <Card.Content>
+      <View style={{flexDirection: 'row'}}>
+    <Entypo name="back-in-time" size={20} color="black" /> 
+    <Text style={{marginLeft: 5}}>9:05 AM</Text>
+    </View>
+      <Paragraph>Checked In</Paragraph>
+    </Card.Content>
+  </Card>
+  </View>
+  <View style={{marginTop: 20, alignItems:'center'}}>
             <TouchableOpacity style={styles.appButtonContainer}>
               <Text style={styles.appButtonText}>
-                Check-In
+                Break
               </Text>
             </TouchableOpacity>
+            </View>
           </View>
+        </ScrollView>
         </View>
     )
 }

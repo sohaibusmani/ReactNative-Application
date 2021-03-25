@@ -1,5 +1,5 @@
 import React from 'react';
-import { View, StyleSheet, ImageBackground, Text} from 'react-native';
+import { View, StyleSheet, ImageBackground, Text, TouchableOpacity} from 'react-native';
 import { Card, Title, Paragraph } from 'react-native-paper';
 import { Feather } from '@expo/vector-icons';
 import { MaterialIcons } from '@expo/vector-icons';
@@ -29,7 +29,21 @@ const styles = StyleSheet.create({
         height: '100%',
         flex: 1
       },
-
+    appButtonContainer: {
+        elevation: 8,
+        backgroundColor: "#009688",
+        // borderRadius: 10,
+        paddingVertical: 10,
+        paddingHorizontal: 12,
+        width: '60%',
+    },
+    appButtonText: {
+        fontSize: 18,
+        color: "#fff",
+        fontWeight: "bold",
+        alignSelf: "center",
+        textTransform: "uppercase"
+    }
 })
 
  
@@ -57,7 +71,7 @@ function CheckIn({ navigation }) {
         <View style={{flex: 1}}>
           <ImageBackground resizeMode='cover' style={styles.image} style={{height: 250}} source={image}>
               <View style={{flex:1, backgroundColor:'rgba(0,0,0,0.3)',}}>
-                  <View style={{color:'white', alignItems:'center'}}>
+                <View style={{color:'white', alignItems:'center'}}>
                 <Title style={{ color:'white',}}>20 March 2021</Title>
                 </View>
                 <View style={{flexDirection:'row', margin: 15}}>
@@ -78,7 +92,13 @@ function CheckIn({ navigation }) {
                 </View>    
               </View>
           </ImageBackground>
-         
+          <View style={{marginTop: 20, alignItems:'center'}}>
+            <TouchableOpacity style={styles.appButtonContainer}>
+              <Text style={styles.appButtonText}>
+                Check-In
+              </Text>
+            </TouchableOpacity>
+          </View>
         </View>
     )
 }

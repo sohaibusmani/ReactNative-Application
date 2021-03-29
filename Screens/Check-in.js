@@ -59,18 +59,29 @@ function CheckIn({ navigation }) {
 
   useEffect(() => {
         getDate();
-  },[]) 
+  }) 
 
   const storeDate = async () => {
-    const jsonValue = JSON.stringify(new Date());
-    await AsyncStorage.setItem('date',jsonValue)
-    console.log(jsonValue);
+    try {
+      const jsonValue = JSON.stringify(new Date())
+      await AsyncStorage.setItem('date', jsonValue)
+      alert('Data successfully saved')
+    } catch (e) {
+      alert('Failed to save the data to the storage')
+    }
   }
 
   const getDate = async () => {
-   const jsonValue =  await AsyncStorage.getItem('date');
-   return jsonValue != null ? JSON.parse(jsonValue) : null;
-   console.log(jsonValue);
+    try {
+      const breakTime = await AsyncStorage.getItem('date')
+  
+      if (breakTime !== null) {
+        setBreakStart(breakTime);
+        console.log(breakStart);
+      }
+    } catch (e) {
+      alert('Failed to fetch the data from storage')
+    }
   }
 
   return (

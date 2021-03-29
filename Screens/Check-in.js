@@ -1,10 +1,11 @@
-import React from 'react';
+import React, {useEffect} from 'react';
 import { View, StyleSheet, ImageBackground, Text, TouchableOpacity, ScrollView } from 'react-native';
 import { Avatar, Button, Card, Title, Paragraph } from 'react-native-paper';
 import { Feather } from '@expo/vector-icons';
 import { MaterialIcons } from '@expo/vector-icons';
 import { MaterialCommunityIcons } from '@expo/vector-icons';
 import { Entypo } from '@expo/vector-icons';
+import AsyncStorage from '@react-native-async-storage/async-storage';
 
 import image from '../assets/pic2.jpg';
 
@@ -56,19 +57,20 @@ function CheckIn({ navigation }) {
   const [currentDate, setCurrentDate] = React.useState('');
   const [showCard, setShowCard] = React.useState(false);
 
+  useEffect(() => {
+        getDate();
+  },[]) 
 
-  const getDate = () => {
-    var date = new Date().getDate(); //Current Date
-    var month = new Date().getMonth() + 1; //Current Month
-    var year = new Date().getFullYear(); //Current Year
-    var hours = new Date().getHours(); //Current Hours
-    var min = new Date().getMinutes(); //Current Minutes
-    var sec = new Date().getSeconds(); //Current Seconds
-    setCurrentDate(
-      date + '/' + month + '/' + year
-      + ' ' + hours + ':' + min + ':' + sec
-    );
-    setShowCard(true);
+  const storeDate = async () => {
+    const jsonValue = JSON.stringify(new Date());
+    await AsyncStorage.setItem('date',jsonValue)
+    console.log(jsonValue);
+  }
+
+  const getDate = async () => {
+   const jsonValue =  await AsyncStorage.getItem('date');
+   return jsonValue != null ? JSON.parse(jsonValue) : null;
+   console.log(jsonValue);
   }
 
   return (
@@ -111,7 +113,7 @@ function CheckIn({ navigation }) {
             </Card>
           </View>
           <View style={{ marginTop: 20, alignItems: 'center' }}>
-            <TouchableOpacity style={styles.appButtonContainer}>
+            <TouchableOpacity style={styles.appButtonContainer} onPress={storeDate}>
               <Text style={styles.appButtonText}>
                 Break
               </Text>

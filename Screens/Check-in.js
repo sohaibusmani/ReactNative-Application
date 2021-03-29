@@ -58,26 +58,95 @@ function CheckIn({ navigation }) {
   const [showCard, setShowCard] = React.useState(false);
 
   useEffect(() => {
-        getDate();
+        getCheckInTime();
   }) 
 
-  const storeDate = async () => {
+  const storeCheckInTime = async () => {
     try {
       const jsonValue = JSON.stringify(new Date())
-      await AsyncStorage.setItem('date', jsonValue)
+      await AsyncStorage.setItem('checkInTime', jsonValue)
       alert('Data successfully saved')
     } catch (e) {
       alert('Failed to save the data to the storage')
     }
   }
 
-  const getDate = async () => {
+  const getCheckInTime = async () => {
     try {
-      const breakTime = await AsyncStorage.getItem('date')
+      const checkInTime = await AsyncStorage.getItem('checkInTime')
   
-      if (breakTime !== null) {
-        setBreakStart(breakTime);
+      if (checkInTime !== null) {
+        setCheckIn(checkInTime);
+        console.log(checkIn);
+      }
+    } catch (e) {
+      alert('Failed to fetch the data from storage')
+    }
+  }
+
+  const storeBreakStartTime = async () => {
+    try {
+      const jsonValue = JSON.stringify(new Date())
+      await AsyncStorage.setItem('breakStartTime', jsonValue)
+      alert('Data successfully saved')
+    } catch (e) {
+      alert('Failed to save the data to the storage')
+    }
+  }
+
+  const getBreakStartTime = async () => {
+    try {
+      const breakStartTime = await AsyncStorage.getItem('breakStartTime')
+  
+      if (breakStartTime !== null) {
+        setBreakStart(breakStartTime);
         console.log(breakStart);
+      }
+    } catch (e) {
+      alert('Failed to fetch the data from storage')
+    }
+  }
+
+  const storeBreakEndTime = async () => {
+    try {
+      const jsonValue = JSON.stringify(new Date())
+      await AsyncStorage.setItem('breakEndTime', jsonValue)
+      alert('Data successfully saved')
+    } catch (e) {
+      alert('Failed to save the data to the storage')
+    }
+  }
+
+  const getBreakEndTime = async () => {
+    try {
+      const breakEndTime = await AsyncStorage.getItem('breakEndTime')
+  
+      if (breakEndTime !== null) {
+        setBreakEnd(breakEndTime);
+        console.log(breakEnd);
+      }
+    } catch (e) {
+      alert('Failed to fetch the data from storage')
+    }
+  }
+
+  const storeCheckOutTime = async () => {
+    try {
+      const jsonValue = JSON.stringify(new Date())
+      await AsyncStorage.setItem('checkOutTime', jsonValue)
+      alert('Data successfully saved')
+    } catch (e) {
+      alert('Failed to save the data to the storage')
+    }
+  }
+
+  const getCheckOutTime = async () => {
+    try {
+      const checkOutTime = await AsyncStorage.getItem('checkOutTime')
+  
+      if (checkOutTime !== null) {
+        setCheckOut(checkOutTime);
+        console.log(checkOut);
       }
     } catch (e) {
       alert('Failed to fetch the data from storage')
@@ -124,7 +193,7 @@ function CheckIn({ navigation }) {
             </Card>
           </View>
           <View style={{ marginTop: 20, alignItems: 'center' }}>
-            <TouchableOpacity style={styles.appButtonContainer} onPress={storeDate}>
+            <TouchableOpacity style={styles.appButtonContainer}>
               <Text style={styles.appButtonText}>
                 Break
               </Text>

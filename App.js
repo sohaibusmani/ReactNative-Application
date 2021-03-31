@@ -27,50 +27,20 @@ const styles = StyleSheet.create({
 
 
 // Components 
-import Login from './Screens/Login';
-import Signup from './Screens/Signup';
+import Splash from './Screens/Splash';
 import MyDrawer from './Components/Drawer';
-import Header from './Components/Header';
-import Navigator from './Routes/HomeStack';
+
 
 export default function App() {
-  // const [enteredGoal, setEnteredGoal] = useState('');
-
-  // const goalInputHandler = (enteredText) => {
-  //   setEnteredGoal(enteredText);
-  // };
-
-  // const addGoalHandler = () => {
-  //   console.log(enteredGoal);
-  // };
 
   return (
-    // <View style={styles.screen}>
-    //   <View style={styles.inputContainer}>
-    //     <TextInput
-    //       placeholder="Course Goal"
-    //       style={styles.input}
-    //       onChangeText={goalInputHandler}
-    //       value={enteredGoal}
-    //     />
-    //     <Button title="ADD" onPress={addGoalHandler} />
-    //   </View>
-    //   <View />
-    // </View>
-    // <NativeRouter>
-    //     {/* <Switch>
-    //       <Route exact path='/' component={Login}/>
-    //       <Route exact path='/signup' component={Signup}/>
-    //     </Switch> */}
-    //     <MyDrawer/>
-    // </NativeRouter>
-    <NavigationContainer>
-    <Drawer.Navigator drawerContent={props => <MyDrawer {...props} />}>
-      <Drawer.Screen name="Home" component={HomeStack} />
-      <Drawer.Screen name="CheckIn" component={CheckInStack} />
-    </Drawer.Navigator>
-    </NavigationContainer>
-
+    // <NavigationContainer>
+    // <Drawer.Navigator drawerContent={props => <MyDrawer {...props} />}>
+    //   <Drawer.Screen name="Home" component={HomeStack} />
+    //   <Drawer.Screen name="CheckIn" component={CheckInStack} />
+    // </Drawer.Navigator>
+    // </NavigationContainer>
+     <Splash/>
   );
 }
 

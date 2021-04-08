@@ -1,15 +1,14 @@
 import React from 'react';
-import {View, Text, StyleSheet, ImageBackground} from 'react-native';
+import {View, Text, StyleSheet, Image} from 'react-native';
 import { MaterialCommunityIcons } from '@expo/vector-icons';
 
-import image from '../assets/splash1.jpg'
+import gif from '../assets/splashGif.gif';
 
 const styles = StyleSheet.create({
     screen: {
         alignItems: 'center',
         flex: 1,
         justifyContent: 'center',
-        backgroundColor:'#66bbb9', 
     },
     inputContainer: {
       justifyContent: 'space-between',
@@ -27,8 +26,8 @@ const styles = StyleSheet.create({
  export default function Splash(){
     return(
           <View style={styles.screen}>
-             <MaterialCommunityIcons name="account-clock-outline" size={80} color="white" />
-             <Text style={{fontWeight:'bold', color:'white',  fontSize:30, marginTop: 8}}>Time Tracking App</Text>
+             <Image source={gif}/>
+             <Text style={{fontWeight:'bold', color:'black',  fontSize:30, marginTop: 8}}>Time Tracking App</Text>
           </View>
     )
 }

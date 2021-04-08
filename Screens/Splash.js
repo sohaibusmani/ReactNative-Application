@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import {View, Text, StyleSheet, Image} from 'react-native';
 import { MaterialCommunityIcons } from '@expo/vector-icons';
 
@@ -9,6 +9,7 @@ const styles = StyleSheet.create({
         alignItems: 'center',
         flex: 1,
         justifyContent: 'center',
+        backgroundColor:'white'
     },
     inputContainer: {
       justifyContent: 'space-between',
@@ -23,7 +24,13 @@ const styles = StyleSheet.create({
       },
   });
 
- export default function Splash(){
+ export default function Splash({navigation}){
+
+  useEffect(() => {
+    setTimeout(() => {
+      navigation.navigate('Home')
+    }, 2000)
+  },[])
     return(
           <View style={styles.screen}>
              <Image source={gif}/>

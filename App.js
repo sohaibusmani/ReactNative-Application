@@ -6,8 +6,6 @@ import HomeStack from './Routes/HomeStack';
 import CheckInStack from './Routes/CheckInStack';
 import Splash from './Screens/Splash';
 
-const Drawer = createDrawerNavigator();
-
 
 // Components 
 import MyDrawer from './Components/Drawer';
@@ -22,7 +20,10 @@ export default function App() {
     //   <Drawer.Screen name="CheckIn" component={CheckInStack} />
     // </Drawer.Navigator>
     // </NavigationContainer>
-    <Splash/>
+    <NavigationContainer>
+      <HomeStack/>
+    </NavigationContainer>
+    
   );
 }
 

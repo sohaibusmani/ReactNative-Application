@@ -36,7 +36,7 @@ const styles = StyleSheet.create({
     }
   });
 
-export default function Login({history}) {
+export default function Login({navigation}) {
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
 
@@ -82,7 +82,7 @@ export default function Login({history}) {
                 Don't have an account ?  
             </Text>
             <Text style={{fontWeight:'bold', fontSize: 17, marginLeft: 5}}
-            onPress={() => {history.push('/signup')}}
+            onPress={() => {navigation.navigate('Signup')}}
             >
                 Create
             </Text>

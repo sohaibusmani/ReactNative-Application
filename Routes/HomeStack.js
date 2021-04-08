@@ -2,7 +2,8 @@ import React from 'react';
 import { createStackNavigator } from '@react-navigation/stack';
 import { NavigationContainer } from '@react-navigation/native';
 import Home from "../Screens/Home"
-import Profile from "../Screens/profile";
+import Login from "../Screens/Login";
+import Signup from '../Screens/Signup'
 import Header from '../Components/Header';
 import CheckIn from '../Screens/Check-in';
 import Splash from '../Screens/Splash'
@@ -15,17 +16,27 @@ function RootStack() {
     <Stack.Navigator
       initialRouteName="Splash"
       screenOptions={{ gestureEnabled: false }}
-      // headerMode='none'
     > 
       <Stack.Screen
         name="Splash"
         component={Splash}
-        // headerShown={false}  
-        // headerMode='none'
         options={{
          headerShown: false
-        }}
-        
+        }}    
+      />
+      <Stack.Screen
+        name="Signup"
+        component={Signup}
+        options={{
+         headerShown: false
+        }}    
+      />
+      <Stack.Screen
+       name="Login"
+       component={Login}
+       options={{
+        headerShown: false
+       }} 
       />
       <Stack.Screen
         name="Home"
@@ -33,23 +44,10 @@ function RootStack() {
         options={({ navigation }) => ({
           headerTitle: () => <Header navigation={navigation} title='Time Tracking App'/>,
         })}
-        // headerShown={false}
-      // headerMode='none'
-      // options={{
-      //   // header: <Header/>
-      //   title:"App"
-        
-      // }}
-      // headerShown={Header}
       />
       <Stack.Screen
         name="CheckIn"
         component={CheckIn}
-        // options={({ navigation }) => ({
-        //   headerTitle: () => <Header navigation={navigation} title='Check-in'/>,
-        // })}
-        headerShown={false}
-        // headerShown={Header}
       /> 
     </Stack.Navigator>
   );

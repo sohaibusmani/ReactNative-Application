@@ -1,8 +1,9 @@
 import React from 'react';
 import {View, Text, TouchableOpacity} from 'react-native';
-import Profile from "../Screens/profile";
 import {Agenda} from 'react-native-calendars';
 import {Card, Avatar} from 'react-native-paper';
+
+import Header from '../Components/Header';
 
 
 const timeToString = (time) => {
@@ -57,14 +58,9 @@ function Home({navigation}){
       }
 
     return(
+     <View style={{flex: 1}}>
+      {/* <Header onPress={() => navigation.openDrawer()}/> */}
     <View style={{flex: 1}}>
-        {/* <Text>
-            Home Screen
-        </Text>
-        <Button
-        title="Go to Details... again"
-        onPress={() => navigation.navigate('Profile')}
-      /> */}
       <Agenda
         items={items}
         loadItemsForMonth={loadItems}
@@ -72,6 +68,7 @@ function Home({navigation}){
         renderItem={renderItem}
         />
     </View>
+    </View>  
     )
 }
  

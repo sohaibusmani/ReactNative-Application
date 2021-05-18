@@ -1,7 +1,9 @@
 import React, {useState} from 'react';
 import { StyleSheet, Text, View, Button,TextInput, ImageBackground } from 'react-native';
+import Axios from 'axios';
 
 import image from '../assets/pic2.jpg';
+import baseUrl from '../Url/BaseUrl';
 
 const styles = StyleSheet.create({
     screen: {
@@ -35,14 +37,33 @@ const styles = StyleSheet.create({
     }
   });
 
-export default function signup({history}){
-    const [email, setEmail] = useState('');
+export default function signup({history, navigation}){
+    const [username, setUsername] = useState('');
     const [password, setPassword] = useState('');
     const [fullName, setFullname] = useState('');
+    const [wage, setWage] = useState('');
     const [contactNumber, setContactnumber] = useState('');
 
-    const consoleFunc = () => {
-        console.log(fullName, email, password, contactNumber)
+    const onSignup = () => {
+        Axios({
+            method: 'PUT',
+            url:`${baseUrl}/auth/signup`,
+            data: {
+                username: username,
+                password: password,
+                name: fullName,
+                contactNumber: contactNumber,
+                wedge: wage
+            }
+
+        })
+        .then(res => {
+            console.log('Signup Successfull')
+            // navigation.navigate('Home')
+        })
+        .catch(err => {
+            console.log(err)
+        })
     }
 
     return(
@@ -67,8 +88,8 @@ export default function signup({history}){
                 style={styles.input}
                 selectionColor='#428AF8'
                 underlineColorAndroid= '#428AF8'
-                onChangeText={(email) => setEmail(email)}
-                value={email}
+                onChangeText={(username) => setUsername(username)}
+                value={username}
                />
                <TextInput
                 placeholder='Enter Password'
@@ -86,12 +107,20 @@ export default function signup({history}){
                 onChangeText={(contactNumber) => setContactnumber(contactNumber)}
                 value={contactNumber}
                />
+                <TextInput
+                placeholder='Enter Wage'
+                style={styles.input}
+                selectionColor='#428AF8'
+                underlineColorAndroid= '#428AF8'
+                onChangeText={(wage) => setWage(wage)}
+                value={wage}
+               />
             </View>
             <View style={{width:'30%', marginTop: 30}}>
                 <Button
                 title="Signup"
                 color="#428AF8"
-                onPress={() => {history.push('/')}}
+                onPress={onSignup}
                 />
             </View>
            </View>

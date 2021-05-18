@@ -1,6 +1,8 @@
 import React, {useState} from 'react';
 import { StyleSheet, Text, View, TextInput, Button, ImageBackground } from 'react-native';
 import Axios from 'axios';
+import AsyncStorage from '@react-native-async-storage/async-storage';
+import baseUrl from '../Url/BaseUrl';
 
 
 import image from '../assets/pic.jpg';
@@ -38,15 +40,29 @@ const styles = StyleSheet.create({
   });
 
 export default function Login({navigation}) {
-    const [email, setEmail] = useState('');
+    const [username, setUsername] = useState('');
     const [password, setPassword] = useState('');
 
-   const consoleFunc = () => {
-        console.log(email, password)
-    }
+   const onLogin = () => {
+       Axios({
+           method:'POST',
+           url:`${baseUrl}/auth/login`,
+           data: {
+               username: username,
+               password: password
+           }
+       })
+       .then(res => {
+         AsyncStorage.setItem('token', res.data.token);
+         AsyncStorage.setItem('userData', res.data.user);
+         
+         console.log('Login Successfull');
 
-   const onSubmit = () => {
-       
+         navigation.navigate('Home')
+       })
+       .catch(err => {
+           console.log(err)
+       })
     }
 
     return(
@@ -59,12 +75,12 @@ export default function Login({navigation}) {
             </View>
             <View style={styles.inputContainer}>
                <TextInput
-                placeholder='Enter Email'
+                placeholder='Enter Username'
                 style={styles.input}
                 selectionColor='#428AF8'
                 underlineColorAndroid= '#428AF8'
-                onChangeText={(email) => setEmail(email)}
-                value={email}
+                onChangeText={(username) => setUsername(username)}
+                value={username}
                />
                <TextInput
                 placeholder='Enter Password'
@@ -79,7 +95,7 @@ export default function Login({navigation}) {
                 <Button
                 title="Login"
                 color="#428AF8"
-                onPress={consoleFunc}
+                onPress={onLogin}
                 />
             </View>
             <View style={{flexDirection:'row', bottom: 50, position:'absolute'}}>

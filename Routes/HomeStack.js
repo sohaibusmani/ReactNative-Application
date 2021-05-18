@@ -49,13 +49,13 @@ function RootStack() {
         name="CheckIn"
         component={CheckIn}
       /> 
-       <Stack.Screen
+       {/* <Stack.Screen
         name="Drawer"
         component={Drawer}
         options={({ navigation }) => ({
           headerTitle: () => <Header navigation={navigation} title='Time Tracking App'/>,
         })}
-      /> 
+      />  */}
     </Stack.Navigator>
   );
 }

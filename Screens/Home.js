@@ -49,7 +49,7 @@ function Home({navigation}){
                              <Text>
                                  {item.name}
                              </Text>
-                             <Avatar.Text label='S' />
+                             {/* <Avatar.Text label='S' /> */}
                          </View>
                      </Card.Content>
                  </Card>

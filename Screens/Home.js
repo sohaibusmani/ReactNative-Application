@@ -49,7 +49,6 @@ function Home({navigation}){
                              <Text>
                                  {item.name}
                              </Text>
-                             {/* <Avatar.Text label='S' /> */}
                          </View>
                      </Card.Content>
                  </Card>
@@ -59,7 +58,6 @@ function Home({navigation}){
 
     return(
      <View style={{flex: 1}}>
-      {/* <Header onPress={() => navigation.openDrawer()}/> */}
     <View style={{flex: 1}}>
       <Agenda
         items={items}

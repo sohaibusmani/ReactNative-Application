@@ -6,7 +6,7 @@ import Signup from '../Screens/Signup'
 import Header from '../Components/Header';
 import CheckIn from '../Screens/Check-in';
 import Splash from '../Screens/Splash';
-import Drawer from '../Components/Drawer';
+import Employes from '../Screens/Admin/Screens/Employes';
 
 
 const Stack = createStackNavigator();
@@ -14,7 +14,7 @@ const Stack = createStackNavigator();
 function RootStack() {
   return (
     <Stack.Navigator
-      initialRouteName="Splash"
+      initialRouteName="Employes"
       screenOptions={{ gestureEnabled: false }}
     > 
       <Stack.Screen
@@ -39,10 +39,10 @@ function RootStack() {
        }} 
       />
       <Stack.Screen
-        name="Home"
-        component={Home}  
+        name="Employes"
+        component={Employes}  
         options={({ navigation }) => ({
-          headerTitle: () => <Header navigation={navigation} title='Time Tracking App'/>,
+          headerTitle: () => <Header navigation={navigation} title='Employes'/>,
         })}
       />
       <Stack.Screen

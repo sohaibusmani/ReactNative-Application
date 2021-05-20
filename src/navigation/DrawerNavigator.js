@@ -9,11 +9,11 @@ import logo from '../assets/me.jpg'
 
 import Home from '../Screens/Home';
 import CheckIn from '../Screens/Check-in'
+import { TouchableOpacity } from 'react-native-gesture-handler';
 
 const Drawer = createDrawerNavigator();
 
 export default function MyDrawer(props) {
-
 
     return (
         <Drawer.Navigator drawerContent={prop => <DrawerContent {...prop} {...props} />}>
@@ -23,57 +23,68 @@ export default function MyDrawer(props) {
     )
 }
 
-const DrawerContent = (props, { navigation }) => {
+const DrawerContent = (props) => {
     return (
-        //       <View style={{ flex: 1 }}>
+        // <View style={{ flex: 1 }}>
         //     <DrawerContentScrollView {...props}>
-        //        <View style={styles.drawerContent}>
-        //          <View style={styles.userInfoSection}>
-        //           <View style={{flexDirection:'row'}}>
-        //             <Avatar.Image
-        //              source={logo}
-        //              size={50}
-        //             />
-        //             <View style={{marginLeft: 20, marginTop: 5}}>
-        //               <Title>Sohaib Usmani</Title>
+        //         <View style={styles.drawerContent}>
+        //             <View style={styles.userInfoSection}>
+        //                 <View style={{ flexDirection: 'row' }}>
+        //                     <Avatar.Image
+        //                         source={logo}
+        //                         size={50}
+        //                     />
+        //                     <View style={{ marginLeft: 20, marginTop: 5 }}>
+        //                         <Title>Sohaib Usmani</Title>
+        //                     </View>
+        //                 </View>
         //             </View>
-        //           </View>
-        //          </View>
-        //          <Drawer.Section style={styles.drawerSection}>
-        //            <DrawerItem
-        //             icon={({color, size}) => (<MaterialIcons name='home' size={size} color={color}/>)}
-        //             label='Home'
-        //             onPress={() => {props.navigation.navigate('Home')}}
-        //            />
-        //             <DrawerItem
-        //             icon={({color, size}) => (<MaterialIcons name='access-time' size={size} color={color}/>)}
-        //             label='Check-In'
-        //             onPress={() => {props.navigation.navigate('CheckIn')}}
-        //            />
-        //          </Drawer.Section>
-        //          <Drawer.Section title='Preferences'>
-        //            <TouchableRipple onPress={() => {toggleTheme()}}>
-        //              <View style={styles.preference}>
-        //                <Text>Dark Theme</Text>
-        //                <View pointerEvents='none'>
-        //                 <Switch/>
-        //                </View>
-        //              </View>
-        //            </TouchableRipple>
-        //          </Drawer.Section>
-        //        </View>
+        //             <Drawer.Section style={styles.drawerSection}>
+        //                 <DrawerItem
+        //                     icon={({ color, size }) => (<MaterialIcons name='home' size={size} color={color} />)}
+        //                     label='Home'
+        //                     onPress={() => { props.navigation.navigate('Home') }}
+        //                 />
+        //                 <DrawerItem
+        //                     icon={({ color, size }) => (<MaterialIcons name='access-time' size={size} color={color} />)}
+        //                     label='Check-In'
+        //                     onPress={() => { props.navigation.navigate('CheckIn') }}
+        //                 />
+        //             </Drawer.Section>
+        //             <Drawer.Section title='Preferences'>
+        //                 <TouchableRipple onPress={() => { toggleTheme() }}>
+        //                     <View style={styles.preference}>
+        //                         <Text>Dark Theme</Text>
+        //                         <View pointerEvents='none'>
+        //                             <Switch />
+        //                         </View>
+        //                     </View>
+        //                 </TouchableRipple>
+        //             </Drawer.Section>
+        //         </View>
         //     </DrawerContentScrollView>
         //     <Drawer.Section style={styles.bottomDrawerSection}>
-        //        <DrawerItem
-        //         icon={({color, size}) => (<MaterialIcons name='exit-to-app' size={size} color={color}/>)}
-        //         label='Sign Out'
-        //        />
+        //         <DrawerItem
+        //             icon={({ color, size }) => (<MaterialIcons name='exit-to-app' size={size} color={color} />)}
+        //             label='Sign Out'
+        //         />
         //     </Drawer.Section>
-        //   </View>
-        <View>
+        // </View>
+        <View style={{ flex: 1, backgroundColor: '#bbb' }}>
             <Text>
-                Chal gaya
+                Heading here
             </Text>
+            <TouchableOpacity
+                onPress={() => props.navigation.navigate('Home')}
+                style={{ height: 60, marginTop: 15, backgroundColor: '#eee', justifyContent: "center" }}>
+                <Text>Home</Text>
+            </TouchableOpacity>
+
+            <TouchableOpacity
+                onPress={() => props.navigation.navigate('CheckIn')}
+                style={{ height: 60, marginTop: 15, backgroundColor: '#eee', justifyContent: "center" }}>
+                <Text>Check Inn</Text>
+            </TouchableOpacity>
         </View>
     )
 }

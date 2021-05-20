@@ -1,5 +1,5 @@
 import React from 'react';
-import { View, Text, StyleSheet, Image } from 'react-native';
+import { View, Text, StyleSheet, TouchableOpacity } from 'react-native';
 
 import img from '../../../assets/favicon.png'
 
@@ -13,7 +13,7 @@ const styles = StyleSheet.create({
         marginTop: 8,
         marginBottom: 8,
         borderRadius: 5,
-        backgroundColor: '#FFF',
+        // backgroundColor: '#FFF',
         // elevation: 2,
     },
     title: {
@@ -36,18 +36,21 @@ const styles = StyleSheet.create({
     },
 });
 
-const EmployesRow = ({ title, designation }) => (
+const EmployesRow = ({ title, designation, navigation }) => (
+    
     <View style={styles.container}>
         <View style={styles.container_text}>
+        <TouchableOpacity onPress={() => {navigation.navigate('EmployeeProfile')}}>
             <Text style={styles.title}>
                Sohaib Usmani
             </Text>
             <Text style={styles.description}>
                 Shift Incharge
             </Text>
-        </View>
-    
-    </View>
+            </TouchableOpacity>
+        </View>   
+    </View>   
+
 );
 
 export default EmployesRow;

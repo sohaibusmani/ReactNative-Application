@@ -3,8 +3,8 @@ import { NavigationContainer } from '@react-navigation/native';
 import {createDrawerNavigator} from '@react-navigation/drawer';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 
-import HomeStack from './Routes/HomeStack';
-import CheckInStack from './Routes/CheckInStack';
+import HomeStack from './src/Routes/HomeStack';
+import CheckInStack from './src/Routes/CheckInStack';
 
 const Tab = createBottomTabNavigator();
 

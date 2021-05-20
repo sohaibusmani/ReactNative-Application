@@ -54,9 +54,9 @@ export default function Login({navigation}) {
        })
        .then(res => {
          AsyncStorage.setItem('token', res.data.token);
-         AsyncStorage.setItem('userData', res.data.user);
+         AsyncStorage.setItem('userData', JSON.stringify(res.data.user));
          
-         console.log('Login Successfull');
+         console.log('Login Successfull', res.data.user);
 
          navigation.navigate('Home')
        })
@@ -64,7 +64,6 @@ export default function Login({navigation}) {
            console.log(err)
        })
     }
-
     return(
         <ImageBackground source={image} style={styles.image}>
         <View style={styles.screen}>

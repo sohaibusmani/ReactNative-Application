@@ -55,6 +55,8 @@ export default function Login({navigation}) {
        .then(res => {
          SyncStorage.set('token', res.data.token);
          SyncStorage.set('userData', res.data.user);
+         SyncStorage.set("newUser", { user: res.data.user, schedule: [] })
+
          
          console.log('Login Successfull', res.data.user);
 

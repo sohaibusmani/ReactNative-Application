@@ -5,7 +5,9 @@ import { Feather } from '@expo/vector-icons';
 import { MaterialIcons } from '@expo/vector-icons';
 import { MaterialCommunityIcons } from '@expo/vector-icons';
 import { Entypo } from '@expo/vector-icons';
-import AsyncStorage from '@react-native-async-storage/async-storage';
+import SyncStorage from 'sync-storage';
+import moment from 'moment';
+
 
 import image from '../assets/pic2.jpg';
 
@@ -50,108 +52,132 @@ const styles = StyleSheet.create({
 
 
 function CheckIn({ navigation }) {
+
+  const user = SyncStorage.get('userData');
+
   const [checkIn, setCheckIn] = React.useState('');
   const [breakStart, setBreakStart] = React.useState('');
   const [breakEnd, setBreakEnd] = React.useState('');
   const [checkOut, setCheckOut] = React.useState('');
   const [currentDate, setCurrentDate] = React.useState('');
   const [showCard, setShowCard] = React.useState(false);
+  const [userData, setUser] = React.useState(user);
+  const [timeArray, setTimeArray] = React.useState([]);
 
-  useEffect(() => {
-        getCheckInTime();
-  }) 
+  // useEffect(() => {
+  //       getCheckInTime();
+  // }) 
 
-  const storeCheckInTime = async () => {
-    try {
-      const jsonValue = JSON.stringify(new Date())
-      await AsyncStorage.setItem('checkInTime', jsonValue)
-      alert('Data successfully saved')
-    } catch (e) {
-      alert('Failed to save the data to the storage')
+  // const storeCheckInTime = async () => {
+  //   try {
+  //     const jsonValue = JSON.stringify(new Date())
+  //     await AsyncStorage.setItem('checkInTime', jsonValue)
+  //     alert('Data successfully saved')
+  //   } catch (e) {
+  //     alert('Failed to save the data to the storage')
+  //   }
+  // }
+
+  const handleSetCheckInTime = (time) => {
+    
+    console.log(time);
+
+    const user = SyncStorage.get("newUser");
+
+    let tempSchedule = user.schedule;
+    if (tempSchedule.length > 0) {
+        tempSchedule = [{ checkInTime: time }];
+    } else {
+        tempSchedule.push({ checkInTime: time })
     }
-  }
 
-  const getCheckInTime = async () => {
-    try {
-      const checkInTime = await AsyncStorage.getItem('checkInTime')
+    user.schedule = tempSchedule;
+    console.log(user.schedule)
+    SyncStorage.set("newUser", user);
+
+}
+
+  // const getCheckInTime = async () => {
+  //   try {
+  //     const checkInTime = await AsyncStorage.getItem('checkInTime')
   
-      if (checkInTime !== null) {
-        setCheckIn(checkInTime);
-        console.log(checkIn);
-      }
-    } catch (e) {
-      alert('Failed to fetch the data from storage')
-    }
-  }
+  //     if (checkInTime !== null) {
+  //       setCheckIn(checkInTime);
+  //       console.log(checkIn);
+  //     }
+  //   } catch (e) {
+  //     alert('Failed to fetch the data from storage')
+  //   }
+  // }
 
-  const storeBreakStartTime = async () => {
-    try {
-      const jsonValue = JSON.stringify(new Date())
-      await AsyncStorage.setItem('breakStartTime', jsonValue)
-      alert('Data successfully saved')
-    } catch (e) {
-      alert('Failed to save the data to the storage')
-    }
-  }
+  // const storeBreakStartTime = async () => {
+  //   try {
+  //     const jsonValue = JSON.stringify(new Date())
+  //     await AsyncStorage.setItem('breakStartTime', jsonValue)
+  //     alert('Data successfully saved')
+  //   } catch (e) {
+  //     alert('Failed to save the data to the storage')
+  //   }
+  // }
 
-  const getBreakStartTime = async () => {
-    try {
-      const breakStartTime = await AsyncStorage.getItem('breakStartTime')
+  // const getBreakStartTime = async () => {
+  //   try {
+  //     const breakStartTime = await AsyncStorage.getItem('breakStartTime')
   
-      if (breakStartTime !== null) {
-        setBreakStart(breakStartTime);
-        console.log(breakStart);
-      }
-    } catch (e) {
-      alert('Failed to fetch the data from storage')
-    }
-  }
+  //     if (breakStartTime !== null) {
+  //       setBreakStart(breakStartTime);
+  //       console.log(breakStart);
+  //     }
+  //   } catch (e) {
+  //     alert('Failed to fetch the data from storage')
+  //   }
+  // }
 
-  const storeBreakEndTime = async () => {
-    try {
-      const jsonValue = JSON.stringify(new Date())
-      await AsyncStorage.setItem('breakEndTime', jsonValue)
-      alert('Data successfully saved')
-    } catch (e) {
-      alert('Failed to save the data to the storage')
-    }
-  }
+  // const storeBreakEndTime = async () => {
+  //   try {
+  //     const jsonValue = JSON.stringify(new Date())
+  //     await AsyncStorage.setItem('breakEndTime', jsonValue)
+  //     alert('Data successfully saved')
+  //   } catch (e) {
+  //     alert('Failed to save the data to the storage')
+  //   }
+  // }
 
-  const getBreakEndTime = async () => {
-    try {
-      const breakEndTime = await AsyncStorage.getItem('breakEndTime')
+  // const getBreakEndTime = async () => {
+  //   try {
+  //     const breakEndTime = await AsyncStorage.getItem('breakEndTime')
   
-      if (breakEndTime !== null) {
-        setBreakEnd(breakEndTime);
-        console.log(breakEnd);
-      }
-    } catch (e) {
-      alert('Failed to fetch the data from storage')
-    }
-  }
+  //     if (breakEndTime !== null) {
+  //       setBreakEnd(breakEndTime);
+  //       console.log(breakEnd);
+  //     }
+  //   } catch (e) {
+  //     alert('Failed to fetch the data from storage')
+  //   }
+  // }
 
-  const storeCheckOutTime = async () => {
-    try {
-      const jsonValue = JSON.stringify(new Date())
-      await AsyncStorage.setItem('checkOutTime', jsonValue)
-      alert('Data successfully saved')
-    } catch (e) {
-      alert('Failed to save the data to the storage')
-    }
-  }
+  // const storeCheckOutTime = async () => {
+  //   try {
+  //     const jsonValue = JSON.stringify(new Date())
+  //     await AsyncStorage.setItem('checkOutTime', jsonValue)
+  //     alert('Data successfully saved')
+  //   } catch (e) {
+  //     alert('Failed to save the data to the storage')
+  //   }
+  // }
 
-  const getCheckOutTime = async () => {
-    try {
-      const checkOutTime = await AsyncStorage.getItem('checkOutTime')
+  // const getCheckOutTime = async () => {
+  //   try {
+  //     const checkOutTime = await AsyncStorage.getItem('checkOutTime')
   
-      if (checkOutTime !== null) {
-        setCheckOut(checkOutTime);
-        console.log(checkOut);
-      }
-    } catch (e) {
-      alert('Failed to fetch the data from storage')
-    }
-  }
+  //     if (checkOutTime !== null) {
+  //       setCheckOut(checkOutTime);
+  //       console.log(checkOut);
+  //     }
+  //   } catch (e) {
+  //     alert('Failed to fetch the data from storage')
+  //   }
+  // }
 
   return (
     <View style={{ flex: 1 }}>
@@ -193,7 +219,7 @@ function CheckIn({ navigation }) {
             </Card>
           </View>
           <View style={{ marginTop: 20, alignItems: 'center' }}>
-            <TouchableOpacity style={styles.appButtonContainer}>
+            <TouchableOpacity style={styles.appButtonContainer} onPress={() => handleSetCheckInTime(moment().format('hh:mm:ss' ))}>
               <Text style={styles.appButtonText}>
                 Break
               </Text>

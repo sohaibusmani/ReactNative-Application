@@ -1,7 +1,7 @@
 import React, {useState} from 'react';
 import { StyleSheet, Text, View, TextInput, Button, ImageBackground } from 'react-native';
 import Axios from 'axios';
-import AsyncStorage from '@react-native-async-storage/async-storage';
+import SyncStorage from 'sync-storage';
 import baseUrl from '../Url/BaseUrl';
 
 
@@ -53,12 +53,12 @@ export default function Login({navigation}) {
            }
        })
        .then(res => {
-         AsyncStorage.setItem('token', res.data.token);
-         AsyncStorage.setItem('userData', JSON.stringify(res.data.user));
+         SyncStorage.set('token', res.data.token);
+         SyncStorage.set('userData', res.data.user);
          
          console.log('Login Successfull', res.data.user);
 
-         navigation.navigate('Home')
+         navigation.navigate('AppNavigator')
        })
        .catch(err => {
            console.log(err)

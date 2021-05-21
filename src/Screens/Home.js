@@ -1,7 +1,10 @@
 import React from 'react';
+import  { useEffect } from 'react';
 import {View, Text, TouchableOpacity} from 'react-native';
 import {Agenda} from 'react-native-calendars';
 import {Card, Avatar} from 'react-native-paper';
+import SyncStorage from 'sync-storage';
+
 
 import Header from '../Components/Header';
 
@@ -15,6 +18,13 @@ const timeToString = (time) => {
 
 function Home({navigation}){
     const [items, setItems] = React.useState({});
+
+
+    useEffect(() => {
+      const user = SyncStorage.get('userData')
+      console.log(user);
+    })
+
 
     const loadItems = (day) => {
         setTimeout(() => {

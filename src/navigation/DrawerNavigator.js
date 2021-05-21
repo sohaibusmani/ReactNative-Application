@@ -10,6 +10,7 @@ import logo from '../assets/me.jpg'
 import Home from '../Screens/Home';
 import CheckIn from '../Screens/Check-in'
 import { TouchableOpacity } from 'react-native-gesture-handler';
+import { Icon } from 'native-base';
 
 const Drawer = createDrawerNavigator();
 
@@ -70,21 +71,42 @@ const DrawerContent = (props) => {
         //         />
         //     </Drawer.Section>
         // </View>
-        <View style={{ flex: 1, backgroundColor: '#bbb' }}>
-            <Text>
+        <View style={{ flex: 1 }}>
+            {/* <Text>
                 Heading here
             </Text>
-            <TouchableOpacity
+          */}
+            <View style={styles.drawerContent}>
+              <View style={styles.userInfoSection}>
+              <View style={{ flexDirection: 'row' }}>
+                            <Avatar.Image
+                                source={logo}
+                                size={50}
+                            />
+                            <View style={{ marginLeft: 20, marginTop: 5 }}>
+                                <Title>Sohaib Usmani</Title>
+                            </View>
+                        </View>
+              </View>
+              <TouchableOpacity
                 onPress={() => props.navigation.navigate('Home')}
-                style={{ height: 60, marginTop: 15, backgroundColor: '#eee', justifyContent: "center" }}>
+                style={{  marginTop: 25, marginLeft: 15, justifyContent: "center" }}
+                >
                 <Text>Home</Text>
             </TouchableOpacity>
 
             <TouchableOpacity
                 onPress={() => props.navigation.navigate('CheckIn')}
-                style={{ height: 60, marginTop: 15, backgroundColor: '#eee', justifyContent: "center" }}>
+                style={{  marginTop: 35, marginLeft: 15, justifyContent: "center" }}>
+                    <Icon name='home' type='FontAwesome'/>
                 <Text>Check Inn</Text>
-            </TouchableOpacity>
+            </TouchableOpacity> 
+            </View>
+            <TouchableOpacity
+                onPress={() => props.navigation.navigate('CheckIn')}
+                style={{ height: 60, margin: 15, justifyContent: "center" }}>
+                <Text>Sign Out</Text>
+            </TouchableOpacity> 
         </View>
     )
 }

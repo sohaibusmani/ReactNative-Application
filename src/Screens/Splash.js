@@ -3,7 +3,7 @@ import {View, Text, StyleSheet, Image} from 'react-native';
 import { MaterialCommunityIcons } from '@expo/vector-icons';
 
 import gif from '../assets/splashGif.gif';
-import AsyncStorage from '@react-native-async-storage/async-storage';
+import SyncStorage from 'sync-storage';
 
 const styles = StyleSheet.create({
     screen: {
@@ -27,7 +27,8 @@ const styles = StyleSheet.create({
 
  export default function Splash({navigation}){
 
- const token = AsyncStorage.getItem('token');
+ const token = SyncStorage.get('token');
+ console.log(token)
 
   useEffect(() => {
     setTimeout(() => {

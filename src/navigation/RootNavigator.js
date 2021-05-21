@@ -68,7 +68,7 @@ const Stack = createStackNavigator();
 function RootStack() {
     return (
         <Stack.Navigator
-            initialRouteName="AppNavigator"
+            initialRouteName="Splash"
             screenOptions={{ gestureEnabled: false }}
         >
             <Stack.Screen

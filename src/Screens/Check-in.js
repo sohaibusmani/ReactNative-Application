@@ -63,25 +63,15 @@ function CheckIn({ navigation }) {
   const [showCard, setShowCard] = React.useState(false);
   const [userData, setUser] = React.useState(user);
   const [timeArray, setTimeArray] = React.useState([]);
+  const [isCheckedIn, setIsCheckedIn] = React.useState(false);
+  const [isOnBreak, setIsBreakOn] = React.useState(false);
 
-  // useEffect(() => {
-  //       getCheckInTime();
-  // }) 
-
-  // const storeCheckInTime = async () => {
-  //   try {
-  //     const jsonValue = JSON.stringify(new Date())
-  //     await AsyncStorage.setItem('checkInTime', jsonValue)
-  //     alert('Data successfully saved')
-  //   } catch (e) {
-  //     alert('Failed to save the data to the storage')
-  //   }
-  // }
 
   const handleSetCheckInTime = (time) => {
     
     console.log(time);
-
+    setCheckIn(time);
+    setIsCheckedIn(true)
     const user = SyncStorage.get("newUser");
 
     let tempSchedule = user.schedule;
@@ -97,87 +87,20 @@ function CheckIn({ navigation }) {
 
 }
 
-  // const getCheckInTime = async () => {
-  //   try {
-  //     const checkInTime = await AsyncStorage.getItem('checkInTime')
-  
-  //     if (checkInTime !== null) {
-  //       setCheckIn(checkInTime);
-  //       console.log(checkIn);
-  //     }
-  //   } catch (e) {
-  //     alert('Failed to fetch the data from storage')
-  //   }
-  // }
+  const handleSetBreakStartTime = (time) => {
+    
+    console.log(time);
+    setBreakStart(time);
+    const user = SyncStorage.get('newUser');
 
-  // const storeBreakStartTime = async () => {
-  //   try {
-  //     const jsonValue = JSON.stringify(new Date())
-  //     await AsyncStorage.setItem('breakStartTime', jsonValue)
-  //     alert('Data successfully saved')
-  //   } catch (e) {
-  //     alert('Failed to save the data to the storage')
-  //   }
-  // }
+    let tempSchedule = user.schedule;   
+    tempSchedule.push({breakStartTime: time});
+    user.schedule = tempSchedule;
+    console.log(user.schedule)
+    SyncStorage.set('newUser', user)
+    
 
-  // const getBreakStartTime = async () => {
-  //   try {
-  //     const breakStartTime = await AsyncStorage.getItem('breakStartTime')
-  
-  //     if (breakStartTime !== null) {
-  //       setBreakStart(breakStartTime);
-  //       console.log(breakStart);
-  //     }
-  //   } catch (e) {
-  //     alert('Failed to fetch the data from storage')
-  //   }
-  // }
-
-  // const storeBreakEndTime = async () => {
-  //   try {
-  //     const jsonValue = JSON.stringify(new Date())
-  //     await AsyncStorage.setItem('breakEndTime', jsonValue)
-  //     alert('Data successfully saved')
-  //   } catch (e) {
-  //     alert('Failed to save the data to the storage')
-  //   }
-  // }
-
-  // const getBreakEndTime = async () => {
-  //   try {
-  //     const breakEndTime = await AsyncStorage.getItem('breakEndTime')
-  
-  //     if (breakEndTime !== null) {
-  //       setBreakEnd(breakEndTime);
-  //       console.log(breakEnd);
-  //     }
-  //   } catch (e) {
-  //     alert('Failed to fetch the data from storage')
-  //   }
-  // }
-
-  // const storeCheckOutTime = async () => {
-  //   try {
-  //     const jsonValue = JSON.stringify(new Date())
-  //     await AsyncStorage.setItem('checkOutTime', jsonValue)
-  //     alert('Data successfully saved')
-  //   } catch (e) {
-  //     alert('Failed to save the data to the storage')
-  //   }
-  // }
-
-  // const getCheckOutTime = async () => {
-  //   try {
-  //     const checkOutTime = await AsyncStorage.getItem('checkOutTime')
-  
-  //     if (checkOutTime !== null) {
-  //       setCheckOut(checkOutTime);
-  //       console.log(checkOut);
-  //     }
-  //   } catch (e) {
-  //     alert('Failed to fetch the data from storage')
-  //   }
-  // }
+}
 
   return (
     <View style={{ flex: 1 }}>
@@ -206,25 +129,59 @@ function CheckIn({ navigation }) {
       </ImageBackground>
       <ScrollView>
         <View style={{ marginTop: 20 }}>
-          <View>
-            <Card>
+          {
+            isCheckedIn &&
+            
+            <View>
+            <View>
+            <Card style={{borderRadius:25}}>
               <Card.Title title="Sohaib Usmani" subtitle="Employee" />
               <Card.Content>
                 <View style={{ flexDirection: 'row' }}>
                   <Entypo name="back-in-time" size={20} color="black" />
-                  <Text style={{ marginLeft: 5 }}>9:05 AM</Text>
+                  <Text style={{ marginLeft: 5 }}>{checkIn}</Text>
                 </View>
                 <Paragraph>Checked In</Paragraph>
               </Card.Content>
             </Card>
           </View>
-          <View style={{ marginTop: 20, alignItems: 'center' }}>
-            <TouchableOpacity style={styles.appButtonContainer} onPress={() => handleSetCheckInTime(moment().format('hh:mm:ss' ))}>
-              <Text style={styles.appButtonText}>
-                Break
-              </Text>
-            </TouchableOpacity>
+        </View>
+          }
+          {
+            isCheckedIn && isOnBreak 
+            ?
+            <TouchableOpacity style={styles.appButtonContainer}>
+            <Text style={styles.appButtonText}>
+              Break End
+            </Text>
+          </TouchableOpacity>
+          :
+          isCheckedIn &&
+          <View style={{justifyContent:'center'}}>
+          <TouchableOpacity style={styles.appButtonContainer} onPress={() => handleSetBreakStartTime(moment().format('hh:mm:ss a' ))}>
+            <Text style={styles.appButtonText}>
+              Break Start
+            </Text>
+          </TouchableOpacity>
           </View>
+          }
+          {
+            isCheckedIn
+            ?
+            <TouchableOpacity style={styles.appButtonContainer}>
+            <Text style={styles.appButtonText}>
+              Check out
+            </Text>
+          </TouchableOpacity>
+          :
+          <View style={{alignItems:'center'}}>
+          <TouchableOpacity style={styles.appButtonContainer} onPress={() => handleSetCheckInTime(moment().format('hh:mm:ss a' ))}>
+            <Text style={styles.appButtonText}>
+              CheckIn
+            </Text>
+          </TouchableOpacity>
+          </View>
+          }
         </View>
       </ScrollView>
     </View>

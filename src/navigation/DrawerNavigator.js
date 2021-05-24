@@ -90,15 +90,16 @@ const DrawerContent = (props) => {
               </View>
               <TouchableOpacity
                 onPress={() => props.navigation.navigate('Home')}
-                style={{  marginTop: 25, marginLeft: 15, justifyContent: "center" }}
+                style={{  marginTop: 25, marginLeft: 15, flexDirection:'row' }}
                 >
+                    <Icon name='home' type='FontAwesome' style={{fontSize:18}}/>
                 <Text>Home</Text>
             </TouchableOpacity>
 
             <TouchableOpacity
                 onPress={() => props.navigation.navigate('CheckIn')}
-                style={{  marginTop: 35, marginLeft: 15, justifyContent: "center" }}>
-                    <Icon name='home' type='FontAwesome'/>
+                style={{  marginTop: 35, marginLeft: 15,flexDirection:'row' }}>
+                    <Icon name='check' type='FontAwesome' style={{fontSize:18}}/>
                 <Text>Check Inn</Text>
             </TouchableOpacity> 
             </View>

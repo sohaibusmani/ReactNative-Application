@@ -64,7 +64,7 @@ function CheckIn({ navigation }) {
   const [userData, setUser] = React.useState(user);
   const [timeArray, setTimeArray] = React.useState([]);
   const [isCheckedIn, setIsCheckedIn] = React.useState(false);
-  const [isOnBreak, setIsBreakOn] = React.useState(false);
+  const [isOnBreak, setIsOnBreak] = React.useState(false);
 
 
   const handleSetCheckInTime = (time) => {
@@ -91,6 +91,7 @@ function CheckIn({ navigation }) {
     
     console.log(time);
     setBreakStart(time);
+    setIsOnBreak(true);
     const user = SyncStorage.get('newUser');
 
     let tempSchedule = user.schedule;   
@@ -146,6 +147,23 @@ function CheckIn({ navigation }) {
             </Card>
           </View>
         </View>
+          }
+           {
+            isOnBreak &&          
+  
+            <View>
+            <Card style={{borderRadius:25, marginTop:20}}>
+              <Card.Title title="Sohaib Usmani" subtitle="Employee" />
+              <Card.Content>
+                <View style={{ flexDirection: 'row' }}>
+                  <Entypo name="back-in-time" size={20} color="black" />
+                  <Text style={{ marginLeft: 5 }}>{breakStart}</Text>
+                </View>
+                <Paragraph>Break</Paragraph>
+              </Card.Content>
+            </Card>
+          </View>
+
           }
           {
             isCheckedIn && isOnBreak 

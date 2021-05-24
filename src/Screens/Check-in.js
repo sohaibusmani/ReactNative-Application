@@ -150,14 +150,16 @@ function CheckIn({ navigation }) {
           {
             isCheckedIn && isOnBreak 
             ?
+            <View style={{alignItems:'center', marginTop:20}}>
             <TouchableOpacity style={styles.appButtonContainer}>
             <Text style={styles.appButtonText}>
               Break End
             </Text>
           </TouchableOpacity>
+          </View>
           :
           isCheckedIn &&
-          <View style={{justifyContent:'center'}}>
+          <View style={{alignItems:'center', marginTop:20}}>
           <TouchableOpacity style={styles.appButtonContainer} onPress={() => handleSetBreakStartTime(moment().format('hh:mm:ss a' ))}>
             <Text style={styles.appButtonText}>
               Break Start
@@ -168,13 +170,15 @@ function CheckIn({ navigation }) {
           {
             isCheckedIn
             ?
+            <View style={{alignItems:'center', marginTop:20}}>
             <TouchableOpacity style={styles.appButtonContainer}>
             <Text style={styles.appButtonText}>
               Check out
             </Text>
           </TouchableOpacity>
+          </View>
           :
-          <View style={{alignItems:'center'}}>
+          <View style={{alignItems:'center', marginTop:20}}>
           <TouchableOpacity style={styles.appButtonContainer} onPress={() => handleSetCheckInTime(moment().format('hh:mm:ss a' ))}>
             <Text style={styles.appButtonText}>
               CheckIn

@@ -1,12 +1,11 @@
 import React, { useEffect } from 'react';
 import { View, StyleSheet, ImageBackground, Text, TouchableOpacity, ScrollView } from 'react-native';
 import { Avatar, Button, Card, Title, Paragraph } from 'react-native-paper';
-import { Feather } from '@expo/vector-icons';
-import { MaterialIcons } from '@expo/vector-icons';
-import { MaterialCommunityIcons } from '@expo/vector-icons';
 import { Entypo } from '@expo/vector-icons';
 import SyncStorage from 'sync-storage';
 import moment from 'moment';
+import Axios from 'axios';
+import baseUrl from '../Url/BaseUrl';
 
 
 import image from '../assets/pic2.jpg';
@@ -131,6 +130,27 @@ function CheckIn({ navigation }) {
 
   }
 
+  const handleSaveData = () => {
+
+     Axios({
+       method:'POST',
+       url:`${baseUrl}/shift/save`,
+       data:{
+         userId: user.user._id,
+         shiftStartTime: user.schedule.checkInTime,
+         breakTime: user.schedule.break,
+         shiftEndTime: user.schedule.checkOutTime
+
+       }
+     })
+     .then(res => {
+       console.log('Shift Save Sucessfully')
+     })
+     .catch(err => {
+       console.log(err.response.data.message)
+     })
+  }
+
   return (
     <View style={{ flex: 1 }}>
       <ImageBackground resizeMode='cover' style={styles.image} style={{ height: 200 }} source={image}>
@@ -239,7 +259,7 @@ function CheckIn({ navigation }) {
           {
             isCheckedOut &&
             <View style={{ alignItems: 'center', marginTop: 20 }}>
-                <TouchableOpacity style={styles.appButtonContainer}>
+                <TouchableOpacity style={styles.appButtonContainer} onPress={handleSaveData}>
                   <Text style={styles.appButtonText}>
                     Save Shift
             </Text>

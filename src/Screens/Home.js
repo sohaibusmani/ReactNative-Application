@@ -4,6 +4,8 @@ import {View, Text, TouchableOpacity} from 'react-native';
 import {Agenda} from 'react-native-calendars';
 import {Card, Avatar} from 'react-native-paper';
 import SyncStorage from 'sync-storage';
+import Axios from 'axios';
+import baseUrl from '../Url/BaseUrl';
 
 
 import Header from '../Components/Header';
@@ -21,10 +23,25 @@ function Home({navigation}){
 
 
     useEffect(() => {
-      const user = SyncStorage.get('userData')
-      console.log(user);
+      getMonthData();
     })
 
+   const getMonthData = () => {
+     const user = SyncStorage.get('newUser');
+      Axios({
+        method:'GET',
+        url:`http://192.168.1.121:8080/shift/get-current-month`,
+        params:{
+          userId: user.user._id
+        }
+      })
+      .then(res => {
+        console.log(res.data.shifts)
+      })
+      .catch(err => {
+        console.log(err.response.data.message)
+      })
+   }
 
     const loadItems = (day) => {
         setTimeout(() => {

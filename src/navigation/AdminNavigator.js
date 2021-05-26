@@ -4,6 +4,7 @@ import Header from '../Components/Header'
 import Employes from '../Screens/Admin/Screens/Employes';
 import EmployeeProfile from '../Screens/Admin/Screens/Employeeprofile';
 import EmployeeSummary from '../Screens/Admin/Screens/EmployeeSummary';
+import EmployeeHistory from '../Screens/Admin/Screens/EmployeeHistory';
 
 
 const Stack = createStackNavigator();
@@ -33,6 +34,13 @@ function AdminStack(){
         component={EmployeeSummary}
         options={({ navigation }) => ({
             headerTitle: () => <Header title='Summary'/>,
+          })}
+    />
+     <Stack.Screen
+        name="EmployeeHistory"
+        component={EmployeeHistory}
+        options={({ navigation }) => ({
+            headerTitle: () => <Header title='History'/>,
           })}
     />
     </Stack.Navigator>

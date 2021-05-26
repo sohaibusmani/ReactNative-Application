@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { StyleSheet, Text, View, TextInput, Button, ImageBackground } from 'react-native';
+import { StyleSheet, Text, View, TextInput, Button, ImageBackground, TouchableOpacity } from 'react-native';
 import Axios from 'axios';
 import SyncStorage from 'sync-storage';
 import baseUrl from '../Url/BaseUrl';
@@ -38,13 +38,53 @@ const styles = StyleSheet.create({
         textAlign: 'center',
         margin: 10,
         fontWeight: 'bold',
-    }
+    },
+    container: {
+        marginBottom: 35,
+        marginTop: 30,
+        alignItems: 'center',
+        flexDirection: 'row',
+        justifyContent: 'space-between',
+        marginLeft: 20
+    },
+    radioContainer: {
+        display: 'flex',
+        justifyContent: "space-between",
+        flexDirection: 'row'
+    },
+    radioText: {
+        marginRight: 15,
+        fontSize: 14,
+        color: '#000',
+        fontWeight: '500'
+    },
+    radioCircle: {
+        height: 20,
+        width: 20,
+        borderRadius: 100,
+        borderWidth: 2,
+        borderColor: '#428AF8',
+        alignItems: 'center',
+        justifyContent: 'center',
+    },
+    selectedRb: {
+        width: 10,
+        height: 10,
+        borderRadius: 50,
+        backgroundColor: '#428AF8',
+    },
+    result: {
+        marginTop: 20,
+        color: 'white',
+        fontWeight: '600',
+        backgroundColor: '#F3FBFE',
+    },
 });
 
 export default function Login({ navigation }) {
     const [username, setUsername] = useState('');
     const [password, setPassword] = useState('');
-    const [checked, setChecked] = React.useState('first');
+    const [radioVal, setRadio] = React.useState('employee');
 
     const onLogin = () => {
         Axios({
@@ -63,7 +103,9 @@ export default function Login({ navigation }) {
 
                 console.log('Login Successfull', res.data.user);
 
-                navigation.navigate('AppNavigator')
+                navigation.navigate('AppNavigator');
+                setUsername("");
+                setPassword("")
             })
             .catch(err => {
                 console.log(err)
@@ -80,7 +122,8 @@ export default function Login({ navigation }) {
             }
         })
             .then(res => {
-
+                setUsername("");
+                setPassword("")
 
                 console.log('Login Successfull');
 
@@ -116,27 +159,44 @@ export default function Login({ navigation }) {
                         value={password}
                     />
                 </View>
-                <View>
-
+                <View style={styles.radioContainer}>
+                    <View style={styles.container}>
+                        <Text style={styles.radioText}>Login as Admin</Text>
+                        <TouchableOpacity
+                            style={styles.radioCircle}
+                            onPress={() => {
+                                setRadio("admin")
+                            }}>
+                            {radioVal === "admin" && <View style={styles.selectedRb} />}
+                        </TouchableOpacity>
+                    </View>
+                    <View style={styles.container}>
+                        <Text style={styles.radioText}>Login as Employee</Text>
+                        <TouchableOpacity
+                            style={styles.radioCircle}
+                            onPress={() => {
+                                setRadio("employee")
+                            }}>
+                            {radioVal === "employee" && <View style={styles.selectedRb} />}
+                        </TouchableOpacity>
+                    </View>
                 </View>
-                {/* <View style={styles.container}>
-                    <Text style={styles.radioText}>text</Text>
-                    <TouchableOpacity
-                        style={styles.radioCircle}
-                        onPress={() => {
-                            // this.setState({
-                            //     value: res.key,
-                            // });
-                        }}>
-                        {value === res.key && <View style={styles.selectedRb} />}
-                    </TouchableOpacity>
-                </View> */}
+
                 <View style={{ width: '30%', marginTop: 30 }}>
-                    <Button
-                        title="Login"
-                        color="#428AF8"
-                        onPress={onAdminLogin}
-                    />
+                    {
+                        radioVal === "admin" ?
+                            <Button
+                                title="Login"
+                                color="#428AF8"
+                                onPress={onAdminLogin}
+                            />
+                            :
+                            <Button
+                                title="Login"
+                                color="#428AF8"
+                                onPress={onLogin}
+                            />
+                    }
                 </View>
                 <View style={{ flexDirection: 'row', bottom: 50, position: 'absolute' }}>
                     <Text style={{ fontWeight: 'bold', fontSize: 17 }}>

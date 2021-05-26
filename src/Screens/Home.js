@@ -1,6 +1,6 @@
 import React from 'react';
 import  { useEffect } from 'react';
-import {View, Text, ScrollView} from 'react-native';
+import {View, Text, ScrollView,StyleSheet, ActivityIndicator} from 'react-native';
 import {Calendar} from 'react-native-calendars';
 import {Card, Paragraph} from 'react-native-paper';
 import SyncStorage from 'sync-storage';
@@ -9,9 +9,22 @@ import baseUrl from '../Url/BaseUrl';
 import Header from '../Components/Header';
 import moment from 'moment';
 
+const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+    justifyContent: "center"
+  },
+  horizontal: {
+    flexDirection: "row",
+    justifyContent: "space-around",
+    padding: 10
+  }
+});
+
 function Home({navigation}){
     const [shifts, setShifts] = React.useState([]);
     const [singleShift, setSingleShift] = React.useState({});
+    const [loading, setLoading] = React.useState(true)
 
 
     useEffect(() => {
@@ -29,6 +42,7 @@ function Home({navigation}){
       })
       .then(res => {
         setShifts(res.data.shifts);
+        setLoading(false);
       })
       .catch(err => {
         console.log(err)
@@ -56,6 +70,12 @@ function Home({navigation}){
    }
 
     return(
+     loading
+     ?
+     <View style={[styles.container, styles.horizontal]}>
+         <ActivityIndicator size="large" color="#009688" />
+         </View>
+     :
      <View style={{flex: 1}}>
     <View style={{flex: 1}}>
       <Calendar
@@ -104,22 +124,22 @@ function Home({navigation}){
         shifts.map((shift, i) => (
           <View style={{flex:1}} key={i}>
           <Card style={{ borderRadius: 25, marginTop: 20 }}>
-                      <Card.Title title={moment(shift.createdAt).format('DD/MM/YYYY')} subtitle={shift.userId} />
+                      <Card.Title title={moment(shift.createdAt).format('DD/MM/YYYY')} />
                       <Card.Content>
                         <View style={{ flexDirection: 'row' }}>
                           <Paragraph>Shift Start :</Paragraph>
-                          <Text style={{marginTop: 3, marginLeft: 3}}>{shift.shiftStartTime}</Text>
+                          <Text style={{marginTop: 3, marginLeft: 3}}>{moment(shift.shiftStartTime).format('hh:mm:ss a')}</Text>
                         </View>
                        {
                         shift.breakTime.length > 0 && shift.breakTime.map((br, i) => (
                           <View key={i}>
                           <View style={{flexDirection:'row'}}>
                           <Paragraph>Break Start :</Paragraph>
-                          <Text style={{marginTop: 3, marginLeft: 3}}>{br.breakStart}</Text>
+                          <Text style={{marginTop: 3, marginLeft: 3}}>{moment(br.breakStart).format('hh:mm:ss a')}</Text>
                           </View>
                           <View style={{flexDirection:'row'}}>
                           <Paragraph>Break End :</Paragraph>
-                          <Text style={{marginTop: 3, marginLeft: 3}}>{br.breakEnd}</Text>
+                          <Text style={{marginTop: 3, marginLeft: 3}}>{moment(br.breakEnd).format('hh:mm:ss a')}</Text>
                           </View>
                         </View>
                         
@@ -127,7 +147,7 @@ function Home({navigation}){
                        }
                         <View style={{ flexDirection: 'row' }}>
                           <Paragraph>Shift End :</Paragraph>
-                          <Text style={{marginTop: 3, marginLeft: 3}}>{shift.shiftEndTime}</Text>
+                          <Text style={{marginTop: 3, marginLeft: 3}}>{moment(shift.shiftEndTime).format('hh:mm:ss a')}</Text>
                         </View>
                       </Card.Content>
                     </Card>

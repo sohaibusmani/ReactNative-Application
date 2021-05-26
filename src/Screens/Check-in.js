@@ -163,7 +163,7 @@ function CheckIn({ navigation }) {
                   <Card.Content>
                     <View style={{ flexDirection: 'row' }}>
                       <Entypo name="back-in-time" size={20} color="black" />
-                      <Text style={{ marginLeft: 5 }}>{checkIn}</Text>
+                      <Text style={{ marginLeft: 5 }}>{moment(checkIn).format('hh:mm:ss a')}</Text>
                     </View>
                     <Paragraph>Checked In</Paragraph>
                   </Card.Content>
@@ -180,16 +180,22 @@ function CheckIn({ navigation }) {
                     <View style={{ flexDirection: 'row', justifyContent:'space-between' }}>
                     <View style={{ flexDirection: 'row' }}>
                       <Entypo name="back-in-time" size={20} color="black" />
-                      <Text style={{ marginLeft: 5 }}>{el.breakStart}</Text>
+                      <Text style={{ marginLeft: 5 }}>{moment(el.breakStart).format('hh:mm:ss a')}</Text>
                     </View>
                   
-                    <View style={{ flexDirection: 'row' }}>
-                    <Entypo name="back-in-time" size={20} color="black" />
-                    <Text style={{ marginLeft: 5 }}>{el.breakEnd}</Text>
-                    </View>
+                   {
+                     el.breakEnd 
+                     ?
+                     <View style={{ flexDirection: 'row' }}>
+                     <Entypo name="back-in-time" size={20} color="black" />
+                     <Text style={{ marginLeft: 5 }}>{moment(el.breakEnd).format('hh:mm:ss a')}</Text>
+                     </View>
+                     :
+                     null 
+                   }
                     
                     </View>
-                    <Paragraph>Break</Paragraph>
+                   
                   </Card.Content>
                 </Card>
               </View>
@@ -205,7 +211,7 @@ function CheckIn({ navigation }) {
                   <Card.Content>
                     <View style={{ flexDirection: 'row' }}>
                       <Entypo name="back-in-time" size={20} color="black" />
-                      <Text style={{ marginLeft: 5 }}>{checkOut}</Text>
+                      <Text style={{ marginLeft: 5 }}>{moment(checkOut).format("hh:mm:ss a")}</Text>
                     </View>
                     <Paragraph>Checked Out</Paragraph>
                   </Card.Content>
@@ -217,7 +223,7 @@ function CheckIn({ navigation }) {
             isCheckedIn && isOnBreak
               ?
               <View style={{ alignItems: 'center', marginTop: 20 }}>
-                <TouchableOpacity style={styles.appButtonContainer} onPress={() => handleSetBreakEndTime(moment().format('hh:mm:ss a'))}>
+                <TouchableOpacity style={styles.appButtonContainer} onPress={() => handleSetBreakEndTime(moment())}>
                   <Text style={styles.appButtonText}>
                     Break End
             </Text>
@@ -226,7 +232,7 @@ function CheckIn({ navigation }) {
               :
               isCheckedIn &&
               <View style={{ alignItems: 'center', marginTop: 20 }}>
-                <TouchableOpacity style={styles.appButtonContainer} onPress={() => handleSetBreakStartTime(moment().format('hh:mm:ss a'))}>
+                <TouchableOpacity style={styles.appButtonContainer} onPress={() => handleSetBreakStartTime(moment())}>
                   <Text style={styles.appButtonText}>
                     Break Start
             </Text>
@@ -237,7 +243,7 @@ function CheckIn({ navigation }) {
             isCheckedIn
               ?
               <View style={{ alignItems: 'center', marginTop: 20 }}>
-                <TouchableOpacity style={styles.appButtonContainer} onPress={() => handleSetCheckOutTime(moment().format('hh:mm:ss a'))}>
+                <TouchableOpacity style={styles.appButtonContainer} onPress={() => handleSetCheckOutTime(moment())}>
                   <Text style={styles.appButtonText}>
                     Check out
             </Text>
@@ -245,7 +251,7 @@ function CheckIn({ navigation }) {
               </View>
               :
               <View style={{ alignItems: 'center', marginTop: 20 }}>
-                <TouchableOpacity style={styles.appButtonContainer} onPress={() => handleSetCheckInTime(moment().format('hh:mm:ss a'))}>
+                <TouchableOpacity style={styles.appButtonContainer} onPress={() => handleSetCheckInTime(moment())}>
                   <Text style={styles.appButtonText}>
                     CheckIn
             </Text>

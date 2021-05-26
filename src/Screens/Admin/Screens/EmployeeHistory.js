@@ -90,10 +90,10 @@ function Home({route, navigation}){
         && 
         <View style={{flex:1}}>
         <Card style={{ borderRadius: 25, marginTop: 20 }}>
-                    <Card.Title title={moment(singleShift.createdAt).format('DD/MM/YYYY')} subtitle={singleShift.userId} />
+                    <Card.Title title={moment(singleShift.createdAt).format('DD/MM/YYYY')} />
                     <Card.Content>
                       <View style={{ flexDirection: 'row' }}>
-                        <Paragraph>Shift Start :</Paragraph>
+                        <Paragraph><strong>Shift Start</strong> :</Paragraph>
                         <Text style={{marginTop: 3, marginLeft: 3}}>{singleShift.shiftStartTime}</Text>
                       </View>
                      {

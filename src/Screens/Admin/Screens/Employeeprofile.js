@@ -1,7 +1,9 @@
 import AsyncStorage from '@react-native-async-storage/async-storage';
-import React from 'react';
+import React, { useEffect } from 'react';
 import { View, Text, StyleSheet, TouchableOpacity } from 'react-native';
 import { Card, Title, Paragraph } from 'react-native-paper';
+import Axios from 'axios';
+import baseUrl from '../../../Url/BaseUrl';
 
 const styles = StyleSheet.create({
     cardContainer: {
@@ -28,16 +30,39 @@ const styles = StyleSheet.create({
       }
 })
 
-export default function Profile() {
-    const token = AsyncStorage.getItem('token')
+export default function Profile({route, navigation}) {
+    const [Employee, setEmployee] = React.useState({});
+    const {employeeId} = route.params;
+
+    useEffect(() => {
+        getEmployeeDetails();
+      },[])
+
+    const getEmployeeDetails = () => {
+        Axios({
+            method:'GET',
+            url:`${baseUrl}/user/details`,
+            params:{
+                userId: employeeId
+            }
+        })
+        .then(res => {
+            console.log(res.data.user);
+            setEmployee(res.data.user);
+        })
+        .catch(err => {
+            console.log(err)
+        })
+    }
+
     return (
         <View>
             <View style={styles.cardContainer}>
             <Card style={{borderRadius: 25, elevation: 3}}>
                 <Card.Content>
                     <View style={styles.cardContent}>
-                    <Title>Sohaib Usmani</Title>
-                    <Paragraph>sohaibusmani52@gmail.com</Paragraph>
+                    <Title>{Employee.name}</Title>
+                    <Paragraph>{Employee.username}</Paragraph>
                     <Title style={{marginTop: 10}}>
                         Role
                     </Title>
@@ -63,7 +88,7 @@ export default function Profile() {
                     Wage Per Hour
                 </Title>
                 <Paragraph>
-                    PKR 50
+                    PKR {Employee.wedge}
                 </Paragraph>
             </View>
             </View>

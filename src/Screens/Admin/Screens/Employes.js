@@ -1,7 +1,9 @@
-import React from 'react';
+import React, {useEffect} from 'react';
 import { View, Text, StyleSheet, TouchableOpacity } from 'react-native';
-
+import Axios from 'axios';
 import img from '../../../assets/favicon.png'
+import baseUrl from '../../../Url/BaseUrl';
+import { ScrollView } from 'react-native-gesture-handler';
 
 const styles = StyleSheet.create({
     container: {
@@ -36,21 +38,50 @@ const styles = StyleSheet.create({
     },
 });
 
-const EmployesRow = ({ title, designation, navigation }) => (
+
+function Employes({navigation}){
+    const [EmployesList, setEmployesList] = React.useState([])
     
-    <View style={styles.container}>
-        <View style={styles.container_text}>
-        <TouchableOpacity onPress={() => {navigation.navigate('EmployeeProfile')}}>
-            <Text style={styles.title}>
-               Sohaib Usmani
-            </Text>
-            <Text style={styles.description}>
-                Shift Incharge
-            </Text>
-            </TouchableOpacity>
+    useEffect(() => {
+        getAllEmployees();
+      },[])
+
+    const getAllEmployees = () => {
+        Axios({
+            method:'GET',
+            url:`${baseUrl}/user/list`,
+        })
+        .then(res => {
+            console.log(res.data.users);
+            setEmployesList(res.data.users);
+        })
+        .catch(err => {
+            console.log(err)
+        })
+    }
+return(
+    <ScrollView>
+     {
+         EmployesList.length > 0 &&
+         EmployesList.map((employee, i) => (
+            <View style={styles.container} key={i}>
+            <View style={styles.container_text}>
+            <TouchableOpacity onPress={() => {navigation.navigate('EmployeeProfile',{
+                employeeId: employee._id
+            })}}>
+                <Text style={styles.title}>
+                   {employee.name}
+                </Text>
+                <Text style={styles.description}>
+                    Employee
+                </Text>
+                </TouchableOpacity>
+            </View>   
         </View>   
-    </View>   
+         ))
+     }
+    </ScrollView>
+)
+}
 
-);
-
-export default EmployesRow;
+export default Employes;

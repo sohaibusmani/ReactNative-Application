@@ -11,6 +11,7 @@ import Home from '../Screens/Home';
 import CheckIn from '../Screens/Check-in'
 import { TouchableOpacity } from 'react-native-gesture-handler';
 import { Icon } from 'native-base';
+import Employes from '../Screens/Admin/Screens/Employes';
 
 const Drawer = createDrawerNavigator();
 
@@ -101,7 +102,7 @@ const DrawerContent = (props) => {
                 style={{  marginTop: 35, marginLeft: 15,flexDirection:'row' }}>
                     <Icon name='check' type='FontAwesome' style={{fontSize:18}}/>
                 <Text>Check Inn</Text>
-            </TouchableOpacity> 
+            </TouchableOpacity>  
             </View>
             <TouchableOpacity
                 onPress={() => props.navigation.navigate('CheckIn')}

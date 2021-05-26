@@ -77,7 +77,7 @@ function Home({navigation}){
                       </View>
                      {
                       singleShift.breakTime.length > 0 && singleShift.breakTime.map((br, i) => (
-                        <View>
+                        <View key={i}>
                         <View style={{flexDirection:'row'}}>
                         <Paragraph>Break Start :</Paragraph>
                         <Text style={{marginTop: 3, marginLeft: 3}}>{br.breakStart}</Text>
@@ -99,38 +99,41 @@ function Home({navigation}){
         </View>
       }
       { 
-      singleShift.length > 0 
+      shifts.length > 0 
         && 
-        <View style={{flex:1}}>
-        <Card style={{ borderRadius: 25, marginTop: 20 }}>
-                    <Card.Title title={moment(shift.createdAt).format('DD/MM/YYYY')} subtitle={shift.userId} />
-                    <Card.Content>
-                      <View style={{ flexDirection: 'row' }}>
-                        <Paragraph>Shift Start :</Paragraph>
-                        <Text style={{marginTop: 3, marginLeft: 3}}>{shift.shiftStartTime}</Text>
-                      </View>
-                     {
-                      shift.breakTime.length > 0 && shift.breakTime.map((br, i) => (
-                        <View>
-                        <View style={{flexDirection:'row'}}>
-                        <Paragraph>Break Start :</Paragraph>
-                        <Text style={{marginTop: 3, marginLeft: 3}}>{br.breakStart}</Text>
+        shifts.map((shift, i) => (
+          <View style={{flex:1}} key={i}>
+          <Card style={{ borderRadius: 25, marginTop: 20 }}>
+                      <Card.Title title={moment(shift.createdAt).format('DD/MM/YYYY')} subtitle={shift.userId} />
+                      <Card.Content>
+                        <View style={{ flexDirection: 'row' }}>
+                          <Paragraph>Shift Start :</Paragraph>
+                          <Text style={{marginTop: 3, marginLeft: 3}}>{shift.shiftStartTime}</Text>
                         </View>
-                        <View style={{flexDirection:'row'}}>
-                        <Paragraph>Break End :</Paragraph>
-                        <Text style={{marginTop: 3, marginLeft: 3}}>{br.breakEnd}</Text>
+                       {
+                        shift.breakTime.length > 0 && shift.breakTime.map((br, i) => (
+                          <View key={i}>
+                          <View style={{flexDirection:'row'}}>
+                          <Paragraph>Break Start :</Paragraph>
+                          <Text style={{marginTop: 3, marginLeft: 3}}>{br.breakStart}</Text>
+                          </View>
+                          <View style={{flexDirection:'row'}}>
+                          <Paragraph>Break End :</Paragraph>
+                          <Text style={{marginTop: 3, marginLeft: 3}}>{br.breakEnd}</Text>
+                          </View>
                         </View>
-                      </View>
-                      
-                      ))
-                     }
-                      <View style={{ flexDirection: 'row' }}>
-                        <Paragraph>Shift End :</Paragraph>
-                        <Text style={{marginTop: 3, marginLeft: 3}}>{shift.shiftEndTime}</Text>
-                      </View>
-                    </Card.Content>
-                  </Card>
-        </View>
+                        
+                        ))
+                       }
+                        <View style={{ flexDirection: 'row' }}>
+                          <Paragraph>Shift End :</Paragraph>
+                          <Text style={{marginTop: 3, marginLeft: 3}}>{shift.shiftEndTime}</Text>
+                        </View>
+                      </Card.Content>
+                    </Card>
+          </View>
+        ))
+        
       }
       </View>
     </ScrollView>

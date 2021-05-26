@@ -60,8 +60,9 @@ import React from 'react';
 import { createStackNavigator } from '@react-navigation/stack';
 import Splash from '../Screens/Splash';
 import Login from "../Screens/Login";
-import Signup from '../Screens/Signup'
-import AppNavigator from './AppNavigator'
+import Signup from '../Screens/Signup';
+import AppNavigator from './AppNavigator';
+import AdminNavigator from './AdminNavigator';
 
 const Stack = createStackNavigator();
 
@@ -95,6 +96,13 @@ function RootStack() {
             <Stack.Screen
                 name="AppNavigator"
                 component={AppNavigator}
+                options={{
+                    headerShown: false
+                }}
+            />
+             <Stack.Screen
+                name="AdminNavigator"
+                component={AdminNavigator}
                 options={{
                     headerShown: false
                 }}

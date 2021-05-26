@@ -1,22 +1,12 @@
 import React from 'react';
 import  { useEffect } from 'react';
 import {View, Text, TouchableOpacity} from 'react-native';
-import {Agenda} from 'react-native-calendars';
+import {Calendar} from 'react-native-calendars';
 import {Card, Avatar} from 'react-native-paper';
 import SyncStorage from 'sync-storage';
 import Axios from 'axios';
 import baseUrl from '../Url/BaseUrl';
-
-
 import Header from '../Components/Header';
-
-
-const timeToString = (time) => {
-    const date = new Date(time);
-    return date.toISOString().split('T')[0];
-    
-  }
-
 
 function Home({navigation}){
     const [items, setItems] = React.useState({});
@@ -30,7 +20,7 @@ function Home({navigation}){
      const user = SyncStorage.get('newUser');
       Axios({
         method:'GET',
-        url:`http://192.168.1.121:8080/shift/get-current-month`,
+        url:`${baseUrl}/shift/get-current-month`,
         params:{
           userId: user.user._id
         }
@@ -39,59 +29,17 @@ function Home({navigation}){
         console.log(res.data.shifts)
       })
       .catch(err => {
-        console.log(err.response.data.message)
+        console.log(err)
       })
    }
-
-    const loadItems = (day) => {
-        setTimeout(() => {
-          for (let i = -15; i < 85; i++) {
-            const time = day.timestamp + i * 24 * 60 * 60 * 1000;
-            const strTime = timeToString(time);
-            if (!items[strTime]) {
-              items[strTime] = [];
-              const numItems = Math.floor(Math.random() * 3 + 1);
-              for (let j = 0; j < numItems; j++) {
-                items[strTime].push({
-                  name: 'Item for ' + strTime + ' #' + j,
-                  height: Math.max(50, Math.floor(Math.random() * 150))
-                });
-              }
-            }
-          }
-          const newItems = {};
-          Object.keys(items).forEach(key => {
-            newItems[key] = items[key];
-          });
-         setItems(newItems);
-        }, 1000);
-      }
-
-      const renderItem = (item) => {
-           return(
-               <TouchableOpacity style={{marginRight: 10, marginTop: 17}}>
-                 <Card>
-                     <Card.Content>
-                         <View style={{flexDirection:'row', justifyContent:'space-between', alignItems:'center'}}>
-                             <Text>
-                                 {item.name}
-                             </Text>
-                         </View>
-                     </Card.Content>
-                 </Card>
-               </TouchableOpacity>
-           )
-      }
 
     return(
      <View style={{flex: 1}}>
     <View style={{flex: 1}}>
-      <Agenda
-        items={items}
-        loadItemsForMonth={loadItems}
-        selected={'2017-05-16'}
-        renderItem={renderItem}
-        />
+      <Calendar
+      current={new Date()}
+      onDayPress={(day) => {console.log('selected day', day)}}
+      />
     </View>
     </View>  
     )

@@ -1,20 +1,22 @@
 import React from 'react';
 import  { useEffect } from 'react';
-import {View, Text, TouchableOpacity} from 'react-native';
+import {View, Text, ScrollView} from 'react-native';
 import {Calendar} from 'react-native-calendars';
-import {Card, Avatar} from 'react-native-paper';
+import {Card, Paragraph} from 'react-native-paper';
 import SyncStorage from 'sync-storage';
 import Axios from 'axios';
 import baseUrl from '../Url/BaseUrl';
 import Header from '../Components/Header';
+import moment from 'moment';
 
 function Home({navigation}){
-    const [items, setItems] = React.useState({});
+    const [shifts, setShifts] = React.useState([]);
+    const [singleShift, setSingleShift] = React.useState({});
 
 
     useEffect(() => {
       getMonthData();
-    })
+    },[])
 
    const getMonthData = () => {
      const user = SyncStorage.get('newUser');
@@ -26,11 +28,31 @@ function Home({navigation}){
         }
       })
       .then(res => {
-        console.log(res.data.shifts)
+        setShifts(res.data.shifts);
       })
       .catch(err => {
         console.log(err)
       })
+   }
+
+   const getShiftByDate = (date) => {
+    const user = SyncStorage.get('newUser');
+     Axios({
+       method:'GET',
+       url:`${baseUrl}/shift/get-single`,
+       params:{
+        userId: user.user._id,
+         date,
+       }
+     })
+     .then(res => {
+       console.log(res.data, 'single shift');
+       setSingleShift(res.data.shift)
+       setShifts([])
+     })
+     .catch(err => {
+       console.log(err)
+     })
    }
 
     return(
@@ -38,8 +60,80 @@ function Home({navigation}){
     <View style={{flex: 1}}>
       <Calendar
       current={new Date()}
-      onDayPress={(day) => {console.log('selected day', day)}}
+      onDayPress={(day) => {getShiftByDate(day.dateString)}}
       />
+    <ScrollView>
+      <View>
+      { 
+      singleShift._id
+        && 
+        <View style={{flex:1}}>
+        <Card style={{ borderRadius: 25, marginTop: 20 }}>
+                    <Card.Title title={moment(singleShift.createdAt).format('DD/MM/YYYY')} subtitle={singleShift.userId} />
+                    <Card.Content>
+                      <View style={{ flexDirection: 'row' }}>
+                        <Paragraph>Shift Start :</Paragraph>
+                        <Text style={{marginTop: 3, marginLeft: 3}}>{singleShift.shiftStartTime}</Text>
+                      </View>
+                     {
+                      singleShift.breakTime.length > 0 && singleShift.breakTime.map((br, i) => (
+                        <View>
+                        <View style={{flexDirection:'row'}}>
+                        <Paragraph>Break Start :</Paragraph>
+                        <Text style={{marginTop: 3, marginLeft: 3}}>{br.breakStart}</Text>
+                        </View>
+                        <View style={{flexDirection:'row'}}>
+                        <Paragraph>Break End :</Paragraph>
+                        <Text style={{marginTop: 3, marginLeft: 3}}>{br.breakEnd}</Text>
+                        </View>
+                      </View>
+                      
+                      ))
+                     }
+                      <View style={{ flexDirection: 'row' }}>
+                        <Paragraph>Shift End :</Paragraph>
+                        <Text style={{marginTop: 3, marginLeft: 3}}>{singleShift.shiftEndTime}</Text>
+                      </View>
+                    </Card.Content>
+                  </Card>
+        </View>
+      }
+      { 
+      singleShift.length > 0 
+        && 
+        <View style={{flex:1}}>
+        <Card style={{ borderRadius: 25, marginTop: 20 }}>
+                    <Card.Title title={moment(shift.createdAt).format('DD/MM/YYYY')} subtitle={shift.userId} />
+                    <Card.Content>
+                      <View style={{ flexDirection: 'row' }}>
+                        <Paragraph>Shift Start :</Paragraph>
+                        <Text style={{marginTop: 3, marginLeft: 3}}>{shift.shiftStartTime}</Text>
+                      </View>
+                     {
+                      shift.breakTime.length > 0 && shift.breakTime.map((br, i) => (
+                        <View>
+                        <View style={{flexDirection:'row'}}>
+                        <Paragraph>Break Start :</Paragraph>
+                        <Text style={{marginTop: 3, marginLeft: 3}}>{br.breakStart}</Text>
+                        </View>
+                        <View style={{flexDirection:'row'}}>
+                        <Paragraph>Break End :</Paragraph>
+                        <Text style={{marginTop: 3, marginLeft: 3}}>{br.breakEnd}</Text>
+                        </View>
+                      </View>
+                      
+                      ))
+                     }
+                      <View style={{ flexDirection: 'row' }}>
+                        <Paragraph>Shift End :</Paragraph>
+                        <Text style={{marginTop: 3, marginLeft: 3}}>{shift.shiftEndTime}</Text>
+                      </View>
+                    </Card.Content>
+                  </Card>
+        </View>
+      }
+      </View>
+    </ScrollView>
     </View>
     </View>  
     )

@@ -59,10 +59,6 @@ function CheckIn({ navigation }) {
   const [breakStart, setBreakStart] = React.useState('');
   const [breakEnd, setBreakEnd] = React.useState('');
   const [checkOut, setCheckOut] = React.useState('');
-  const [currentDate, setCurrentDate] = React.useState('');
-  const [showCard, setShowCard] = React.useState(false);
-  const [userData, setUser] = React.useState(user);
-  const [timeArray, setTimeArray] = React.useState([]);
   const [isCheckedIn, setIsCheckedIn] = React.useState(false);
   const [isOnBreak, setIsOnBreak] = React.useState(false);
   const [isCheckedOut, setIsCheckedOut] = React.useState(false);

@@ -155,6 +155,7 @@ export default function Login({ navigation }) {
                         style={styles.input}
                         selectionColor='#428AF8'
                         underlineColorAndroid='#428AF8'
+                        secureTextEntry={true}
                         onChangeText={(password) => setPassword(password)}
                         value={password}
                     />

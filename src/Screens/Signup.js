@@ -59,10 +59,10 @@ export default function signup({history, navigation}){
         })
         .then(res => {
             console.log('Signup Successfull')
-            navigation.navigate('Home')
+            navigation.navigate('Login')
         })
         .catch(err => {
-            console.log(err)
+            console.log(err.response.message.data)
         })
     }
 

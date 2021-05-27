@@ -2,6 +2,7 @@ import React, {useEffect} from 'react';
 import { View, Text, StyleSheet, TouchableOpacity, ActivityIndicator } from 'react-native';
 import { Card, Title, Paragraph } from 'react-native-paper';
 import Axios from 'axios';
+import baseUrl from '../../../Url/BaseUrl';
 
 const styles = StyleSheet.create({
     cardContainer: {
@@ -51,7 +52,7 @@ export default function Profile({route}) {
     const getSummary = () => {
       Axios({
           method:'GET',
-          url:'http://192.168.1.121:8080/user/summary',
+          url:`${baseUrl}/user/summary`,
           params:{
               userId: employeeId
           }

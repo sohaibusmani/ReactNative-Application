@@ -43,6 +43,7 @@ export default function signup({history, navigation}){
     const [fullName, setFullname] = useState('');
     const [wage, setWage] = useState('');
     const [contactNumber, setContactnumber] = useState('');
+    const [designation, setDesignation] = useState('')
 
     const onSignup = () => {
         Axios({
@@ -106,6 +107,14 @@ export default function signup({history, navigation}){
                 underlineColorAndroid= '#428AF8'
                 onChangeText={(contactNumber) => setContactnumber(contactNumber)}
                 value={contactNumber}
+               />
+                <TextInput
+                placeholder='Enter Designation'
+                style={styles.input}
+                selectionColor='#428AF8'
+                underlineColorAndroid= '#428AF8'
+                onChangeText={(designation) => setDesignation(designation)}
+                value={password}
                />
                 <TextInput
                 placeholder='Enter Wage'

@@ -87,11 +87,10 @@ function CheckIn({ navigation }) {
   }, [])
 
   const handleSetCheckInTime = (time) => {
-
-    setIsCheckedIn(true)
-    let user = SyncStorage.get("newUser");
     let tempSchedule = {};
     tempSchedule.checkInTime = time;
+    setSchedule(tempSchedule);
+    setIsCheckedIn(true);
 
     Axios({
       method: 'POST',
@@ -103,7 +102,6 @@ function CheckIn({ navigation }) {
     })
       .then(res => {
         // console.log('post checkin time', res.data);
-        setCheckIn(res.data.user.localStorage.checkInTime);
       })
       .catch(err => {
         console.log(err)
@@ -114,31 +112,14 @@ function CheckIn({ navigation }) {
   const handleSetBreakStartTime = async (time) => {
     let tempSchedule = { ...schedule };
     let tempBreakTime = [];
-    // setBreakStart(time);
 
-    // await Axios({
-    //   method: 'GET',
-    //   url: `${baseUrl}/user/get-localstorage`,
-    //   params: {
-    //     userId: user.user._id
-    //   }
-    // })
-    //   .then(res => {
-    //     // console.log("tets", res.data.localStorage)
-    //     tempSchedule = res.data.localStorage;
-    //     if (tempSchedule.break.length > 0) {
-    //       tempBreakTime = tempSchedule.break;
-    //     }
-    //   })
-    //   .catch(err => {
-    //     console.log(err)
-    //   });
-
-    if (tempSchedule.break.length > 0)
+    if (tempSchedule.break?.length > 0)
       tempBreakTime = tempSchedule.break;
 
     tempBreakTime.push({ breakStart: time, breakEnd: "" });
     tempSchedule.break = tempBreakTime;
+    setSchedule(tempSchedule);
+    setIsOnBreak(true);
 
     Axios({
       method: 'POST',
@@ -158,48 +139,26 @@ function CheckIn({ navigation }) {
   }
 
   const handleSetBreakEndTime = (time) => {
-    let temporaryUser;
+    let tempSchedule = { ...schedule };
+    let tempBreakTime = [...tempSchedule.break];
+    let tempIndex = tempBreakTime.length;
 
-    Axios({
-      method: 'GET',
-      url: `${baseUrl}/user/get-localstorage`,
-      params: {
-        userId: user.user._id
-      }
-        .then(res => {
-          temporaryUser = res.data.localStorage;
-          if (temporaryUser.schedule.break.breakEnd) {
-            setBreakEnd(temporaryUser.schedule.break.breakEnd)
-          }
-        })
-        .catch(err => {
-          console.log(err)
-        })
-    })
-
-
-    const tempBreak = temporaryUser.schedule.break;
-    const tempIndex = tempBreak.length;
-
-    tempBreak[tempIndex - 1].breakEnd = time;
-    temporaryUser.break = tempBreak;
-
-    console.log(temporaryUser)
-
-    setBreakEnd(time);
+    tempBreakTime[tempIndex - 1].breakEnd = time;
+    tempSchedule.break = tempBreakTime;
+    setSchedule(tempSchedule);
     setIsOnBreak(false);
-    setIsBreakEnd(true);
 
     Axios({
       method: 'POST',
       url: `${baseUrl}/user/post-localstorage`,
       data: {
-        localStorage: user,
+        localStorage: tempSchedule,
         userId: user.user._id
       }
     })
       .then(res => {
-        console.log('post breakEnd time')
+        // console.log('post break start time', res.data)
+        // setSchedule(res.data.user.localStorage);
       })
       .catch(err => {
         console.log(err)
@@ -208,71 +167,49 @@ function CheckIn({ navigation }) {
 
 
   const handleSetCheckOutTime = (time) => {
-    // setCheckOut(time);
-    // setIsCheckedIn(false);
-    // setIsCheckedOut(true)
-    let temporaryUser;
-
-    Axios({
-      method: 'GET',
-      url: `${baseUrl}/user/get-localstorage`,
-      params: {
-        userId: user.user._id
-      }
-    })
-      .then(res => {
-        console.log(res.data.localStorage);
-        temporaryUser = res.data.localStorage;
-        if (temporaryUser.schedule.checkOutTime) {
-          setCheckOut(temporaryUser.schedule.checkOutTime)
-        }
-
-      })
-      .catch(err => {
-        console.log(err)
-      })
-
-    let tempSchedule = temporaryUserData.schedule;
+    let tempSchedule = { ...schedule };
     tempSchedule.checkOutTime = time;
-    temporaryUserData.schedule = tempSchedule;
+    setSchedule(tempSchedule);
 
     Axios({
       method: 'POST',
       url: `${baseUrl}/user/post-localstorage`,
       data: {
-        localStorage: user,
+        localStorage: tempSchedule,
         userId: user.user._id
       }
-        .then(res => {
-          console.log('post checkout time')
-        })
-        .catch(err => {
-          console.log(err)
-        })
     })
-
+      .then(res => {
+        handleSaveData(time);
+      })
+      .catch(err => {
+        console.log(err)
+      })
   }
 
-  const handleSaveData = () => {
+  const handleSaveData = (shiftEndTime) => {
 
     Axios({
       method: 'POST',
       url: `${baseUrl}/shift/save`,
       data: {
         userId: user.user._id,
-        shiftStartTime: user.schedule.checkInTime,
-        breakTime: user.schedule.break,
-        shiftEndTime: user.schedule.checkOutTime
+        shiftStartTime: schedule.checkInTime,
+        breakTime: schedule.break,
+        shiftEndTime
 
       }
     })
       .then(res => {
-        console.log('Shift Save Sucessfully')
+        console.log('Shift Save Sucessfully');
+        setIsCheckedIn(false);
       })
       .catch(err => {
         console.log(err.response.data.message)
       })
   }
+
+  console.log(schedule)
 
   return (
     <View style={{ flex: 1 }}>
@@ -286,11 +223,11 @@ function CheckIn({ navigation }) {
             <View>
               <View>
                 <Card style={{ borderRadius: 25 }}>
-                  <Card.Title title="Sohaib Usmani" subtitle="Employee" />
+                  <Card.Title title={user.user.name} subtitle={user.user.designation} />
                   <Card.Content>
                     <View style={{ flexDirection: 'row' }}>
                       <Entypo name="back-in-time" size={20} color="black" />
-                      <Text style={{ marginLeft: 5 }}>{moment(checkIn).format('hh:mm:ss a')}</Text>
+                      <Text style={{ marginLeft: 5 }}>{moment(schedule.checkInTime).format('hh:mm:ss a')}</Text>
                     </View>
                     <Paragraph>Checked In</Paragraph>
                   </Card.Content>
@@ -302,7 +239,7 @@ function CheckIn({ navigation }) {
             schedule?.break && schedule?.break.length > 0 && schedule?.break.map((el, i) => (
               <View key={i}>
                 <Card style={{ borderRadius: 25, marginTop: 20 }}>
-                  <Card.Title title="Sohaib Usmani" subtitle="Employee" />
+                  <Card.Title title={user.user.name} subtitle={user.user.designation}  />
                   <Card.Content>
                     <View style={{ flexDirection: 'row', justifyContent: 'space-between' }}>
                       <View style={{ flexDirection: 'row' }}>
@@ -329,16 +266,16 @@ function CheckIn({ navigation }) {
             ))
           }
           {
-            user.schedule.checkOutTime &&
+            schedule.checkOutTime &&
 
             <View>
               <View>
                 <Card style={{ borderRadius: 25, marginTop: 20 }}>
-                  <Card.Title title="Sohaib Usmani" subtitle="Employee" />
+                  <Card.Title title={user.user.name} subtitle={user.user.designation} />
                   <Card.Content>
                     <View style={{ flexDirection: 'row' }}>
                       <Entypo name="back-in-time" size={20} color="black" />
-                      <Text style={{ marginLeft: 5 }}>{moment(checkOut).format("hh:mm:ss a")}</Text>
+                      <Text style={{ marginLeft: 5 }}>{moment(schedule.checkOutTime).format("hh:mm:ss a")}</Text>
                     </View>
                     <Paragraph>Checked Out</Paragraph>
                   </Card.Content>
@@ -353,7 +290,7 @@ function CheckIn({ navigation }) {
                 <TouchableOpacity style={styles.appButtonContainer} onPress={() => handleSetBreakEndTime(moment())}>
                   <Text style={styles.appButtonText}>
                     Break End
-            </Text>
+                </Text>
                 </TouchableOpacity>
               </View>
               :
@@ -362,7 +299,7 @@ function CheckIn({ navigation }) {
                 <TouchableOpacity style={styles.appButtonContainer} onPress={() => handleSetBreakStartTime(moment())}>
                   <Text style={styles.appButtonText}>
                     Break Start
-            </Text>
+                </Text>
                 </TouchableOpacity>
               </View>
           }
@@ -373,28 +310,18 @@ function CheckIn({ navigation }) {
                 <TouchableOpacity style={styles.appButtonContainer} onPress={() => handleSetCheckOutTime(moment())}>
                   <Text style={styles.appButtonText}>
                     Check out
-            </Text>
+                </Text>
                 </TouchableOpacity>
               </View>
               :
+              !schedule.checkInTime &&
               <View style={{ alignItems: 'center', marginTop: 20 }}>
                 <TouchableOpacity style={styles.appButtonContainer} onPress={() => handleSetCheckInTime(moment())}>
                   <Text style={styles.appButtonText}>
                     CheckIn
-            </Text>
+                </Text>
                 </TouchableOpacity>
               </View>
-          }
-          {
-            isCheckedOut &&
-            <View style={{ alignItems: 'center', marginTop: 20 }}>
-              <TouchableOpacity style={styles.appButtonContainer} onPress={handleSaveData}>
-                <Text style={styles.appButtonText}>
-                  Save Shift
-            </Text>
-              </TouchableOpacity>
-            </View>
-
           }
         </View>
       </ScrollView>

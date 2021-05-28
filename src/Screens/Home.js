@@ -89,22 +89,23 @@ function Home({navigation}){
         && 
         <View style={{flex:1}}>
         <Card style={{ borderRadius: 25, marginTop: 20 }}>
-                    <Card.Title title={moment(singleShift.createdAt).format('DD/MM/YYYY')} subtitle={singleShift.userId} />
+                    <Card.Title title={moment(singleShift.createdAt).format('DD/MM/YYYY')}  />
+                    <View style={{flex: 1, height: 0.5, backgroundColor: 'black'}} />
                     <Card.Content>
-                      <View style={{ flexDirection: 'row' }}>
+                      <View style={{ flexDirection: 'row',marginTop:10 }}>
                         <Paragraph>Shift Start :</Paragraph>
-                        <Text style={{marginTop: 3, marginLeft: 3}}>{singleShift.shiftStartTime}</Text>
+                        <Text style={{marginTop: 3, marginLeft: 3}}>{moment(singleShift.shiftStartTime).format('hh:mm:ss a')}</Text>
                       </View>
                      {
                       singleShift.breakTime.length > 0 && singleShift.breakTime.map((br, i) => (
                         <View key={i}>
                         <View style={{flexDirection:'row'}}>
                         <Paragraph>Break Start :</Paragraph>
-                        <Text style={{marginTop: 3, marginLeft: 3}}>{br.breakStart}</Text>
+                        <Text style={{marginTop: 3, marginLeft: 3}}>{moment(br.breakStart).format('hh:mm:ss a')}</Text>
                         </View>
                         <View style={{flexDirection:'row'}}>
                         <Paragraph>Break End :</Paragraph>
-                        <Text style={{marginTop: 3, marginLeft: 3}}>{br.breakEnd}</Text>
+                        <Text style={{marginTop: 3, marginLeft: 3}}>{moment(br.breakEnd).format('hh:mm:ss a')}</Text>
                         </View>
                       </View>
                       
@@ -112,7 +113,7 @@ function Home({navigation}){
                      }
                       <View style={{ flexDirection: 'row' }}>
                         <Paragraph>Shift End :</Paragraph>
-                        <Text style={{marginTop: 3, marginLeft: 3}}>{singleShift.shiftEndTime}</Text>
+                        <Text style={{marginTop: 3, marginLeft: 3}}>{moment(singleShift.shiftEndTime).format('hh:mm:ss a')}</Text>
                       </View>
                     </Card.Content>
                   </Card>
@@ -125,8 +126,9 @@ function Home({navigation}){
           <View style={{flex:1}} key={i}>
           <Card style={{ borderRadius: 25, marginTop: 20 }}>
                       <Card.Title title={moment(shift.createdAt).format('DD/MM/YYYY')} />
+                      <View style={{flex: 1, height: 0.5, backgroundColor: 'black'}} />
                       <Card.Content>
-                        <View style={{ flexDirection: 'row' }}>
+                        <View style={{ flexDirection: 'row', marginTop:10 }}>
                           <Paragraph>Shift Start :</Paragraph>
                           <Text style={{marginTop: 3, marginLeft: 3}}>{moment(shift.shiftStartTime).format('hh:mm:ss a')}</Text>
                         </View>

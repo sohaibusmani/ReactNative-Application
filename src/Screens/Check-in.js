@@ -53,9 +53,9 @@ const styles = StyleSheet.create({
 function CheckIn({ navigation }) {
 
   const user = SyncStorage.get('newUser');
-  console.log('user ka data', user);
 
   const [checkIn, setCheckIn] = React.useState('');
+  const [schedule, setSchedule] = React.useState({});
   const [breakStart, setBreakStart] = React.useState('');
   const [breakEnd, setBreakEnd] = React.useState('');
   const [checkOut, setCheckOut] = React.useState('');
@@ -65,86 +65,213 @@ function CheckIn({ navigation }) {
   const [isBreakEnd, setIsBreakEnd] = React.useState(false);
 
 
+  useEffect(() => {
+
+    Axios({
+      method: 'GET',
+      url: `${baseUrl}/user/get-localstorage`,
+      params: {
+        userId: user.user._id
+      }
+    })
+      .then(res => {
+        let tempLocalStorage = res.data.localStorage;
+        if (tempLocalStorage.checkInTime) {
+          setIsCheckedIn(true)
+          setSchedule(tempLocalStorage)
+        }
+      })
+      .catch(err => {
+        console.log(err)
+      })
+  }, [])
+
   const handleSetCheckInTime = (time) => {
 
-    console.log(time);
-    setCheckIn(time);
     setIsCheckedIn(true)
     let user = SyncStorage.get("newUser");
-    let tempSchedule = user.schedule;
-    tempSchedule.checkInTime = time
-    user.schedule = tempSchedule;
-    console.log(user.schedule)
-    SyncStorage.set("newUser", user);
+    let tempSchedule = {};
+    tempSchedule.checkInTime = time;
+
+    Axios({
+      method: 'POST',
+      url: `${baseUrl}/user/post-localstorage`,
+      data: {
+        localStorage: tempSchedule,
+        userId: user.user._id
+      }
+    })
+      .then(res => {
+        // console.log('post checkin time', res.data);
+        setCheckIn(res.data.user.localStorage.checkInTime);
+      })
+      .catch(err => {
+        console.log(err)
+      })
 
   }
 
-  const handleSetBreakStartTime = (time) => {
+  const handleSetBreakStartTime = async (time) => {
+    let tempSchedule = { ...schedule };
+    let tempBreakTime = [];
+    // setBreakStart(time);
 
-    setBreakStart(time);
-    setIsOnBreak(true);
-    const user = SyncStorage.get('newUser');
-    console.log(user.schedule)
-    let tempArrBreak = user.schedule.break;
+    // await Axios({
+    //   method: 'GET',
+    //   url: `${baseUrl}/user/get-localstorage`,
+    //   params: {
+    //     userId: user.user._id
+    //   }
+    // })
+    //   .then(res => {
+    //     // console.log("tets", res.data.localStorage)
+    //     tempSchedule = res.data.localStorage;
+    //     if (tempSchedule.break.length > 0) {
+    //       tempBreakTime = tempSchedule.break;
+    //     }
+    //   })
+    //   .catch(err => {
+    //     console.log(err)
+    //   });
 
-    console.log(tempArrBreak)
+    if (tempSchedule.break.length > 0)
+      tempBreakTime = tempSchedule.break;
 
-    tempArrBreak.push({ breakStart: time, breakEnd: "" });
-    console.log(tempArrBreak)
-    user.schedule.break = tempArrBreak;
+    tempBreakTime.push({ breakStart: time, breakEnd: "" });
+    tempSchedule.break = tempBreakTime;
 
-    SyncStorage.set('newUser', user)
+    Axios({
+      method: 'POST',
+      url: `${baseUrl}/user/post-localstorage`,
+      data: {
+        localStorage: tempSchedule,
+        userId: user.user._id
+      }
+    })
+      .then(res => {
+        // console.log('post break start time', res.data)
+        // setSchedule(res.data.user.localStorage);
+      })
+      .catch(err => {
+        console.log(err)
+      })
   }
 
   const handleSetBreakEndTime = (time) => {
-    const user = SyncStorage.get('newUser');
-    const tempBreak = user.schedule.break;
+    let temporaryUser;
+
+    Axios({
+      method: 'GET',
+      url: `${baseUrl}/user/get-localstorage`,
+      params: {
+        userId: user.user._id
+      }
+        .then(res => {
+          temporaryUser = res.data.localStorage;
+          if (temporaryUser.schedule.break.breakEnd) {
+            setBreakEnd(temporaryUser.schedule.break.breakEnd)
+          }
+        })
+        .catch(err => {
+          console.log(err)
+        })
+    })
+
+
+    const tempBreak = temporaryUser.schedule.break;
     const tempIndex = tempBreak.length;
 
     tempBreak[tempIndex - 1].breakEnd = time;
-    user.break = tempBreak;
-    SyncStorage.set('newUser', user)
+    temporaryUser.break = tempBreak;
 
-    console.log(user)
+    console.log(temporaryUser)
 
     setBreakEnd(time);
     setIsOnBreak(false);
     setIsBreakEnd(true);
+
+    Axios({
+      method: 'POST',
+      url: `${baseUrl}/user/post-localstorage`,
+      data: {
+        localStorage: user,
+        userId: user.user._id
+      }
+    })
+      .then(res => {
+        console.log('post breakEnd time')
+      })
+      .catch(err => {
+        console.log(err)
+      })
   }
 
 
   const handleSetCheckOutTime = (time) => {
-    setCheckOut(time);
-    setIsCheckedIn(false);
-    setIsCheckedOut(true)
-    let user = SyncStorage.get("newUser");
-    let tempSchedule = user.schedule;
-    tempSchedule.checkOutTime = time
-    user.schedule = tempSchedule;
-    console.log(user.schedule)
-    SyncStorage.set("newUser", user);
+    // setCheckOut(time);
+    // setIsCheckedIn(false);
+    // setIsCheckedOut(true)
+    let temporaryUser;
+
+    Axios({
+      method: 'GET',
+      url: `${baseUrl}/user/get-localstorage`,
+      params: {
+        userId: user.user._id
+      }
+    })
+      .then(res => {
+        console.log(res.data.localStorage);
+        temporaryUser = res.data.localStorage;
+        if (temporaryUser.schedule.checkOutTime) {
+          setCheckOut(temporaryUser.schedule.checkOutTime)
+        }
+
+      })
+      .catch(err => {
+        console.log(err)
+      })
+
+    let tempSchedule = temporaryUserData.schedule;
+    tempSchedule.checkOutTime = time;
+    temporaryUserData.schedule = tempSchedule;
+
+    Axios({
+      method: 'POST',
+      url: `${baseUrl}/user/post-localstorage`,
+      data: {
+        localStorage: user,
+        userId: user.user._id
+      }
+        .then(res => {
+          console.log('post checkout time')
+        })
+        .catch(err => {
+          console.log(err)
+        })
+    })
 
   }
 
   const handleSaveData = () => {
 
-     Axios({
-       method:'POST',
-       url:`${baseUrl}/shift/save`,
-       data:{
-         userId: user.user._id,
-         shiftStartTime: user.schedule.checkInTime,
-         breakTime: user.schedule.break,
-         shiftEndTime: user.schedule.checkOutTime
+    Axios({
+      method: 'POST',
+      url: `${baseUrl}/shift/save`,
+      data: {
+        userId: user.user._id,
+        shiftStartTime: user.schedule.checkInTime,
+        breakTime: user.schedule.break,
+        shiftEndTime: user.schedule.checkOutTime
 
-       }
-     })
-     .then(res => {
-       console.log('Shift Save Sucessfully')
-     })
-     .catch(err => {
-       console.log(err.response.data.message)
-     })
+      }
+    })
+      .then(res => {
+        console.log('Shift Save Sucessfully')
+      })
+      .catch(err => {
+        console.log(err.response.data.message)
+      })
   }
 
   return (
@@ -154,7 +281,7 @@ function CheckIn({ navigation }) {
       <ScrollView>
         <View style={{ marginTop: 20 }}>
           {
-            user.schedule.checkInTime &&
+            schedule.checkInTime &&
 
             <View>
               <View>
@@ -172,36 +299,36 @@ function CheckIn({ navigation }) {
             </View>
           }
           {
-            user.schedule.break.map((el, i) => (
+            schedule?.break && schedule?.break.length > 0 && schedule?.break.map((el, i) => (
               <View key={i}>
                 <Card style={{ borderRadius: 25, marginTop: 20 }}>
                   <Card.Title title="Sohaib Usmani" subtitle="Employee" />
                   <Card.Content>
-                    <View style={{ flexDirection: 'row', justifyContent:'space-between' }}>
-                    <View style={{ flexDirection: 'row' }}>
-                      <Entypo name="back-in-time" size={20} color="black" />
-                      <Text style={{ marginLeft: 5 }}>{moment(el.breakStart).format('hh:mm:ss a')}</Text>
+                    <View style={{ flexDirection: 'row', justifyContent: 'space-between' }}>
+                      <View style={{ flexDirection: 'row' }}>
+                        <Entypo name="back-in-time" size={20} color="black" />
+                        <Text style={{ marginLeft: 5 }}>{moment(el.breakStart).format('hh:mm:ss a')}</Text>
+                      </View>
+
+                      {
+                        el.breakEnd
+                          ?
+                          <View style={{ flexDirection: 'row' }}>
+                            <Entypo name="back-in-time" size={20} color="black" />
+                            <Text style={{ marginLeft: 5 }}>{moment(el.breakEnd).format('hh:mm:ss a')}</Text>
+                          </View>
+                          :
+                          null
+                      }
+
                     </View>
-                  
-                   {
-                     el.breakEnd 
-                     ?
-                     <View style={{ flexDirection: 'row' }}>
-                     <Entypo name="back-in-time" size={20} color="black" />
-                     <Text style={{ marginLeft: 5 }}>{moment(el.breakEnd).format('hh:mm:ss a')}</Text>
-                     </View>
-                     :
-                     null 
-                   }
-                    
-                    </View>
-                   
+
                   </Card.Content>
                 </Card>
               </View>
             ))
           }
-           {
+          {
             user.schedule.checkOutTime &&
 
             <View>
@@ -261,12 +388,12 @@ function CheckIn({ navigation }) {
           {
             isCheckedOut &&
             <View style={{ alignItems: 'center', marginTop: 20 }}>
-                <TouchableOpacity style={styles.appButtonContainer} onPress={handleSaveData}>
-                  <Text style={styles.appButtonText}>
-                    Save Shift
+              <TouchableOpacity style={styles.appButtonContainer} onPress={handleSaveData}>
+                <Text style={styles.appButtonText}>
+                  Save Shift
             </Text>
-                </TouchableOpacity>
-              </View>
+              </TouchableOpacity>
+            </View>
 
           }
         </View>

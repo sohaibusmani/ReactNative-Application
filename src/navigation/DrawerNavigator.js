@@ -14,7 +14,6 @@ import Home from '../Screens/Home';
 import CheckIn from '../Screens/Check-in'
 import { TouchableOpacity } from 'react-native-gesture-handler';
 import { Icon } from 'native-base';
-import Employes from '../Screens/Admin/Screens/Employes';
 
 const Drawer = createDrawerNavigator();
 
@@ -30,7 +29,7 @@ export default function MyDrawer(props) {
 
 const DrawerContent = (props) => {
     const user = SyncStorage.get('newUser')
-    console.log('rawer', user)
+    // console.log('rawer', user)
 
     const handleLogout = () => {
 

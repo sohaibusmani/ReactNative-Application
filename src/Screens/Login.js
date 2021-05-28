@@ -101,7 +101,7 @@ export default function Login({ navigation }) {
                 SyncStorage.set("newUser", { user: res.data.user, schedule: { break: [] } })
 
 
-                console.log('Login Successfull', res.data.user);
+                // console.log('Login Successfull', res.data.user);
 
                 navigation.navigate('AppNavigator');
                 setUsername("");

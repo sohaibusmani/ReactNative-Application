@@ -14,7 +14,6 @@ const styles = StyleSheet.create({
         alignItems: 'center',
         flex: 1,
         justifyContent: 'center',
-        backgroundColor: 'rgba(0,0,0,0.1)',
     },
     inputContainer: {
         justifyContent: 'space-between',
@@ -136,7 +135,7 @@ export default function Login({ navigation }) {
     return (
         <ImageBackground source={image} style={styles.image}>
             <View style={styles.screen}>
-                <View style={{ marginBottom: 10 }}>
+                <View style={{ marginBottom: 10, marginTop:70 }}>
                     <Text style={styles.heading}>
                         Login
                 </Text>

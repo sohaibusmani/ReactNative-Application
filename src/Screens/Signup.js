@@ -10,7 +10,6 @@ const styles = StyleSheet.create({
         alignItems: 'center',
         flex: 1,
         justifyContent: 'center',
-        backgroundColor:'rgba(0,0,0,0.2)', 
     },
     inputContainer: {
       justifyContent: 'space-between',
@@ -54,7 +53,8 @@ export default function signup({history, navigation}){
                 password: password,
                 name: fullName,
                 contactNumber: contactNumber,
-                wedge: wage
+                wedge: wage,
+                designation,
             }
 
         })

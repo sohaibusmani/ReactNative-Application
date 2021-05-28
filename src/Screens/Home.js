@@ -90,9 +90,9 @@ function Home({navigation}){
         <View style={{flex:1}}>
         <Card style={{ borderRadius: 25, marginTop: 20 }}>
                     <Card.Title title={moment(singleShift.createdAt).format('DD/MM/YYYY')}  />
-                    <View style={{flex: 1, height: 0.5, backgroundColor: 'black'}} />
+                    {/* <View style={{flex: 1, height: 0.5, backgroundColor: 'black'}} /> */}
                     <Card.Content>
-                      <View style={{ flexDirection: 'row',marginTop:10 }}>
+                      <View style={{ flexDirection: 'row',marginTop:10, justifyContent:'center' }}>
                         <Paragraph>Shift Start :</Paragraph>
                         <Text style={{marginTop: 3, marginLeft: 3}}>{moment(singleShift.shiftStartTime).format('hh:mm:ss a')}</Text>
                       </View>
@@ -126,29 +126,29 @@ function Home({navigation}){
           <View style={{flex:1}} key={i}>
           <Card style={{ borderRadius: 25, marginTop: 20 }}>
                       <Card.Title title={moment(shift.createdAt).format('DD/MM/YYYY')} />
-                      <View style={{flex: 1, height: 0.5, backgroundColor: 'black'}} />
+                      
                       <Card.Content>
-                        <View style={{ flexDirection: 'row', marginTop:10 }}>
-                          <Paragraph>Shift Start :</Paragraph>
+                        <View style={{ flexDirection: 'row', marginTop:10, justifyContent:'center' }}>
+                          <Paragraph style={{fontWeight:'bold'}}>Shift Start :</Paragraph>
                           <Text style={{marginTop: 3, marginLeft: 3}}>{moment(shift.shiftStartTime).format('hh:mm:ss a')}</Text>
                         </View>
                        {
                         shift.breakTime.length > 0 && shift.breakTime.map((br, i) => (
-                          <View key={i}>
+                          <View key={i} style={{flexDirection:'row', justifyContent:'space-between', marginTop:10}}>
                           <View style={{flexDirection:'row'}}>
-                          <Paragraph>Break Start :</Paragraph>
+                          <Paragraph style={{fontWeight:'bold'}}>Break Start :</Paragraph>
                           <Text style={{marginTop: 3, marginLeft: 3}}>{moment(br.breakStart).format('hh:mm:ss a')}</Text>
                           </View>
                           <View style={{flexDirection:'row'}}>
-                          <Paragraph>Break End :</Paragraph>
+                          <Paragraph style={{fontWeight:'bold'}}>Break End :</Paragraph>
                           <Text style={{marginTop: 3, marginLeft: 3}}>{moment(br.breakEnd).format('hh:mm:ss a')}</Text>
                           </View>
                         </View>
                         
                         ))
                        }
-                        <View style={{ flexDirection: 'row' }}>
-                          <Paragraph>Shift End :</Paragraph>
+                        <View style={{ flexDirection: 'row', justifyContent:'center', marginTop:10 }}>
+                          <Paragraph style={{fontWeight:'bold'}}>Shift End :</Paragraph>
                           <Text style={{marginTop: 3, marginLeft: 3}}>{moment(shift.shiftEndTime).format('hh:mm:ss a')}</Text>
                         </View>
                       </Card.Content>

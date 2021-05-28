@@ -6,7 +6,6 @@ import {Card, Paragraph} from 'react-native-paper';
 import SyncStorage from 'sync-storage';
 import Axios from 'axios';
 import baseUrl from '../Url/BaseUrl';
-import Header from '../Components/Header';
 import moment from 'moment';
 
 const styles = StyleSheet.create({

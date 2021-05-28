@@ -114,7 +114,7 @@ export default function signup({history, navigation}){
                 selectionColor='#428AF8'
                 underlineColorAndroid= '#428AF8'
                 onChangeText={(designation) => setDesignation(designation)}
-                value={password}
+                value={designation}
                />
                 <TextInput
                 placeholder='Enter Wage'

@@ -223,126 +223,120 @@ function CheckIn({ navigation }) {
   console.log(schedule)
 
   return (
-   loading
-   ?
-   <View style={[styles.container, styles.horizontal]}>
-         <ActivityIndicator size="large" color="#009688" />
-         </View>
-   :
-   <View style={{ flex: 1 }}>
-   <ImageBackground resizeMode='cover' style={styles.image} style={{ height: 200 }} source={image}>
-   </ImageBackground>
-   <ScrollView>
-     <View style={{ marginTop: 20 }}>
-       {
-         schedule.checkInTime &&
+    <View style={{ flex: 1 }}>
+      <ImageBackground resizeMode='cover' style={styles.image} style={{ height: 200 }} source={image}>
+      </ImageBackground>
+      <ScrollView>
+        <View style={{ marginTop: 20 }}>
+          {
+            schedule.checkInTime &&
 
-         <View>
-           <View>
-             <Card style={{ borderRadius: 25 }}>
-               <Card.Title title={user.user.name} subtitle={user.user.designation} />
-               <Card.Content>
-                 <View style={{ flexDirection: 'row' }}>
-                   <Entypo name="back-in-time" size={20} color="black" />
-                   <Text style={{ marginLeft: 5 }}>{moment(schedule.checkInTime).format('hh:mm:ss a')}</Text>
-                 </View>
-                 <Paragraph>Checked In</Paragraph>
-               </Card.Content>
-             </Card>
-           </View>
-         </View>
-       }
-       {
-         schedule?.break && schedule?.break.length > 0 && schedule?.break.map((el, i) => (
-           <View key={i}>
-             <Card style={{ borderRadius: 25, marginTop: 20 }}>
-               <Card.Title title={user.user.name} subtitle={user.user.designation}  />
-               <Card.Content>
-                 <View style={{ flexDirection: 'row', justifyContent: 'space-between' }}>
-                   <View style={{ flexDirection: 'row' }}>
-                     <Entypo name="back-in-time" size={20} color="black" />
-                     <Text style={{ marginLeft: 5 }}>{moment(el.breakStart).format('hh:mm:ss a')}</Text>
-                   </View>
+            <View>
+              <View>
+                <Card style={{ borderRadius: 25 }}>
+                  <Card.Title title={user.user.name} subtitle={user.user.designation} />
+                  <Card.Content>
+                    <View style={{ flexDirection: 'row' }}>
+                      <Entypo name="back-in-time" size={20} color="black" />
+                      <Text style={{ marginLeft: 5 }}>{moment(schedule.checkInTime).format('hh:mm:ss a')}</Text>
+                    </View>
+                    <Paragraph>Checked In</Paragraph>
+                  </Card.Content>
+                </Card>
+              </View>
+            </View>
+          }
+          {
+            schedule?.break && schedule?.break.length > 0 && schedule?.break.map((el, i) => (
+              <View key={i}>
+                <Card style={{ borderRadius: 25, marginTop: 20 }}>
+                  <Card.Title title={user.user.name} subtitle={user.user.designation}  />
+                  <Card.Content>
+                    <View style={{ flexDirection: 'row', justifyContent: 'space-between' }}>
+                      <View style={{ flexDirection: 'row' }}>
+                        <Entypo name="back-in-time" size={20} color="black" />
+                        <Text style={{ marginLeft: 5 }}>{moment(el.breakStart).format('hh:mm:ss a')}</Text>
+                      </View>
 
-                   {
-                     el.breakEnd
-                       ?
-                       <View style={{ flexDirection: 'row' }}>
-                         <Entypo name="back-in-time" size={20} color="black" />
-                         <Text style={{ marginLeft: 5 }}>{moment(el.breakEnd).format('hh:mm:ss a')}</Text>
-                       </View>
-                       :
-                       null
-                   }
+                      {
+                        el.breakEnd
+                          ?
+                          <View style={{ flexDirection: 'row' }}>
+                            <Entypo name="back-in-time" size={20} color="black" />
+                            <Text style={{ marginLeft: 5 }}>{moment(el.breakEnd).format('hh:mm:ss a')}</Text>
+                          </View>
+                          :
+                          null
+                      }
 
-                 </View>
+                    </View>
 
-               </Card.Content>
-             </Card>
-           </View>
-         ))
-       }
-       {
-         schedule.checkOutTime &&
+                  </Card.Content>
+                </Card>
+              </View>
+            ))
+          }
+          {
+            schedule.checkOutTime &&
 
-         <View>
-           <View>
-             <Card style={{ borderRadius: 25, marginTop: 20 }}>
-               <Card.Title title={user.user.name} subtitle={user.user.designation} />
-               <Card.Content>
-                 <View style={{ flexDirection: 'row' }}>
-                   <Entypo name="back-in-time" size={20} color="black" />
-                   <Text style={{ marginLeft: 5 }}>{moment(schedule.checkOutTime).format("hh:mm:ss a")}</Text>
-                 </View>
-                 <Paragraph>Checked Out</Paragraph>
-               </Card.Content>
-             </Card>
-           </View>
-         </View>
-       }
-       {
-         isCheckedIn && isOnBreak
-           ?
-           <View style={{ alignItems: 'center', marginTop: 20 }}>
-             <TouchableOpacity style={styles.appButtonContainer} onPress={() => handleSetBreakEndTime(moment())}>
-               <Text style={styles.appButtonText}>
-                 Break End
-             </Text>
-             </TouchableOpacity>
-           </View>
-           :
-           isCheckedIn &&
-           <View style={{ alignItems: 'center', marginTop: 20 }}>
-             <TouchableOpacity style={styles.appButtonContainer} onPress={() => handleSetBreakStartTime(moment())}>
-               <Text style={styles.appButtonText}>
-                 Break Start
-             </Text>
-             </TouchableOpacity>
-           </View>
-       }
-       {
-         isCheckedIn
-           ?
-           <View style={{ alignItems: 'center', marginTop: 20 }}>
-             <TouchableOpacity style={styles.appButtonContainer} onPress={() => handleSetCheckOutTime(moment())}>
-               <Text style={styles.appButtonText}>
-                 Check out
-             </Text>
-             </TouchableOpacity>
-           </View>
-           :
-           !schedule.checkInTime &&
-           <View style={{ alignItems: 'center', marginTop: 20 }}>
-             <TouchableOpacity style={styles.appButtonContainer} onPress={() => handleSetCheckInTime(moment())}>
-               <Text style={styles.appButtonText}>
-                 CheckIn
-             </Text>
-             </TouchableOpacity>
-           </View>
-       }
-     </View>
-   </ScrollView>
- </View>
+            <View>
+              <View>
+                <Card style={{ borderRadius: 25, marginTop: 20 }}>
+                  <Card.Title title={user.user.name} subtitle={user.user.designation} />
+                  <Card.Content>
+                    <View style={{ flexDirection: 'row' }}>
+                      <Entypo name="back-in-time" size={20} color="black" />
+                      <Text style={{ marginLeft: 5 }}>{moment(schedule.checkOutTime).format("hh:mm:ss a")}</Text>
+                    </View>
+                    <Paragraph>Checked Out</Paragraph>
+                  </Card.Content>
+                </Card>
+              </View>
+            </View>
+          }
+          {
+            isCheckedIn && isOnBreak
+              ?
+              <View style={{ alignItems: 'center', marginTop: 20 }}>
+                <TouchableOpacity style={styles.appButtonContainer} onPress={() => handleSetBreakEndTime(moment())}>
+                  <Text style={styles.appButtonText}>
+                    Break End
+                </Text>
+                </TouchableOpacity>
+              </View>
+              :
+              isCheckedIn &&
+              <View style={{ alignItems: 'center', marginTop: 20 }}>
+                <TouchableOpacity style={styles.appButtonContainer} onPress={() => handleSetBreakStartTime(moment())}>
+                  <Text style={styles.appButtonText}>
+                    Break Start
+                </Text>
+                </TouchableOpacity>
+              </View>
+          }
+          {
+            isCheckedIn
+              ?
+              <View style={{ alignItems: 'center', marginTop: 20 }}>
+                <TouchableOpacity style={styles.appButtonContainer} onPress={() => handleSetCheckOutTime(moment())}>
+                  <Text style={styles.appButtonText}>
+                    Check out
+                </Text>
+                </TouchableOpacity>
+              </View>
+              :
+              !schedule.checkInTime &&
+              <View style={{ alignItems: 'center', marginTop: 20 }}>
+                <TouchableOpacity style={styles.appButtonContainer} onPress={() => handleSetCheckInTime(moment())}>
+                  <Text style={styles.appButtonText}>
+                    CheckIn
+                </Text>
+                </TouchableOpacity>
+              </View>
+          }
+        </View>
+      </ScrollView>
+    </View>
   )
 }
 

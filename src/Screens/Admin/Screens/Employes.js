@@ -1,7 +1,7 @@
 import React, {useEffect} from 'react';
 import { View, Text, StyleSheet, TouchableOpacity } from 'react-native';
 import Axios from 'axios';
-import img from '../../../assets/favicon.png'
+import {Avatar} from 'react-native-paper';
 import baseUrl from '../../../Url/BaseUrl';
 import { ScrollView } from 'react-native-gesture-handler';
 
@@ -19,14 +19,17 @@ const styles = StyleSheet.create({
         // elevation: 2,
     },
     title: {
-        fontSize: 16,
+        fontSize: 18,
         color: '#000',
+        fontWeight:'bold'
     },
     container_text: {
         flex: 1,
         flexDirection: 'column',
         marginLeft: 12,
         justifyContent: 'center',
+
+        
     },
     description: {
         fontSize: 11,
@@ -66,14 +69,14 @@ return(
          EmployesList.map((employee, i) => (
             <View style={styles.container} key={i}>
             <View style={styles.container_text}>
-            <TouchableOpacity onPress={() => {navigation.navigate('EmployeeProfile',{
+            <TouchableOpacity  onPress={() => {navigation.navigate('EmployeeProfile',{
                 employeeId: employee._id
             })}}>
                 <Text style={styles.title}>
                    {employee.name}
                 </Text>
-                <Text style={styles.description}>
-                    Employee
+                <Text>
+                    {employee.designation}
                 </Text>
                 </TouchableOpacity>
             </View>   

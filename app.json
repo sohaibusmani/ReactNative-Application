@@ -1,12 +1,12 @@
 {
   "expo": {
     "name": "Passage Time",
-    "slug": "Passage Time",
+    "slug": "Passage-Time",
     "version": "1.0.0",
     "orientation": "portrait",
     "icon": "./src/assets/passageTime.png",
     "splash": {
-      "image": "./src/assets/splash.png",
+      "image": "./src/assets/passageTime.png",
       "resizeMode": "contain",
       "backgroundColor": "#ffffff"
     },
@@ -21,7 +21,7 @@
     },
     "android": {
       "adaptiveIcon": {
-        "foregroundImage": "./src/assets/adaptive-icon.png",
+        "foregroundImage": "./src/assets/passageTime.png",
         "backgroundColor": "#FFFFFF"
       },
       "package": "com.passageTime.app"

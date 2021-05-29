@@ -83,7 +83,7 @@ export default function Profile({route, navigation}) {
                <Title style={{marginTop: 10}}>
                    Role
                </Title>
-               <Paragraph>Employee</Paragraph>
+               <Paragraph>{Employee.designation}</Paragraph>
                </View>
                <View style={styles.buttonContainer}>                  
                        <TouchableOpacity style={styles.appButtonContainer} onPress={() => {navigation.navigate('EmployeeHistory',{employeeId: employeeId})}}>

@@ -42,7 +42,7 @@ const styles = StyleSheet.create({
     return(
           <View style={styles.screen}>
              <Image source={gif}/>
-             <Text style={{fontWeight:'bold', color:'black',  fontSize:30, marginTop: 8}}>Time Tracking App</Text>
+             <Text style={{fontWeight:'bold', color:'black',  fontSize:30, marginTop: 8}}>Passage Time</Text>
           </View>
     )
 }

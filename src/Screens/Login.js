@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { StyleSheet, Text, View, TextInput, Button, ImageBackground, TouchableOpacity } from 'react-native';
+import { StyleSheet, Text, View, TextInput, Button, ImageBackground, TouchableOpacity, Alert } from 'react-native';
 import Axios from 'axios';
 import SyncStorage from 'sync-storage';
 import baseUrl from '../Url/BaseUrl';
@@ -106,9 +106,7 @@ export default function Login({ navigation }) {
                 setUsername("");
                 setPassword("")
             })
-            .catch(err => {
-                console.log(err)
-            })
+            .catch(err => {Alert.alert('Error', err.response.data.message)})
     }
 
     const onAdminLogin = () => {
@@ -128,10 +126,11 @@ export default function Login({ navigation }) {
 
                 navigation.navigate('AdminNavigator')
             })
-            .catch(err => {
-                console.log(err)
-            })
+            .catch(err => {Alert.alert('Error', err.response.data.message)})
     }
+
+   
+
     return (
         <ImageBackground source={image} style={styles.image}>
             <View style={styles.screen}>
@@ -195,6 +194,7 @@ export default function Login({ navigation }) {
                                 title="Login"
                                 color="#428AF8"
                                 onPress={onLogin}
+                                
                             />
                     }
                 </View>

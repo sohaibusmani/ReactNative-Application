@@ -75,7 +75,7 @@ function RootStack() {
         name="DrawerNavigator"
         component={DrawerNavigator}
         options={({ navigation }) => ({
-          headerTitle: () => <Header navigation={DrawerNavigator} title='Time Tracking App'/>,
+          headerTitle: () => <Header  title='Time Tracking App'/>,
         })}
       /> 
     </Stack.Navigator>

@@ -92,26 +92,26 @@ function Home({navigation}){
                     {/* <View style={{flex: 1, height: 0.5, backgroundColor: 'black'}} /> */}
                     <Card.Content>
                       <View style={{ flexDirection: 'row',marginTop:10, justifyContent:'center' }}>
-                        <Paragraph>Shift Start :</Paragraph>
+                        <Paragraph style={{fontWeight:'bold'}}>Shift Start :</Paragraph>
                         <Text style={{marginTop: 3, marginLeft: 3}}>{moment(singleShift.shiftStartTime).format('hh:mm:ss a')}</Text>
                       </View>
                      {
                       singleShift.breakTime.length > 0 && singleShift.breakTime.map((br, i) => (
-                        <View key={i}>
+                        <View key={i} style={{flexDirection:'row', justifyContent:'space-between', marginTop:10}}>
                         <View style={{flexDirection:'row'}}>
-                        <Paragraph>Break Start :</Paragraph>
+                        <Paragraph style={{fontWeight:'bold'}}>Break Start :</Paragraph>
                         <Text style={{marginTop: 3, marginLeft: 3}}>{moment(br.breakStart).format('hh:mm:ss a')}</Text>
                         </View>
                         <View style={{flexDirection:'row'}}>
-                        <Paragraph>Break End :</Paragraph>
+                        <Paragraph style={{fontWeight:'bold'}}>Break End :</Paragraph>
                         <Text style={{marginTop: 3, marginLeft: 3}}>{moment(br.breakEnd).format('hh:mm:ss a')}</Text>
                         </View>
                       </View>
                       
                       ))
                      }
-                      <View style={{ flexDirection: 'row' }}>
-                        <Paragraph>Shift End :</Paragraph>
+                      <View style={{ flexDirection: 'row', justifyContent:'center', marginTop:10 }}>
+                        <Paragraph style={{fontWeight:'bold'}}>Shift End :</Paragraph>
                         <Text style={{marginTop: 3, marginLeft: 3}}>{moment(singleShift.shiftEndTime).format('hh:mm:ss a')}</Text>
                       </View>
                     </Card.Content>

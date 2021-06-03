@@ -1,8 +1,9 @@
-import React, {useState} from 'react';
-import { StyleSheet, Text, View, Button,TextInput, ImageBackground } from 'react-native';
+import React, {useState, useEffect} from 'react';
+import { StyleSheet, Text, View, Button,TextInput, ImageBackground, Alert } from 'react-native';
 import Axios from 'axios';
+import baseUrl from '../../../Url/BaseUrl';
 
-import image from '../../../assets/pic2.jpg';
+import image from '../../../assets/splash1.jpg';
 // import baseUrl from '../Url/BaseUrl';
 
 const styles = StyleSheet.create({
@@ -36,21 +37,70 @@ const styles = StyleSheet.create({
     }
   });
 
-export default function signup({history, navigation}){
+export default function signup({history, navigation, route}){
+    const {employeeId} = route.params;
     const [wage, setWage] = useState('');
     const [contactNumber, setContactnumber] = useState('');
-    const [designation, setDesignation] = useState('')
+    const [designation, setDesignation] = useState('');
+    const [fullName, setFullName] = useState('')
 
+    useEffect(() => {
+        getEmployeeDetails();
+      },[])
+
+    const getEmployeeDetails = () => {
+        Axios({
+            method:'GET',
+            url:`${baseUrl}/user/details`,
+            params:{
+                userId: employeeId
+            }
+        })
+        .then(res => {
+            console.log(res.data.user);
+            setFullName(res.data.user.name);
+            setDesignation(res.data.user.designation);
+            setContactnumber(res.data.user.contactNumber);
+            setWage(res.data.user.wedge)
+        })
+        .catch(err => {
+            console.log(err)
+        })
+    }
+
+    const updateProfile = () => {
+        Axios({
+            method:'POST',
+            url:`${baseUrl}/user/update`,
+            data: {
+                name: fullName,
+                contactNumber,
+                designation,
+                wedge: parseInt(wage),
+                userId: employeeId
+            }
+        })
+        .then(res =>{
+            Alert.alert('Updated', 'Profile has been updated.')
+        })
+        .catch(err => {
+            console.log(err.response.data.message)
+            Alert.alert('Error', 'Profile has not been updated.')
+        })
+    }
 
     return(
        <ImageBackground source={image} style={styles.image}>
            <View style={styles.screen}>
-           <View style={{marginBottom: 10}}>
-                <Text style={styles.heading}>
-                    Edit Profile
-                </Text>
-            </View>
             <View style={styles.inputContainer}>
+            <TextInput
+                placeholder='Enter Number'
+                style={styles.input}
+                selectionColor='#428AF8'
+                underlineColorAndroid= '#428AF8'
+                onChangeText={(fullName) => setFullName(fullName)}
+                value={fullName}
+               />
                <TextInput
                 placeholder='Enter Number'
                 style={styles.input}
@@ -71,16 +121,17 @@ export default function signup({history, navigation}){
                 placeholder='Enter Wage'
                 style={styles.input}
                 selectionColor='#428AF8'
+                keyboardType = 'numeric'
                 underlineColorAndroid= '#428AF8'
                 onChangeText={(wage) => setWage(wage)}
-                value={wage}
+                value={wage.toString()}
                />
             </View>
             <View style={{width:'30%', marginTop: 30}}>
                 <Button
                 title="Update"
                 color="#428AF8"
-                // onPress={onSignup}
+                onPress={updateProfile}
                 />
             </View>
            </View>

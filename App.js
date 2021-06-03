@@ -14,10 +14,6 @@ export default function App() {
     <NavigationContainer>
       <HomeStack/>
     </NavigationContainer>
-    // <Tab.Navigator>
-    //   <Tab.Screen name="Home" component={HomeStack} />
-    //   <Tab.Screen name="CheckIn" component={CheckInStack} />
-    // </Tab.Navigator>
   );
 }
 

@@ -33,9 +33,9 @@ const styles = StyleSheet.create({
   useEffect(() => {
     setTimeout(() => {
       token ?
-      navigation.navigate('AppNavigator')
+      navigation.replace('AppNavigator')
       :
-      navigation.navigate('Login')
+      navigation.replace('Login')
     }, 2000)
   },[])
   

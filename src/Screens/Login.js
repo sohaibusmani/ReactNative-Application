@@ -124,7 +124,7 @@ export default function Login({ navigation }) {
 
                 console.log('Login Successfull');
 
-                navigation.navigate('AdminNavigator')
+                navigation.replace('AdminNavigator')
             })
             .catch(err => {Alert.alert('Error', err.response.data.message)})
     }

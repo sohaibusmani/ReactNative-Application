@@ -27,6 +27,7 @@ const styles = StyleSheet.create({
       appButtonText: {
         color: "#fff",
         alignSelf: "center",
+        fontSize: 16
       },
       loaderContainer: {
         flex: 1,
@@ -107,6 +108,13 @@ export default function Profile({route, navigation}) {
            <Paragraph>
                PKR {Employee.wedge}
            </Paragraph>
+       </View>
+       <View style={{alignSelf:'center', marginTop:30 }}>
+       <TouchableOpacity style={styles.appButtonContainer} onPress={() => {navigation.navigate('EmployeeSummary',{employeeId: employeeId})}}>
+                          <Text style={styles.appButtonText}>
+                              Edit Profile
+                          </Text>
+                       </TouchableOpacity>
        </View>
        </View>
    </View>

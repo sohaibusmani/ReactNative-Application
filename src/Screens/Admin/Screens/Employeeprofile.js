@@ -110,7 +110,7 @@ export default function Profile({route, navigation}) {
            </Paragraph>
        </View>
        <View style={{alignSelf:'center', marginTop:30 }}>
-       <TouchableOpacity style={styles.appButtonContainer} onPress={() => {navigation.navigate('EmployeeSummary',{employeeId: employeeId})}}>
+       <TouchableOpacity style={styles.appButtonContainer} onPress={() => {navigation.navigate('EmployeeEditProfile',{employeeId: employeeId})}}>
                           <Text style={styles.appButtonText}>
                               Edit Profile
                           </Text>

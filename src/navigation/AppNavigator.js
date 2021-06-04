@@ -1,48 +1,4 @@
 
-// import React from 'react';
-// import {createStackNavigator} from '@react-navigation/stack';
-// import AuthNavigator from './AuthNavigator';
-// import DrawerNavigator from './DrawerNavigator';
-// import {connect} from 'react-redux';
-
-// const MainStack = createStackNavigator();
-
-// export const navigationRef = React.createRef();
-
-// export function navigate(name, params) {
-//   navigationRef.current?.navigate(name, params);
-// }
-
-// const MainNavigator = (props) => {
-//   return (
-//     <MainStack.Navigator headerMode="none" initialRouteName="AuthStack">
-//       {props?.user ? (
-//         <MainStack.Screen name="DrawerNavigator">
-//           {() => <DrawerNavigator {...props?.user} />}
-//         </MainStack.Screen>
-//       ) : (
-//         <MainStack.Screen name="AuthStack" component={AuthNavigator} />
-//       )}
-//     </MainStack.Navigator>
-//   );
-// };
-
-// const mapStateToProps = (state) => {
-//   return {
-//     user: state.authReducer.user,
-//   };
-// };
-
-// export default connect(mapStateToProps)(MainNavigator);
-
-
-
-
-
-
-
-
-
 import React from 'react';
 import { createStackNavigator } from '@react-navigation/stack';
 
@@ -51,7 +7,6 @@ import Header from '../Components/Header';
 // import CheckIn from '../Screens/Check-in';
 import DrawerNavigator from '../navigation/DrawerNavigator';
 
-
 const Stack = createStackNavigator();
 
 function RootStack() {
@@ -59,6 +14,7 @@ function RootStack() {
     <Stack.Navigator
       initialRouteName="DrawerNavigator"
       screenOptions={{ gestureEnabled: false }}
+      headerMode="none"
     > 
       {/* <Stack.Screen
         name="Home"
@@ -74,9 +30,9 @@ function RootStack() {
        <Stack.Screen
         name="DrawerNavigator"
         component={DrawerNavigator}
-        options={({ navigation }) => ({
-          headerTitle: () => <Header  title='Time Tracking App'/>,
-        })}
+        // options={({ navigation }) => ({
+        //   headerTitle: () => <Header  title='Time Tracking App'/>,
+        // })}
       /> 
     </Stack.Navigator>
   );

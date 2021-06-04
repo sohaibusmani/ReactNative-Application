@@ -1,12 +1,17 @@
 import React from 'react';
 import  { useEffect } from 'react';
-import {View, Text, ScrollView,StyleSheet, ActivityIndicator} from 'react-native';
+import {View, Text, ScrollView, ActivityIndicator, Dimensions, StyleSheet} from 'react-native';
+import Feather from 'react-native-vector-icons/Feather';
 import {Calendar} from 'react-native-calendars';
 import {Card, Paragraph} from 'react-native-paper';
 import SyncStorage from 'sync-storage';
 import Axios from 'axios';
 import baseUrl from '../Url/BaseUrl';
 import moment from 'moment';
+import { TouchableOpacity } from 'react-native-gesture-handler';
+
+const HEIGHT = Dimensions.get('window').height;
+const WIDTH = Dimensions.get('window').width;
 
 const styles = StyleSheet.create({
   container: {
@@ -17,6 +22,26 @@ const styles = StyleSheet.create({
     flexDirection: "row",
     justifyContent: "space-around",
     padding: 10
+  },
+  txtHeader:{
+    fontSize:22, fontWeight:"bold", color:"rgba(0,0,0,0.5)",
+    marginLeft: WIDTH*0.5 - 130, marginTop: 35
+  },
+  btnMenu:{
+    marginTop:35, marginLeft:15,
+  },
+  viewHeader:{
+    width: WIDTH, height: 75, zIndex:1000, 
+    flexDirection:"row",
+    shadowColor: "#000",
+     shadowOffset: {
+       width: 0,
+       height: 3,
+     },
+     shadowOpacity: 0.29,
+     shadowRadius: 4.65,
+
+     elevation: 7,
   }
 });
 
@@ -76,6 +101,12 @@ function Home({navigation}){
          </View>
      :
      <View style={{flex: 1}}>
+       <View style={styles.viewHeader}>
+         <TouchableOpacity onPress={()=> navigation.toggleDrawer()} style={styles.btnMenu}>
+            <Feather name="menu" size={30} color="black" />         
+         </TouchableOpacity>
+         <Text style={styles.txtHeader}>Time Tracking App</Text>
+       </View>
     <View style={{flex: 1}}>
       <Calendar
       current={new Date()}
@@ -165,5 +196,3 @@ function Home({navigation}){
  
 export default Home;
 
-
- 

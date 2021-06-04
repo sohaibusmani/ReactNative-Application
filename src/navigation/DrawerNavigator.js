@@ -45,8 +45,8 @@ const DrawerContent = (props) => {
                <View style={styles.userInfoSection}>
                     <View style={{ flexDirection: 'row' }}>
                         <View style={{ marginLeft: 10, marginTop: 5 }}>
-                            <Title style={{color:'white'}}>{user.user.name}</Title>
-                            <Paragraph style={{color:'white'}}>{user.user.username}</Paragraph>
+                            <Title style={{color:'white'}}>{user?.user.name}</Title>
+                            <Paragraph style={{color:'white'}}>{user?.user.username}</Paragraph>
                         </View>
                     </View>
                 </View>

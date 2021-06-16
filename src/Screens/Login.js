@@ -1,9 +1,10 @@
 import React, { useState } from 'react';
-import { StyleSheet, Text, View, TextInput, Button, ImageBackground, TouchableOpacity, Alert } from 'react-native';
+import { StyleSheet, Text, View, TextInput, Button, ImageBackground, TouchableOpacity, Alert, ActivityIndicator } from 'react-native';
 import Axios from 'axios';
 import SyncStorage from 'sync-storage';
 import baseUrl from '../Url/BaseUrl';
 import { RadioButton } from 'react-native-paper';
+
 
 
 
@@ -84,8 +85,10 @@ export default function Login({ navigation }) {
     const [username, setUsername] = useState('');
     const [password, setPassword] = useState('');
     const [radioVal, setRadio] = React.useState('employee');
+    const [loader, setLoader] = useState(false);
 
     const onLogin = () => {
+        setLoader(true)
         Axios({
             method: 'POST',
             url: `${baseUrl}/auth/login`,
@@ -95,6 +98,7 @@ export default function Login({ navigation }) {
             }
         })
             .then(res => {
+                setLoader(false)
                 SyncStorage.set('token', res.data.token);
                 SyncStorage.set('userData', res.data.user);
                 SyncStorage.set("newUser", { user: res.data.user, schedule: { break: [] } })
@@ -102,14 +106,18 @@ export default function Login({ navigation }) {
 
                 // console.log('Login Successfull', res.data.user);
 
-                navigation.navigate('AppNavigator');
+                navigation.replace('AppNavigator');
                 setUsername("");
                 setPassword("")
             })
-            .catch(err => {Alert.alert('Error', err.response.data.message)})
+            .catch(err => {
+                setLoader(false)
+                Alert.alert('Error', err.response.data.message)}
+                )
     }
 
     const onAdminLogin = () => {
+        setLoader(true)
         Axios({
             method: 'POST',
             url: `${baseUrl}/auth/admin-login`,
@@ -119,6 +127,7 @@ export default function Login({ navigation }) {
             }
         })
             .then(res => {
+                setLoader(false)
                 setUsername("");
                 setPassword("")
 
@@ -126,7 +135,10 @@ export default function Login({ navigation }) {
 
                 navigation.replace('AdminNavigator')
             })
-            .catch(err => {Alert.alert('Error', err.response.data.message)})
+            .catch(err => {
+                setLoader(false)
+                Alert.alert('Error', err.response.data.message)}
+                )
     }
 
    
@@ -183,7 +195,12 @@ export default function Login({ navigation }) {
 
                 <View style={{ width: '30%', marginTop: 30 }}>
                     {
+                        loader
+                        ? 
+                        <ActivityIndicator size="large" color="#428AF8"/>
+                        :
                         radioVal === "admin" ?
+
                             <Button
                                 title="Login"
                                 color="#428AF8"

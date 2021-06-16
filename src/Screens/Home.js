@@ -28,7 +28,7 @@ const styles = StyleSheet.create({
     marginLeft: WIDTH*0.5 - 130, marginTop: 35
   },
   btnMenu:{
-    marginTop:35, marginLeft:15,
+    marginTop:42, marginLeft:15,
   },
   viewHeader:{
     width: WIDTH, height: 75, zIndex:1000, 
@@ -103,7 +103,7 @@ function Home({navigation}){
      <View style={{flex: 1}}>
        <View style={styles.viewHeader}>
          <TouchableOpacity onPress={()=> navigation.toggleDrawer()} style={styles.btnMenu}>
-            <Feather name="menu" size={30} color="black" />         
+            <Feather name="menu" size={22} color="black" />         
          </TouchableOpacity>
          <Text style={styles.txtHeader}>Time Tracking App</Text>
        </View>

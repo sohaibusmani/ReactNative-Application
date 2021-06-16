@@ -1,16 +1,19 @@
 import React, { useEffect } from 'react';
-import { View, StyleSheet, ImageBackground, Text, TouchableOpacity, ScrollView , ActivityIndicator} from 'react-native';
+import { View, StyleSheet, ImageBackground, Text, TouchableOpacity, ScrollView , Dimensions} from 'react-native';
 import { Avatar, Button, Card, Title, Paragraph } from 'react-native-paper';
 import { Entypo } from '@expo/vector-icons';
 import SyncStorage from 'sync-storage';
 import moment from 'moment';
 import Axios from 'axios';
 import baseUrl from '../Url/BaseUrl';
+import Feather from 'react-native-vector-icons/Feather';
+
 
 
 
 import image from '../assets/pic2.jpg';
 
+const WIDTH = Dimensions.get('window').width;
 
 const styles = StyleSheet.create({
   screen: {
@@ -56,6 +59,26 @@ const styles = StyleSheet.create({
     flexDirection: "row",
     justifyContent: "space-around",
     padding: 10
+  },
+  txtHeader:{
+    fontSize:22, fontWeight:"bold", color:"rgba(0,0,0,0.5)",
+    marginLeft: WIDTH*0.5 - 130, marginTop: 35
+  },
+  btnMenu:{
+    marginTop:42, marginLeft:15,
+  },
+  viewHeader:{
+    width: WIDTH, height: 75, zIndex:1000, 
+    flexDirection:"row",
+    shadowColor: "#000",
+     shadowOffset: {
+       width: 0,
+       height: 3,
+     },
+     shadowOpacity: 0.29,
+     shadowRadius: 4.65,
+
+     elevation: 7,
   }
 })
 
@@ -224,6 +247,12 @@ function CheckIn({ navigation }) {
 
   return (
     <View style={{ flex: 1 }}>
+       <View style={styles.viewHeader}>
+         <TouchableOpacity onPress={()=> navigation.toggleDrawer()} style={styles.btnMenu}>
+            <Feather name="menu" size={22} color="black" />         
+         </TouchableOpacity>
+         <Text style={styles.txtHeader}>Time Tracking App</Text>
+       </View>
       <ImageBackground resizeMode='cover' style={styles.image} style={{ height: 200 }} source={image}>
       </ImageBackground>
       <ScrollView>

@@ -21,7 +21,7 @@ export default function MyDrawer(props) {
 
     return (
         <Drawer.Navigator drawerContent={prop => <DrawerContent {...prop} {...props} />}>
-            <Drawer.Screen name="Home" component={Home} />
+            {/* <Drawer.Screen name="Home" component={Home} /> */}
             <Drawer.Screen name="CheckIn" component={CheckIn} />
         </Drawer.Navigator>
     )
@@ -51,14 +51,6 @@ const DrawerContent = (props) => {
                     </View>
                 </View>
                </ImageBackground>
-                <TouchableOpacity
-                    onPress={() => props.navigation.navigate('Home')}
-                    style={{ marginTop: 30, marginLeft: 15, flexDirection: 'row' }}
-                >
-                    <Icon name='home' type='FontAwesome' style={{ fontSize: 18 }} />
-                    <Text style={{marginLeft:10, fontSize:16}}>Home</Text>
-                </TouchableOpacity>
-
                 <TouchableOpacity
                     onPress={() => props.navigation.navigate('CheckIn')}
                     style={{ marginTop: 35, marginLeft: 15, flexDirection: 'row' }}>

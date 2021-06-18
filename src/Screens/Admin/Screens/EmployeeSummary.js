@@ -75,6 +75,24 @@ export default function Profile({route}) {
       })
     }
 
+    const getRespectiveMonthSummary = () => {
+        Axios({
+          method:'GET',
+          url:`${baseUrl}/shift/get-by-date`,
+          params:{
+            userId:employeeId,
+            startDate,
+            endDate
+          }
+        })
+        .then(res => {
+          console.log('CONSOLE',res.data)
+        })
+        .catch(err => {
+          console.log(err)
+        })
+    }
+
     const startOnChange = (event, selectedDate) => {
       const currentDate = selectedDate || date;
       setStartShow(false);
@@ -94,6 +112,7 @@ export default function Profile({route}) {
       const currentDate = selectedDate || date;
       setEndShow(false);
       setEndDate(currentDate);
+      getRespectiveMonthSummary();
     };
 
     const endShowMode = (currentMode) => {

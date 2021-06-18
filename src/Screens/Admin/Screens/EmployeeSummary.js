@@ -48,6 +48,9 @@ export default function Profile({route}) {
     const [startDate, setStartDate] = React.useState(new Date());
     const [startMode, setStartMode] = React.useState('date');
     const [startShow, setStartShow] = React.useState(false);
+    const [endDate, setEndDate] = React.useState(new Date());
+    const [endMode, setEndMode] = React.useState('date');
+    const [endShow, setEndShow] = React.useState(false);
 
 
     useEffect(() => {
@@ -85,6 +88,21 @@ export default function Profile({route}) {
   
     const startShowDatepicker = () => {
       startShowMode('date');
+    };
+
+    const endOnChange = (event, selectedDate) => {
+      const currentDate = selectedDate || date;
+      setEndShow(false);
+      setEndDate(currentDate);
+    };
+
+    const endShowMode = (currentMode) => {
+      setEndShow(true);
+      setEndMode(currentMode);
+    };
+  
+    const endShowDatepicker = () => {
+      endShowMode('date');
     };
 
     return (
@@ -131,7 +149,7 @@ export default function Profile({route}) {
                               Start Date
                           </Text>
                        </TouchableOpacity>
-                       <TouchableOpacity style={styles.appButtonContainer}>
+                       <TouchableOpacity style={styles.appButtonContainer} onPress={endShowDatepicker}>
                           <Text style={styles.appButtonText}>
                               End Date
                           </Text>
@@ -145,6 +163,16 @@ export default function Profile({route}) {
           is24Hour={true}
           display="default"
           onChange={startOnChange}
+        />
+      )}
+       {endShow && (
+        <DateTimePicker
+          testID="dateTimePicker"
+          value={endDate}
+          mode={endMode}
+          is24Hour={true}
+          display="default"
+          onChange={endOnChange}
         />
       )}
               </View>

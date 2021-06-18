@@ -1,8 +1,9 @@
 import React, {useEffect} from 'react';
-import { View, Text, StyleSheet, TouchableOpacity, ActivityIndicator } from 'react-native';
+import { View, StyleSheet, ActivityIndicator,TouchableOpacity, Text } from 'react-native';
 import { Card, Title, Paragraph } from 'react-native-paper';
 import Axios from 'axios';
 import baseUrl from '../../../Url/BaseUrl';
+import DateTimePicker from '@react-native-community/datetimepicker';
 
 const styles = StyleSheet.create({
     cardContainer: {
@@ -44,6 +45,10 @@ export default function Profile({route}) {
     const [monthlyWage, setMonthlyWage] = React.useState('');
     const [user, setUser] = React.useState({});
     const [loading, setLoading] = React.useState(true);
+    const [startDate, setStartDate] = React.useState(new Date());
+    const [startMode, setStartMode] = React.useState('date');
+    const [startShow, setStartShow] = React.useState(false);
+
 
     useEffect(() => {
         getSummary();
@@ -66,6 +71,22 @@ export default function Profile({route}) {
 
       })
     }
+
+    const startOnChange = (event, selectedDate) => {
+      const currentDate = selectedDate || date;
+      setStartShow(false);
+      setStartDate(currentDate);
+    };
+
+    const startShowMode = (currentMode) => {
+      setStartShow(true);
+      setStartMode(currentMode);
+    };
+  
+    const startShowDatepicker = () => {
+      startShowMode('date');
+    };
+
     return (
         loading
         ?
@@ -80,6 +101,8 @@ export default function Profile({route}) {
                     <View style={styles.cardContent}>
                     <Title>{user.name}</Title>
                     <Paragraph>{user.username}</Paragraph>
+                    <View>
+      </View>
                     <Title style={{marginTop: 10}}>
                         Total Hours In a Month
                     </Title>
@@ -102,6 +125,28 @@ export default function Profile({route}) {
                 <Paragraph>
                     PKR {monthlyWage}
                 </Paragraph>
+                <View style={styles.buttonContainer}>
+                <TouchableOpacity style={styles.appButtonContainer} onPress={startShowDatepicker}>
+                          <Text style={styles.appButtonText}>
+                              Start Date
+                          </Text>
+                       </TouchableOpacity>
+                       <TouchableOpacity style={styles.appButtonContainer}>
+                          <Text style={styles.appButtonText}>
+                              End Date
+                          </Text>
+                       </TouchableOpacity>
+                       </View>
+                       {startShow && (
+        <DateTimePicker
+          testID="dateTimePicker"
+          value={startDate}
+          mode={startMode}
+          is24Hour={true}
+          display="default"
+          onChange={startOnChange}
+        />
+      )}
               </View>
                 </Card.Content>
             </Card>

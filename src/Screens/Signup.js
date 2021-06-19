@@ -60,7 +60,7 @@ export default function signup({history, navigation}){
         })
         .then(res => {
             console.log('Signup Successfull')
-            navigation.navigate('Login')
+            navigation.navigate('Employes')
         })
         .catch(err => {
             console.log(err.response.message.data)
@@ -72,7 +72,7 @@ export default function signup({history, navigation}){
            <View style={styles.screen}>
            <View style={{marginBottom: 10}}>
                 <Text style={styles.heading}>
-                    Signup
+                    Register Employee
                 </Text>
             </View>
             <View style={styles.inputContainer}>

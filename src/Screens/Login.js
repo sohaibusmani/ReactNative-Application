@@ -215,7 +215,7 @@ export default function Login({ navigation }) {
                             />
                     }
                 </View>
-                <View style={{ flexDirection: 'row', bottom: 50, position: 'absolute' }}>
+                {/* <View style={{ flexDirection: 'row', bottom: 50, position: 'absolute' }}>
                     <Text style={{ fontWeight: 'bold', fontSize: 17 }}>
                         Don't have an account ?
                     </Text>
@@ -224,7 +224,7 @@ export default function Login({ navigation }) {
                     >
                         Create
             </Text>
-                </View>
+                </View> */}
             </View>
         </ImageBackground>
 

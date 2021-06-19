@@ -1,9 +1,12 @@
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import React, { useEffect } from 'react';
-import { View, Text, StyleSheet, TouchableOpacity, ActivityIndicator } from 'react-native';
+import { View, Text, StyleSheet, TouchableOpacity, ActivityIndicator, Dimensions } from 'react-native';
 import { Card, Title, Paragraph } from 'react-native-paper';
 import Axios from 'axios';
 import baseUrl from '../../../Url/BaseUrl';
+
+const WIDTH = Dimensions.get('window').width;
+
 
 const styles = StyleSheet.create({
     cardContainer: {
@@ -37,6 +40,26 @@ const styles = StyleSheet.create({
         flexDirection: "row",
         justifyContent: "space-around",
         padding: 10
+      },
+      txtHeader:{
+        fontSize:22, fontWeight:"bold", color:"rgba(0,0,0,0.5)",
+        marginLeft: WIDTH*0.6 - 130, marginTop: 35
+      },
+      btnMenu:{
+        marginTop:42, marginLeft:15,
+      },
+      viewHeader:{
+        width: WIDTH, height: 75, zIndex:1000, 
+        flexDirection:"row",
+        shadowColor: "#000",
+         shadowOffset: {
+           width: 0,
+           height: 3,
+         },
+         shadowOpacity: 0.29,
+         shadowRadius: 4.65,
+    
+         elevation: 7,
       }
 })
 
@@ -74,7 +97,10 @@ export default function Profile({route, navigation}) {
          <ActivityIndicator size="large" color="#009688" />
          </View>
        :
-       <View>
+       <View style={{flex:1}}>
+           <View style={styles.viewHeader}>
+         <Text style={styles.txtHeader}>Employee Profile</Text>
+       </View>
        <View style={styles.cardContainer}>
        <Card style={{borderRadius: 25, elevation: 3}}>
            <Card.Content>

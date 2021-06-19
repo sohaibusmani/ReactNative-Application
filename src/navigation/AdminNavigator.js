@@ -5,24 +5,36 @@ import Employes from '../Screens/Admin/Screens/Employes';
 import EmployeeProfile from '../Screens/Admin/Screens/Employeeprofile';
 import EmployeeSummary from '../Screens/Admin/Screens/EmployeeSummary';
 import EmployeeHistory from '../Screens/Admin/Screens/EmployeeHistory';
-import EmployeeEditProfile from '../Screens/Admin/Screens/EmployeeEditProfile'
+import EmployeeEditProfile from '../Screens/Admin/Screens/EmployeeEditProfile';
+import AdminDrawerNavigator from '../navigation/AdminDrawerNavigator';
 
 
 const Stack = createStackNavigator();
 
 function AdminStack(){
     return(
-        <Stack.Navigator
-            initialRouteName="Employes"
-            screenOptions={{ gestureEnabled: false }}
-        >
-        <Stack.Screen
+    //     <Stack.Navigator
+    //         initialRouteName="Employes"
+    //         screenOptions={{ gestureEnabled: false }}
+    //     >
+    
+    // </Stack.Navigator>
+    <Stack.Navigator
+    initialRouteName="AdminDrawerNavigator"
+    screenOptions={{ gestureEnabled: false }}
+    headerMode="none"
+  >
+    <Stack.Screen
+     name='AdminDrawerNavigator'
+     component={AdminDrawerNavigator}
+    />
+        {/* <Stack.Screen
         name="Employes"
         component={Employes}
         options={({ navigation }) => ({
             headerTitle: () => <Header  title='Employes'/>,
           })}
-    />
+    /> */}
      <Stack.Screen
         name="EmployeeProfile"
         component={EmployeeProfile}
